@@ -1,0 +1,36 @@
+-- comment
+-- cd c:\xampp\mysql\bin
+-- ./mysql -u root
+
+-- 行を Ctrl + C でコピー、右クリックでペースト&実行できる
+-- 下にコピーを作成するには Shift + Alt + ↓ 
+
+show tables;
+select * from employee;
+show fields from employee;
+desc employee;
+select emp_name, birthday, sal from employee;
+select emp_name, birthday, sal, comm, sal+comm as 月収 from employee;
+select emp_name, birthday, sal, comm, sal+comm as 月収 from employee order by 月収 desc;
+
+-- p48 実習
+select * from product;
+select prod_name, cost, discount from product;
+select prod_name, cost, discount, cost*discount as 割引価格 from product;
+select prod_name, cost, discount, cost*coalesce(discount, 1) as 割引価格 from product;
+select prod_name, cost, discount, format(cost*coalesce(discount, 1), 2)  as 割引価格 from product;
+select prod_name, cost, discount, format(cost*coalesce(discount, 1), 2)  as 割引価格 from product order by cost desc;
+select prod_name, cost, discount, format(cost*coalesce(discount, 1), 2)  as 割引価格 from product order by 2 desc;
+select prod_name, cost, discount, format(cost*coalesce(discount, 1), 2)  as 割引価格 from product order by cost desc limit 3;
+
+-- p62 実習
+select * from product where cost >= 20000;
+select cust_id, cust_name from customer where fax is null;
+select sales_no, psales_no, prod_id, price from sales where psales_no between 110 and 119 order by price desc;
+select prod_id, prod_name, cost*discount from product where prod_id = 102 or prod_id = 104 or prod_id = 106 order by 3 desc;
+select cust_id, cust_address, delivery_date from packedsales where cust_address like '%渋谷区%' and delivery_date like '1996%';
+select cust_id, cust_name, tel from customer where (tel not like '03%') and (tel not like '06%');
+
+-- p112 実習
+insert into employee values(100, 10, 'リスキル 太郎', '2002-02-22', '2025-04-01', 1, 200.00, 50);
+insert into customer(cust_id, cust_name) select emp_id+1000, emp_name from employee;

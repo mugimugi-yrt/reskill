@@ -1,0 +1,39 @@
+-- comment
+-- cd c:\xampp\mysql\bin
+-- ./mysql -u root
+
+-- 行を Ctrl + C でコピー、右クリックでペースト&実行できる
+-- 下にコピーを作成するには Shift + Alt + ↓ 
+
+-- p117 実習
+select * from department order by dept_id;
+update department set loc = '神奈川県川崎市' where dept_id between 20 and 30;
+select emp_id from employee where sal = (select min(sal) from employee);
+select * from department order by dept_id;
+update department set mgr_id = (select emp_id from employee where sal = (select min(sal) from employee)) where adept_id = 40;
+update department, (select min(sal) as a from employee) as tmp set department.mgr_id = tmp.a where adept_id = 40;
+
+-- p119 実習
+select * from product order by prod_id;
+delete from product where discount is null;
+select * from product;
+delete from product;
+
+-- p73 実習
+select sum(cost), avg(cost), min(cost), max(cost) from product;
+select count(*), count(discount), count(distinct discount), sum(discount), avg(discount), min(discount), max(discount) from product;
+select discount, count(discount), sum(discount), avg(discount), min(discount), max(discount) from product group by discount;
+select discount, count(discount), sum(discount), avg(discount), min(discount), max(discount) from product group by discount having count(discount) >= 5;
+select discount, count(discount), sum(discount), avg(discount), min(discount), max(discount) from product group by discount having not count(discount) < 5;
+select discount, count(discount), sum(discount), avg(discount), min(discount), max(discount) from product where cost >= 15000 group by discount;
+select emp_id, avg(total) from packedsales group by emp_id;
+select psales_date, sum(total) from packedsales group by psales_date order by sum(total) desc limit 5;
+select distinct emp_id from packedsales;
+
+-- p94 実習
+select c.cust_name, p.cust_address, p.delivery_date from packedsales p join customer c on p.cust_id = c.cust_id where p.psales_no = 3;
+select p.prod_name, s.quantity * s.price as amount from sales s join product p using(prod_id) where s.quantity >= 3;
+select p.psales_no, p.psales_date, p.total, s.prod_id, s.quantity, s.price from packedsales p join sales s using(psales_no) join customer c using(cust_id) where c.cust_name like '田中%';
+select p.emp_id, e.emp_name, avg(p.total) as avg from packedsales p join employee e using(emp_id) group by p.emp_id;
+select p.prod_id, p.prod_name, sum(s.quantity), sum(s.price) from sales s join product p using(prod_id) group by p.prod_id having sum(s.price) >= 500000;
+select p.prod_name, sum(s.quantity * s.price) as total from sales s join product p using(prod_id) group by p.prod_name order by total desc;

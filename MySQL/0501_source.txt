@@ -1,0 +1,4 @@
+INSERT INTO animals(name, description, image) VALUES("コーギー","「ヤード・ロング・ドッグ」という別称もある。", "corgi.png");
+INSERT INTO animals(name, description, image) VALUES("コクチョウ","「ブラックスワン」とも呼ばれる。", "kokuchou.png");
+INSERT INTO animals(name, description, image) VALUES("クロアシネコ", "足裏が黒いことからこの名前がある。", "kuroashineko.png");
+INSERT INTO animals(name, description, image) VALUES("ウシガエル","鳴き声は「ブオー、ブオー」とウシに似ている", "ushigaeru.png");
