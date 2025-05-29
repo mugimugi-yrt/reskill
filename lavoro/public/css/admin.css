@@ -1,0 +1,267 @@
+html {
+    background-color: #e4f1fc;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    margin: 0;
+    padding: 0;
+}
+
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 30px;
+    background-color: #e2e2e2;
+    list-style: none;
+    border: 3px solid #c4c4c4;
+}
+
+/* ロゴ */
+#logo {
+    position: relative;
+    display: inline-block;
+}
+
+#logo img:first-child {
+    height: 50px;
+}
+
+#admin {
+    position: absolute;
+    top: 10px;
+    left: 70px;
+    height: 20px;
+    opacity: 0.6;
+}
+
+/* メニュー */
+#menu {
+    display: flex;
+    gap: 1px;
+}
+
+#menu li {
+    list-style: none;
+}
+
+#menu li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    transition: color 0.2s;
+}
+
+#menu li a:hover {
+    color: #0099ff;
+}
+
+/* コンテンツ */
+main .container {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.container h2 {
+    padding: 12px 0px 12px 30px;
+    color: #004691;
+    background-color: #fafafa;
+    border: 3px solid #023974;
+    border-radius: 3px;
+}
+
+/* index */
+#create {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #004691;
+    border: 2px solid #000000;
+    border-radius: 4px;
+    margin: 0px 10px 20px 10px;
+    text-align: left;
+    font-size: 16px; /* 必要に応じて調整 */
+}
+
+#create a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+#create a:hover {
+    color: #fffc39;
+}
+
+#index_table {
+    width: 80%;
+    margin-left: 10px;
+    margin-right: auto;
+    border-collapse: collapse;
+    background-color: #fff;
+    border: 1px solid #5e5e5e;
+}
+
+#index_table th,
+#index_table td {
+    border: 1px solid #5e5e5e;
+}
+
+#index_table th {
+    font-size: 15px;
+    padding: 10px 5px;
+    background-color: #f0f0f0;
+    text-align: center;
+}
+
+#index_table td {
+    padding: 6px 10px;
+    text-align: left;
+}
+
+.index_table_hotel {
+    width: 40%;
+    margin-left: 10px;
+    margin-right: auto;
+    margin-bottom: 15px;
+    background-color: #fff;
+    border: 1px solid #5e5e5e;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+.index_table_hotel td {
+    padding: 6px 10px;
+    vertical-align: center;
+    font-size: 16px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.photo_space {
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    text-align: center;
+}
+
+.photo_space img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.show a {
+    color: #005499;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.show a:hover {
+    color: #99002A;
+}
+
+/* show */
+/* 
+    usersの
+    show_planとshow_hotelと共有できるため
+    app.cssに移行
+*/
+
+/* form (create/edit) */
+input[type="password"],
+input[type="email"],
+input[type="text"] {
+    width: 300px;
+    height: 20px;
+    max-width: 100%;
+}
+
+select {
+    width: 300px;
+    height: 25px;
+    max-width: 100%;
+}
+
+.detail-item .name {
+    display: inline-block;
+    width: 120px;
+    margin-right: 10px;
+}
+#post {
+    width: 120px;
+}
+
+#town {
+    width: 250px;
+}
+
+#street {
+    width: 250px;
+}
+
+#add_num {
+    width: 300px;
+}
+
+#pref {
+    width: 200px;
+}
+
+#tel {
+    width: 200px;
+}
+
+#company {
+    width: 300px;
+}
+
+.caution {
+    font-size: 12px;
+    color: #666666;
+}
+
+#submit_check {
+    background-color: #ffffff;
+    color: #000000;
+    border: 2px solid #000000;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+/* check */
+#submit_edit {
+    background-color: #009246;
+    color: #ffffff;
+    border: 2px solid #000000;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+#submit_create {
+    background-color: #004691;
+    color: #ffffff;
+    border: 2px solid #000000;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+/* request */
+#submit_request {
+    background-color: #646464;
+    color: #ffffff;
+    border: 2px solid #000000;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+}
