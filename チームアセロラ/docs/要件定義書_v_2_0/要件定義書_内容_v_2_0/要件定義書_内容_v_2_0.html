@@ -1,0 +1,723 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>要件定義書_v 2.0</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+
+/* 追記部分 */
+h2 {
+    page-break-before: always;
+}
+
+h3:nth-child(-n+6) {
+    font-weight: normal;
+}
+h3:last-of-type {
+    font-weight: bold;
+    page-break-before: always;
+}
+table {
+    page-break-before: always;
+}
+table:first-of-type {
+    page-break-before: auto;
+}
+table:last-of-type {
+    page-break-before: auto;
+}
+.imgBlock {
+    text-align: left; 
+}
+
+@page {
+  @bottom-right {
+    content: counter(page) " / " counter(pages);
+    font-size: 16px;
+  }
+  @top-center {
+    content: "要件定義書_v2.0"; /* バージョンごとに書き換える */
+    font-size: 16px;
+  }
+}
+/* 追記終わり */
+
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.highlight-default_background {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: undefined; }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-translucentGray { background-color: undefined; }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="1f9b95b7-e1e8-80b8-8447-d057df8cae3f" class="page sans"><header><h1 class="page-title">要件定義書_v 2.0</h1><p class="page-description"></p></header><div class="page-body"><h1 id="1f9b95b7-e1e8-8196-a9da-c6e0938a314c" class="">目次</h1><h3 id="1f9b95b7-e1e8-8159-b9aa-c4f76bc53a7f" class="">１. システム概要・・・・・2</h3><h3 id="1f9b95b7-e1e8-813c-a5b5-d272a38c14ae" class="">２. 機能要件・・・・・・・3</h3><h3 id="1f9b95b7-e1e8-8167-b3e8-c15d40547f5f" class="">３. ユースケース図・・・・5</h3><h3 id="1f9b95b7-e1e8-81b6-94cc-f4a4e3c5d042" class="">４. ユースケース記述・・・7</h3><h3 id="1f9b95b7-e1e8-8121-a832-c12d0feec560" class="">５. 用語説明・・・・・・・39</h3><h2 id="1f9b95b7-e1e8-81d8-8c8b-e28f0b49c045" class="">１．システム概要</h2><h3 id="1f9b95b7-e1e8-8113-a6d6-f764651d72e9" class=""><strong>システム名</strong></h3><p id="1f9b95b7-e1e8-81a6-b675-f0b38d593d35" class="">宿予約システム「ラボーロ」</p><h3 id="1f9b95b7-e1e8-811d-b058-cb0c0dfb6796" class=""><strong>システム導入の背景</strong></h3><p id="1f9b95b7-e1e8-8167-95d3-cce684e2a77d" class="">出張されるビジネスマンが宿泊先を簡易に見つけ、会社に報告できるシステムが欲しかった</p><h3 id="1f9b95b7-e1e8-8181-b64a-cffeacda144f" class=""><strong>システム導入の目的</strong></h3><p id="1f9b95b7-e1e8-8132-bec2-cd63d1b700ab" class="">出張されるビジネスマンにそれぞれの目的や用途に合わせた宿泊プランを紹介し、会社への報告をサポートする</p><h3 id="1f9b95b7-e1e8-814d-823a-ca9205c34063" class=""><strong>システムの強み</strong></h3><p id="1f9b95b7-e1e8-81f5-ba79-c11ace8d9cb6" class="">デザインをシンプルに、機能性を重視することで多くのビジネスマンが速度感をもって利用してもらえるようにする</p><h2 id="1f9b95b7-e1e8-814f-9dea-dc222817738e" class="">２．機能要件</h2><h3 id="1f9b95b7-e1e8-814a-b89e-e91726c2b74d" class=""><strong>管理者側</strong></h3><ol type="1" id="1f9b95b7-e1e8-807c-9f17-f128c568546f" class="numbered-list" start="1"><li>認証関連機能<ul id="1f9b95b7-e1e8-80c8-9b0a-d5be28a73ae6" class="bulleted-list"><li style="list-style-type:disc">認証機能<ul id="1f9b95b7-e1e8-8002-806a-c3b568406721" class="bulleted-list"><li style="list-style-type:circle">新規会員登録依頼機能 　※登録はチームアセロラ</li></ul><ul id="1f9b95b7-e1e8-801c-a888-eb2e9427d148" class="bulleted-list"><li style="list-style-type:circle">ログアウト機能</li></ul></li></ul></li></ol><ol type="1" id="1f9b95b7-e1e8-802a-91f9-f724b109a0f1" class="numbered-list" start="2"><li>ユーザー情報関連機能<ul id="1f9b95b7-e1e8-8095-8c10-eac99d944478" class="bulleted-list"><li style="list-style-type:disc">一覧表示機能<ul id="1f9b95b7-e1e8-8087-89bb-e3e38764ce83" class="bulleted-list"><li style="list-style-type:circle">新規登録機能</li></ul><ul id="1f9b95b7-e1e8-80f0-861d-c81040165c70" class="bulleted-list"><li style="list-style-type:circle">詳細表示機能<ul id="1f9b95b7-e1e8-80ee-a2d6-e797951de69d" class="bulleted-list"><li style="list-style-type:square">登録情報変更機能</li></ul><ul id="1f9b95b7-e1e8-80db-8f2e-d570d4a6762a" class="bulleted-list"><li style="list-style-type:square">削除機能</li></ul></li></ul></li></ul></li></ol><ol type="1" id="1f9b95b7-e1e8-8077-bef0-ed8e4eefd835" class="numbered-list" start="3"><li>宿情報関連機能<ul id="1f9b95b7-e1e8-80ed-9db4-f2e93713c270" class="bulleted-list"><li style="list-style-type:disc">一覧表示機能<ul id="1f9b95b7-e1e8-8002-98fe-c0d3042ac04b" class="bulleted-list"><li style="list-style-type:circle">新規登録機能</li></ul><ul id="1f9b95b7-e1e8-80ab-8437-f5c928cfdcfd" class="bulleted-list"><li style="list-style-type:circle">詳細表示機能<ul id="1f9b95b7-e1e8-808b-be22-f1aad597408c" class="bulleted-list"><li style="list-style-type:square">登録情報変更機能</li></ul><ul id="1f9b95b7-e1e8-80e2-9d11-ccea49113aca" class="bulleted-list"><li style="list-style-type:square">削除機能</li></ul></li></ul></li></ul></li></ol><ol type="1" id="1f9b95b7-e1e8-80ee-8da9-c0c9488ae9f4" class="numbered-list" start="4"><li>プラン情報関連機能<ul id="1f9b95b7-e1e8-80e0-9caa-dac4b2b560ea" class="bulleted-list"><li style="list-style-type:disc">一覧表示機能<ul id="1f9b95b7-e1e8-80ca-af02-e848c38e0e74" class="bulleted-list"><li style="list-style-type:circle">新規登録機能</li></ul><ul id="1f9b95b7-e1e8-80ec-a860-c7eb3188a0ca" class="bulleted-list"><li style="list-style-type:circle">詳細表示機能<ul id="1f9b95b7-e1e8-80f1-ac6e-fb8d1cb6775f" class="bulleted-list"><li style="list-style-type:square">登録情報変更機能</li></ul><ul id="1f9b95b7-e1e8-80c0-b351-cec7954c0063" class="bulleted-list"><li style="list-style-type:square">削除機能</li></ul></li></ul></li></ul></li></ol><h3 id="1f9b95b7-e1e8-81a5-baf5-d8767f6ebfb3" class=""><strong>ユーザー側</strong></h3><ol type="1" id="1f9b95b7-e1e8-8017-b98e-cd0093106e92" class="numbered-list" start="1"><li>ユーザー認証関連機能<ul id="1f9b95b7-e1e8-804a-9559-f2d3c64cd301" class="bulleted-list"><li style="list-style-type:disc">新規会員登録</li></ul><ul id="1f9b95b7-e1e8-8006-b2a4-d3848a53dcf0" class="bulleted-list"><li style="list-style-type:disc">認証機能<ul id="1f9b95b7-e1e8-800b-8ee9-c291f8d1f3c6" class="bulleted-list"><li style="list-style-type:circle">会員情報変更機能</li></ul><ul id="1f9b95b7-e1e8-80ee-a3b7-e6ebc73abcb8" class="bulleted-list"><li style="list-style-type:circle">ログアウト機能</li></ul><ul id="1f9b95b7-e1e8-806d-b1f8-f27823d2df6a" class="bulleted-list"><li style="list-style-type:circle">退会機能</li></ul></li></ul></li></ol><ol type="1" id="1f9b95b7-e1e8-8083-be0e-f8817f3a3909" class="numbered-list" start="2"><li>プラン検索・予約関連機能<ul id="1f9b95b7-e1e8-805d-bce6-f19bdf72602c" class="bulleted-list"><li style="list-style-type:disc">検索結果一覧表示機能<ul id="1f9b95b7-e1e8-80b2-bf74-f422a76da8b3" class="bulleted-list"><li style="list-style-type:circle">プラン詳細確認機能<ul id="1f9b95b7-e1e8-8025-959e-fbd61e1dfecd" class="bulleted-list"><li style="list-style-type:square">プラン予約機能</li></ul></li></ul><ul id="1f9b95b7-e1e8-80a2-aeb0-c19dde06c390" class="bulleted-list"><li style="list-style-type:circle">宿詳細確認機能<ul id="1f9b95b7-e1e8-8049-82cb-cc32c4d8f128" class="bulleted-list"><li style="list-style-type:square">宿お気に入り機能/口コミ機能/星評価機能 </li></ul></li></ul></li></ul></li></ol><ol type="1" id="1f9b95b7-e1e8-80ce-b3eb-ffecd0c75f03" class="numbered-list" start="3"><li>予約履歴関連機能<ul id="1f9b95b7-e1e8-805e-94f7-ca77cc838e4e" class="bulleted-list"><li style="list-style-type:disc">一覧表示機能<ul id="1f9b95b7-e1e8-80d7-ba45-db01d187b699" class="bulleted-list"><li style="list-style-type:circle">予約情報変更機能</li></ul><ul id="1f9b95b7-e1e8-8058-bb5a-d39ed997ac51" class="bulleted-list"><li style="list-style-type:circle">領収書発行機能</li></ul></li></ul></li></ol><h2 id="1f9b95b7-e1e8-8138-81d4-df3f02c61083" class="">３．ユースケース図</h2><figure id="1fab95b7-e1e8-801b-9e6d-d448b07bc28b" class="image"><a href="%E8%AA%8D%E8%A8%BC%E6%A9%9F%E8%83%BD.jpg"><img style="width:709.984375px" src="%E8%AA%8D%E8%A8%BC%E6%A9%9F%E8%83%BD.jpg"/></a></figure><figure id="1fab95b7-e1e8-8053-bdc8-d3b8c2d182ba" class="image"><a href="%E6%83%85%E5%A0%B1%E7%AE%A1%E7%90%86%E6%A9%9F%E8%83%BD.jpg"><img style="width:709.984375px" src="%E6%83%85%E5%A0%B1%E7%AE%A1%E7%90%86%E6%A9%9F%E8%83%BD.jpg"/></a></figure><figure id="1fab95b7-e1e8-800c-9e8d-e5f274ff1ef9" class="image"><a href="%E5%AE%BF%E4%BA%88%E7%B4%84%E6%A9%9F%E8%83%BD.jpg"><img style="width:709.984375px" src="%E5%AE%BF%E4%BA%88%E7%B4%84%E6%A9%9F%E8%83%BD.jpg"/></a></figure><h2 id="1f9b95b7-e1e8-81fa-b419-e8520bbb015e" class="">４．ユースケース記述</h2><table id="1f9b95b7-e1e8-8127-a705-e52b86816d31" class="simple-table"><tbody><tr id="1f9b95b7-e1e8-81a2-9dee-fe51143c1bcf"><td id="O:jx" class="">ユースケースID</td><td id="VYFI" class="" style="width:926px">UC101</td></tr><tr id="1f9b95b7-e1e8-817f-aeff-dade7653abbd"><td id="O:jx" class="">ユースケース名</td><td id="VYFI" class="" style="width:926px">管理者認証機能</td></tr><tr id="1f9b95b7-e1e8-81de-a7b8-d8281edbb532"><td id="O:jx" class="">概要</td><td id="VYFI" class="" style="width:926px">システムで管理者を認証する</td></tr><tr id="1f9b95b7-e1e8-814a-b4b8-db5803c2b69a"><td id="O:jx" class="">アクター</td><td id="VYFI" class="" style="width:926px">管理者</td></tr><tr id="1f9b95b7-e1e8-8164-a4a7-df5710fa35f0"><td id="O:jx" class="">事前条件</td><td id="VYFI" class="" style="width:926px">管理者認証画面にアクセスできる</td></tr><tr id="1f9b95b7-e1e8-81b6-9517-dfcab303654f"><td id="O:jx" class="">事後条件</td><td id="VYFI" class="" style="width:926px">管理者認証される</td></tr><tr id="1f9b95b7-e1e8-813d-bebd-cbbe40b38f54"><td id="O:jx" class="">基本系列</td><td id="VYFI" class="" style="width:926px">1. 管理者認証を選択すると、このユースケースが開始される<br/>2. システムは管理者のメールアドレス、パスワードを入力し、「ログイン」ボタンを押す<br/>3.認証されるとシステムはユーザー一覧画面に遷移する<br/></td></tr><tr id="1f9b95b7-e1e8-81d2-8c60-ee77a9fcc288"><td id="O:jx" class="">例外系列</td><td id="VYFI" class="" style="width:926px">E-1：アクターが次の認証条件を満たさずに「ログイン」ボタンを押した<br/>• 管理者の「メールアドレス」が登録されていない<br/>• 管理者の「パスワード」が登録したものと一致しない<br/>1.システムは、入力が正しくない旨を伝えるメッセージとともに、管理者認証画面を再表示する<br/></td></tr><tr id="1f9b95b7-e1e8-814e-b55b-d333f8159cc5"><td id="O:jx" class="">備考</td><td id="VYFI" class="" style="width:926px"></td></tr></tbody></table><table id="1f9b95b7-e1e8-8159-84cd-e1b1027f2593" class="simple-table"><tbody><tr id="1f9b95b7-e1e8-81a8-a4b4-f4b2f3971ceb"><td id="O:jx" class="">ユースケースID</td><td id="VYFI" class="" style="width:926px">UC102</td></tr><tr id="1f9b95b7-e1e8-817b-baff-e5a54d92f687"><td id="O:jx" class="">ユースケース名</td><td id="VYFI" class="" style="width:926px">管理者登録依頼機能 </td></tr><tr id="1f9b95b7-e1e8-819a-9302-dde71b799536"><td id="O:jx" class="">概要</td><td id="VYFI" class="" style="width:926px">新規管理者としてシステムに登録する</td></tr><tr id="1f9b95b7-e1e8-81ca-a86c-fe14fa807ba0"><td id="O:jx" class="">アクター</td><td id="VYFI" class="" style="width:926px">管理者</td></tr><tr id="1f9b95b7-e1e8-81ea-83b3-d4c5a2a17908"><td id="O:jx" class="">事前条件</td><td id="VYFI" class="" style="width:926px">管理者ログインを済ませている</td></tr><tr id="1f9b95b7-e1e8-8154-84d0-f1d2ec68932b"><td id="O:jx" class="">事後条件</td><td id="VYFI" class="" style="width:926px">チームアセロラに新規管理者登録を依頼される</td></tr><tr id="1f9b95b7-e1e8-81a0-a4c6-e87e59ab864a"><td id="O:jx" class="">基本系列</td><td id="VYFI" class="" style="width:926px">1. メニューから「管理者登録」を選択すると、このユースケースが開始される<br/>2. システムは管理者情報を入力する画面を表示する<br/>3. アクターは登録する管理者のメールアドレス、パスワードを入力し「確認画面へ」ボタンを押す<br/>4. システムは登録情報の確認画面を表示する<br/>5. アクターは「登録を依頼する」ボタンを押す<br/>6. システムは入力された情報を管理者を登録するメールをアセロラ側に送る<br/></td></tr><tr id="1f9b95b7-e1e8-81fd-92d8-f2cd9bae205e"><td id="O:jx" class="">例外系列</td><td id="VYFI" class="" style="width:926px">E-1：アクターが次の入力チェック条件を満たさずに「確認画面へ」ボタンを押した<br/>• 「メールアドレス」は、100文字以下、メールアドレスとして正しいフォーマットであること、同じメールアド<br/>レスが登録されていないこと<br/>• 「パスワード」は必須、50文字以下<br/>1.システムは、入力が正しくない旨を伝えるメッセージとともに、管理者情報入力画面を再表示する<br/></td></tr><tr id="1f9b95b7-e1e8-8199-8026-e37a2ff10404"><td id="O:jx" class="">備考</td><td id="VYFI" class="" style="width:926px">管理者ログインを通してからのみ依頼することができる</td></tr></tbody></table><table id="1f9b95b7-e1e8-8101-abf2-f5f0088068fd" class="simple-table"><tbody><tr id="1f9b95b7-e1e8-8121-b2bb-c712c84252bb"><td id="O:jx" class="">ユースケースID</td><td id="VYFI" class="" style="width:926px">UC103</td></tr><tr id="1f9b95b7-e1e8-8123-9bf6-c45fa3fdeb89"><td id="O:jx" class="">ユースケース名</td><td id="VYFI" class="" style="width:926px">管理者ログアウト機能</td></tr><tr id="1f9b95b7-e1e8-8134-96cd-f94856d63033"><td id="O:jx" class="">概要</td><td id="VYFI" class="" style="width:926px">管理者が管理者画面からログアウトする</td></tr><tr id="1f9b95b7-e1e8-8113-8b0d-de8bdf615151"><td id="O:jx" class="">アクター</td><td id="VYFI" class="" style="width:926px">管理者</td></tr><tr id="1f9b95b7-e1e8-8159-93fd-ea8f0e02acc6"><td id="O:jx" class="">事前条件</td><td id="VYFI" class="" style="width:926px">管理者ログインを済ませている</td></tr><tr id="1f9b95b7-e1e8-8140-a710-f2fa6b42779e"><td id="O:jx" class="">事後条件</td><td id="VYFI" class="" style="width:926px">管理者ログインから解除 (ログアウト) される</td></tr><tr id="1f9b95b7-e1e8-81ca-a4be-f7c300e7e66b"><td id="O:jx" class="">基本系列</td><td id="VYFI" class="" style="width:926px">1.メニューバーの中に ログアウトがある<br/>2. アクターがログアウト選択する<br/>3. アクターが管理者ログインからログアウトできる<br/></td></tr><tr id="1f9b95b7-e1e8-816b-b614-f0c05f5c72dc"><td id="O:jx" class="">例外系列</td><td id="VYFI" class="" style="width:926px"></td></tr><tr id="1f9b95b7-e1e8-8180-9bce-ecadfde486ec"><td id="O:jx" class="">備考</td><td id="VYFI" class="" style="width:926px"></td></tr></tbody></table><table id="1f9b95b7-e1e8-81e8-a77f-cd398c6544b4" class="simple-table"><tbody><tr id="1f9b95b7-e1e8-81ef-81f5-d3153bdfbfab"><td id="O:jx" class="">ユースケースID</td><td id="VYFI" class="" style="width:926px">UC104</td></tr><tr id="1f9b95b7-e1e8-8172-94fe-cf8bf40e895b"><td id="O:jx" class="">ユースケース名</td><td id="VYFI" class="" style="width:926px">ユーザー一覧表示機能</td></tr><tr id="1f9b95b7-e1e8-81df-b199-d725d06041aa"><td id="O:jx" class="">概要</td><td id="VYFI" class="" style="width:926px">ユーザーの一覧を見ることができる</td></tr><tr id="1f9b95b7-e1e8-8155-b532-f61efa7fa181"><td id="O:jx" class="">アクター</td><td id="VYFI" class="" style="width:926px">管理者</td></tr><tr id="1f9b95b7-e1e8-814b-aac9-f78bf8695000"><td id="O:jx" class="">事前条件</td><td id="VYFI" class="" style="width:926px">管理者ログインを済ませている</td></tr><tr id="1f9b95b7-e1e8-81d4-8187-f357f3e0a2f7"><td id="O:jx" class="">事後条件</td><td id="VYFI" class="" style="width:926px">ユーザーの一覧が閲覧できる</td></tr><tr id="1f9b95b7-e1e8-8143-85cf-d4864ef3fe97"><td id="O:jx" class="">基本系列</td><td id="VYFI" class="" style="width:926px">1.管理者ログイン後、ユーザー一覧表示画面が表示される</td></tr><tr id="1f9b95b7-e1e8-81e1-b94f-c224ba2e9207"><td id="O:jx" class="">例外系列</td><td id="VYFI" class="" style="width:926px"></td></tr><tr id="1f9b95b7-e1e8-812b-b98b-ed499e0b58b3"><td id="O:jx" class="">備考</td><td id="VYFI" class="" style="width:926px">ユーザー一覧画面は、メニューバーからもアクセス可能</td></tr></tbody></table><table id="1f9b95b7-e1e8-81d5-9d3c-da6355d504bc" class="simple-table"><tbody><tr id="1f9b95b7-e1e8-81a4-ade9-d2abd9baf27c"><td id="O:jx" class="">ユースケースID</td><td id="VYFI" class="" style="width:926px">UC105</td></tr><tr id="1f9b95b7-e1e8-81a8-a197-de4deb880fdf"><td id="O:jx" class="">ユースケース名</td><td id="VYFI" class="" style="width:926px">宿一覧表示機能</td></tr><tr id="1f9b95b7-e1e8-81df-91ef-ecf49db92560"><td id="O:jx" class="">概要</td><td id="VYFI" class="" style="width:926px">宿の一覧を見ることができる</td></tr><tr id="1f9b95b7-e1e8-811b-9baa-fbd3c0e67bd4"><td id="O:jx" class="">アクター</td><td id="VYFI" class="" style="width:926px">管理者</td></tr><tr id="1f9b95b7-e1e8-815c-ae8d-c9eae091e4c6"><td id="O:jx" class="">事前条件</td><td id="VYFI" class="" style="width:926px">管理者ログインを済ませている</td></tr><tr id="1f9b95b7-e1e8-817d-be28-df24c07a9a04"><td id="O:jx" class="">事後条件</td><td id="VYFI" class="" style="width:926px">宿の一覧が閲覧できる</td></tr><tr id="1f9b95b7-e1e8-811f-8937-d0c4c2a87085"><td id="O:jx" class="">基本系列</td><td id="VYFI" class="" style="width:926px">1.管理者ログイン後、メニューバーにて「宿一覧」のボタンをクリックする<br/>2.管理者画面で宿一覧を確認できる<br/></td></tr><tr id="1f9b95b7-e1e8-819f-89f6-eb144915b7b9"><td id="O:jx" class="">例外系列</td><td id="VYFI" class="" style="width:926px"></td></tr><tr id="1f9b95b7-e1e8-814a-990b-efe6a3bcc5f8"><td id="O:jx" class="">備考</td><td id="VYFI" class="" style="width:926px"></td></tr></tbody></table><table id="1f9b95b7-e1e8-814f-a8fd-f19b72453526" class="simple-table"><tbody><tr id="1f9b95b7-e1e8-814c-a4e8-e32988bac489"><td id="O:jx" class="">ユースケースID</td><td id="VYFI" class="" style="width:926px">UC106</td></tr><tr id="1f9b95b7-e1e8-81ef-945b-fa538ae9cebb"><td id="O:jx" class="">ユースケース名</td><td id="VYFI" class="" style="width:926px">プラン一覧表示機能</td></tr><tr id="1f9b95b7-e1e8-81a3-ae1a-f1682a522bd2"><td id="O:jx" class="">概要</td><td id="VYFI" class="" style="width:926px">プランの一覧を見ることができる</td></tr><tr id="1f9b95b7-e1e8-81a5-ac72-c9b197131ac1"><td id="O:jx" class="">アクター</td><td id="VYFI" class="" style="width:926px">管理者</td></tr><tr id="1f9b95b7-e1e8-815c-93b2-d283d082f902"><td id="O:jx" class="">事前条件</td><td id="VYFI" class="" style="width:926px">管理者ログインを済ませている</td></tr><tr id="1f9b95b7-e1e8-81dc-9b36-eee51da1c11c"><td id="O:jx" class="">事後条件</td><td id="VYFI" class="" style="width:926px">プランの一覧が閲覧できる</td></tr><tr id="1f9b95b7-e1e8-81bc-ad53-de3f74085121"><td id="O:jx" class="">基本系列</td><td id="VYFI" class="" style="width:926px">1.管理者ログイン後、メニューバーにて「プラン一覧」のボタンをクリックする<br/>2. 管理者画面で登録されているプランの一覧を確認できる<br/></td></tr><tr id="1f9b95b7-e1e8-8152-9f97-dcf714c2f2e2"><td id="O:jx" class="">例外系列</td><td id="VYFI" class="" style="width:926px"></td></tr><tr id="1f9b95b7-e1e8-8114-9cb0-db1be83f8393"><td id="O:jx" class="">備考</td><td id="VYFI" class="" style="width:926px"></td></tr></tbody></table><table id="1f9b95b7-e1e8-8092-aea3-e617ad18caae" class="simple-table"><tbody><tr id="1f9b95b7-e1e8-80f9-9705-fad4d9ed479f"><td id="O:jx" class="">ユースケースID</td><td id="VYFI" class="" style="width:926px">UC107</td></tr><tr id="1f9b95b7-e1e8-804c-8f67-f37b8e420da3"><td id="O:jx" class="">ユースケース名</td><td id="VYFI" class="" style="width:926px">ユーザー詳細表示機能</td></tr><tr id="1f9b95b7-e1e8-80ed-9a9d-f5388f6d2765"><td id="O:jx" class="">概要</td><td id="VYFI" class="" style="width:926px">ユーザー（宿を予約する人）の詳細を見ることができる</td></tr><tr id="1f9b95b7-e1e8-803b-b44d-e9e20b60cdc5"><td id="O:jx" class="">アクター</td><td id="VYFI" class="" style="width:926px">管理者</td></tr><tr id="1f9b95b7-e1e8-80f5-bfa1-f6756da1cae1"><td id="O:jx" class="">事前条件</td><td id="VYFI" class="" style="width:926px">管理者ログインを済ませており、なおかつ、ユーザー一覧画面からユーザー詳細を選択できる</td></tr><tr id="1f9b95b7-e1e8-80a7-9f3a-f08b0cf6da0e"><td id="O:jx" class="">事後条件</td><td id="VYFI" class="" style="width:926px">ユーザー（宿を予約する人）の詳細表示が閲覧できる</td></tr><tr id="1f9b95b7-e1e8-802c-8923-d0f2b35611e4"><td id="O:jx" class="">基本系列</td><td id="VYFI" class="" style="width:926px">1.「ユーザー一覧画面」になると、このユースケースが開始される<br/>2.ユーザー詳細がリンクになっているので、その部分をクリックする<br/>3.ユーザー（宿を予約する人）の氏名、ふりがな、電話番号、メールアドレス、所属（会社）、生年月日、住所をユーザー詳細画面として表示する<br/></td></tr><tr id="1f9b95b7-e1e8-8086-adbf-d690294f23b3"><td id="O:jx" class="">例外系列</td><td id="VYFI" class="" style="width:926px"></td></tr><tr id="1f9b95b7-e1e8-80a2-be84-e4c20db5ec33"><td id="O:jx" class="">備考</td><td id="VYFI" class="" style="width:926px"></td></tr></tbody></table><table id="1f9b95b7-e1e8-81b2-83e9-ee6c4d2e09e0" class="simple-table"><tbody><tr id="1f9b95b7-e1e8-812d-bfa3-f71ce0c6e628"><td id="O:jx" class="">ユースケースID</td><td id="VYFI" class="" style="width:926px">UC108</td></tr><tr id="1f9b95b7-e1e8-8144-a3f4-c47e6d023eb9"><td id="O:jx" class="">ユースケース名</td><td id="VYFI" class="" style="width:926px">宿詳細表示機能</td></tr><tr id="1f9b95b7-e1e8-811c-867f-e5a4941b416a"><td id="O:jx" class="">概要</td><td id="VYFI" class="" style="width:926px">宿の詳細を表示する</td></tr><tr id="1f9b95b7-e1e8-81ca-b8d5-d1e1cc9c7f90"><td id="O:jx" class="">アクター</td><td id="VYFI" class="" style="width:926px">管理者</td></tr><tr id="1f9b95b7-e1e8-8149-bcc4-f13d5effedef"><td id="O:jx" class="">事前条件</td><td id="VYFI" class="" style="width:926px">管理者ログインを済ませており、なおかつ「宿一覧画面」から宿を選択できる</td></tr><tr id="1f9b95b7-e1e8-81f3-b4f9-ee8523b45ea9"><td id="O:jx" class="">事後条件</td><td id="VYFI" class="" style="width:926px">選択した宿情報の詳細が閲覧できる</td></tr><tr id="1f9b95b7-e1e8-81b2-86d4-ff884286c0f7"><td id="O:jx" class="">基本系列</td><td id="VYFI" class="" style="width:926px">1. 「宿一覧表示画面」になると、このユースケースが開始される<br/>2. 宿の名前がリンクになっているので、そのリンク部分をクリックする<br/>3. 「ホテル名」「住所」「電話番号」「最寄り駅」「イメージ写真」<br/>「温泉の有無」「ホテルのジャンル」「団体受け入れ可能客室数」「評価」（お気に入り数、口コミ数、星数、ランキング順位）「イメージ写真」を宿詳細画面として表示する<br/></td></tr><tr id="1f9b95b7-e1e8-813b-b004-ff969db5bae1"><td id="O:jx" class="">例外系列</td><td id="VYFI" class="" style="width:926px"></td></tr><tr id="1f9b95b7-e1e8-8194-a9df-e48655006056"><td id="O:jx" class="">備考</td><td id="VYFI" class="" style="width:926px"></td></tr></tbody></table><table id="1f9b95b7-e1e8-8129-88fb-f26bb42b86ea" class="simple-table"><tbody><tr id="1f9b95b7-e1e8-818b-bea7-c85800b186a3"><td id="O:jx" class="">ユースケースID</td><td id="VYFI" class="" style="width:926px">UC109</td></tr><tr id="1f9b95b7-e1e8-8119-8ca5-d896058bcd64"><td id="O:jx" class="">ユースケース名</td><td id="VYFI" class="" style="width:926px">プラン詳細表示機能</td></tr><tr id="1f9b95b7-e1e8-8176-b1b7-f49e7ed9cebd"><td id="O:jx" class="">概要</td><td id="VYFI" class="" style="width:926px">プランの詳細を表示する</td></tr><tr id="1f9b95b7-e1e8-81b4-85d8-cd37fbce800c"><td id="O:jx" class="">アクター</td><td id="VYFI" class="" style="width:926px">管理者</td></tr><tr id="1f9b95b7-e1e8-81b9-b3b4-c8a6bbe62650"><td id="O:jx" class="">事前条件</td><td id="VYFI" class="" style="width:926px">管理者ログインを済ませており、なおかつ「プラン一覧画面」からプランを選択できる</td></tr><tr id="1f9b95b7-e1e8-81de-bc4c-edf851916d33"><td id="O:jx" class="">事後条件</td><td id="VYFI" class="" style="width:926px">選択したプラン情報の詳細が閲覧できる</td></tr><tr id="1f9b95b7-e1e8-81f1-9317-feca998c534e"><td id="O:jx" class="">基本系列</td><td id="VYFI" class="" style="width:926px">1. 「プラン一覧表示画面」になると、このユースケースが開始される<br/>2. プランの名前がリンクになっているので、そのリンク部分をクリックする<br/>3. 「プラン名」「金額」をプラン詳細画面として表示する<br/></td></tr><tr id="1f9b95b7-e1e8-815c-b85b-de342bb89ff9"><td id="O:jx" class="">例外系列</td><td id="VYFI" class="" style="width:926px"></td></tr><tr id="1f9b95b7-e1e8-8140-9d1c-c809ce2eba68"><td id="O:jx" class="">備考</td><td id="VYFI" class="" style="width:926px"></td></tr></tbody></table><table id="1f9b95b7-e1e8-8185-8a8e-f04b5d21f5d7" class="simple-table"><tbody><tr id="1f9b95b7-e1e8-81ee-8d2f-e2e96d4edda6"><td id="O:jx" class="">ユースケースID</td><td id="VYFI" class="" style="width:926px">UC110</td></tr><tr id="1f9b95b7-e1e8-818e-897d-dfac5465ed36"><td id="O:jx" class="">ユースケース名</td><td id="VYFI" class="" style="width:926px">ユーザー登録機能</td></tr><tr id="1f9b95b7-e1e8-81a0-99ed-efdab9e179c8"><td id="O:jx" class="">概要</td><td id="VYFI" class="" style="width:926px">ユーザー（宿を予約する人）を登録することができる</td></tr><tr id="1f9b95b7-e1e8-8195-81f7-ffd8254bb26f"><td id="O:jx" class="">アクター</td><td id="VYFI" class="" style="width:926px">管理者</td></tr><tr id="1f9b95b7-e1e8-8147-96be-e08c9fe49550"><td id="O:jx" class="">事前条件</td><td id="VYFI" class="" style="width:926px">管理者ログインを済ませており、なおかつユーザ一覧からユーザー登録を選択できる</td></tr><tr id="1f9b95b7-e1e8-8133-97de-dd619c62ce36"><td id="O:jx" class="">事後条件</td><td id="VYFI" class="" style="width:926px">宿登録される</td></tr><tr id="1f9b95b7-e1e8-81a8-933e-f689e026d69f"><td id="O:jx" class="">基本系列</td><td id="VYFI" class="" style="width:926px">1. 「ユーザー一覧表示画面」になると、このユースケースが開始される<br/>2. 「ユーザー登録」がリンクになっているので、そのリンク部分をクリックする<br/>3. ユーザー（宿を予約する人）に関する「氏名」「ふりがな」「電話番号」「メールアドレス」「所属（会社）」「生年月日」「住所」「パスワード情報」を入力<br/>4. 「登録する」ボタンを押すと、ユーザー（宿を予約する人）に関する情報が登録される<br/></td></tr><tr id="1f9b95b7-e1e8-81d9-8464-fe5bbee983e3"><td id="O:jx" class="">例外系列</td><td id="VYFI" class="" style="width:926px">E-1：アクターが次の入力チェック条件を満たさずに「確認画面へ」ボタンを押した<br/>• 「氏名」「ふりがな」は必須、50文字以下<br/>• 「電話番号」は必須、11文字以下、電話番号として正しいフォーマットであること、同じ電話番号が登録されていないこと<br/>• 「メールアドレス」は必須、100文字以下、メールアドレスとして正しいフォーマットであること、同じメールアド<br/>レスが登録されていないこと<br/>• 「所属（会社）」は必須、50文字以下<br/>• 「生年月日」は必須、選択式<br/>• 「住所」は必須、100文字以下<br/>• 「パスワード」は必須、50文字以下<br/>1.システムは入力が正しくない旨を伝えるメッセージとともに、ユーザー情報入力画面を再表示する<br/></td></tr><tr id="1f9b95b7-e1e8-8182-90d0-f14a41208b64"><td id="O:jx" class="">備考</td><td id="VYFI" class="" style="width:926px"></td></tr></tbody></table><table id="1f9b95b7-e1e8-802b-bb40-df62ccc417e8" class="simple-table"><tbody><tr id="1f9b95b7-e1e8-80ca-913e-d32bb04a1de7"><td id="O:jx" class="">ユースケースID</td><td id="VYFI" class="" style="width:926px">UC111</td></tr><tr id="1f9b95b7-e1e8-8049-b690-ff17437bb5d1"><td id="O:jx" class="">ユースケース名</td><td id="VYFI" class="" style="width:926px">宿登録機能</td></tr><tr id="1f9b95b7-e1e8-80de-9a31-d12c90e3b2c7"><td id="O:jx" class="">概要</td><td id="VYFI" class="" style="width:926px">システムに宿を登録する</td></tr><tr id="1f9b95b7-e1e8-8079-8f39-f87bcc4731cd"><td id="O:jx" class="">アクター</td><td id="VYFI" class="" style="width:926px">管理者</td></tr><tr id="1f9b95b7-e1e8-8036-8fae-c26dc199885a"><td id="O:jx" class="">事前条件</td><td id="VYFI" class="" style="width:926px">管理者ログインを済ませており、なおかつ宿一覧から宿登録を選択できる</td></tr><tr id="1f9b95b7-e1e8-806d-b788-c96a4017740b"><td id="O:jx" class="">事後条件</td><td id="VYFI" class="" style="width:926px">宿登録される</td></tr><tr id="1f9b95b7-e1e8-8067-a29c-dbc1893bbb05"><td id="O:jx" class="">基本系列</td><td id="VYFI" class="" style="width:926px">1. 「宿一覧表示画面」になると、このユースケースが開始される<br/>2. 「宿登録」がリンクになっているので、そのリンク部分をクリックする<br/>3. システムは宿情報を入力する画面を表示する<br/>4. アクターは登録する宿の<br/>※必須「ホテル名」「住所」「電話番号」「最寄り駅」「イメージ写真」<br/>※任意「温泉の有無」「ホテルのジャンル」「団体受け入れ可能客室数」を入力<br/>5. 「確認画面へ」ボタンを押す<br/>6. システムは宿登録情報の確認画面を表示する<br/>7. アクターは「登録する」ボタンを押す<br/>8. システムは宿を登録して宿詳細画面を表示する<br/></td></tr><tr id="1f9b95b7-e1e8-8055-ad42-d5336e32e0ef"><td id="O:jx" class="">例外系列</td><td id="VYFI" class="" style="width:926px">E-1：アクターが次の入力チェック条件を満たさずに「確認画面へ」ボタンを押した<br/>• 「ホテル名」は必須、50文字以下<br/>• 「住所」は必須、50文字以下<br/>• 「電話番号」は必須<br/>• 「最寄り駅」は必須、50文字以下<br/>• 「イメージ写真」は必須、形式は jpeg, png のみ<br/>• 「温泉の有無」は任意<br/>• 「ホテルのジャンル」は任意、50文字以下<br/>• 「団体受け入れ可能客室数」は任意、正の整数のみ<br/>1.システムは入力が正しくない旨を伝えるメッセージとともに、宿情報入力画面を再表示する<br/></td></tr><tr id="1f9b95b7-e1e8-8007-bed3-e8c28fd39941"><td id="O:jx" class="">備考</td><td id="VYFI" class="" style="width:926px"></td></tr></tbody></table><table id="1f9b95b7-e1e8-81e3-8c26-d1737ecc39ae" class="simple-table"><tbody><tr id="1f9b95b7-e1e8-811c-97d3-cbe81ea93dcc"><td id="O:jx" class="">ユースケースID</td><td id="VYFI" class="" style="width:926px">UC112</td></tr><tr id="1f9b95b7-e1e8-81fe-8cb5-c808842a41c8"><td id="O:jx" class="">ユースケース名</td><td id="VYFI" class="" style="width:926px">プラン登録機能</td></tr><tr id="1f9b95b7-e1e8-81c1-a42f-c0709752cb73"><td id="O:jx" class="">概要</td><td id="VYFI" class="" style="width:926px">システムにプランを登録する</td></tr><tr id="1f9b95b7-e1e8-8100-abb8-eff791c131a6"><td id="O:jx" class="">アクター</td><td id="VYFI" class="" style="width:926px">管理者</td></tr><tr id="1f9b95b7-e1e8-81fc-9e97-e51319a693be"><td id="O:jx" class="">事前条件</td><td id="VYFI" class="" style="width:926px">管理者ログインを済ませており、なおかつプラン一覧からプラン登録を選択できる</td></tr><tr id="1f9b95b7-e1e8-8184-90e4-e06a9c4984fc"><td id="O:jx" class="">事後条件</td><td id="VYFI" class="" style="width:926px">プランが登録される</td></tr><tr id="1f9b95b7-e1e8-815b-81a3-f57b1aa6bca1"><td id="O:jx" class="">基本系列</td><td id="VYFI" class="" style="width:926px">1. 「プラン一覧表示画面」になると、このユースケースが開始される<br/>2. 「プラン登録」がリンクになっているので、そのリンク部分をクリックする<br/>3. システムはプラン情報を入力する画面を表示する<br/>4. アクターは「プラン名」「金額」を必須項目として入力<br/>5. 「確認画面へ」ボタンを押す<br/>6. システムはプラン登録情報の確認画面を表示する<br/>7. アクターは「登録する」ボタンを押す<br/>8. システムはプランを登録してプラン詳細画面を表示する<br/></td></tr><tr id="1f9b95b7-e1e8-8117-8b71-cc3e4f1418fd"><td id="O:jx" class="">例外系列</td><td id="VYFI" class="" style="width:926px">E-1：アクターが次の入力チェック条件を満たさずに「確認画面へ」ボタンを押した<br/>• 「プラン名」は必須、50文字以下<br/>• 「金額」は必須、正の整数<br/></td></tr><tr id="1f9b95b7-e1e8-81ef-806e-e147809033e4"><td id="O:jx" class="">備考</td><td id="VYFI" class="" style="width:926px"></td></tr></tbody></table><table id="1f9b95b7-e1e8-8076-84ae-d4590472078c" class="simple-table"><tbody><tr id="1f9b95b7-e1e8-802e-8826-f8bf335d6a58"><td id="O:jx" class="">ユースケースID</td><td id="VYFI" class="" style="width:926px">UC113</td></tr><tr id="1f9b95b7-e1e8-80cc-950f-fec5ceb6a6ff"><td id="O:jx" class="">ユースケース名</td><td id="VYFI" class="" style="width:926px">ユーザー削除機能</td></tr><tr id="1f9b95b7-e1e8-8070-8e8f-ea0baae2ef8b"><td id="O:jx" class="">概要</td><td id="VYFI" class="" style="width:926px">ユーザー（宿を予約する人）を削除することができる</td></tr><tr id="1f9b95b7-e1e8-8031-a0e5-fb5945250636"><td id="O:jx" class="">アクター</td><td id="VYFI" class="" style="width:926px">管理者</td></tr><tr id="1f9b95b7-e1e8-8004-8b72-ccda3d7a257a"><td id="O:jx" class="">事前条件</td><td id="VYFI" class="" style="width:926px">管理者ログインを済ませており、なおかつユーザ一覧画面からユーザー詳細画面に行き、「ユーザー削除」を選択できる</td></tr><tr id="1f9b95b7-e1e8-809d-a38e-e031a61e8abc"><td id="O:jx" class="">事後条件</td><td id="VYFI" class="" style="width:926px">登録したユーザー情報の削除のフラグが建てられている</td></tr><tr id="1f9b95b7-e1e8-8088-bcd3-d4d0d98f7e64"><td id="O:jx" class="">基本系列</td><td id="VYFI" class="" style="width:926px">1. 「ユーザー詳細画面」になると、このユースケースが開始される<br/>2. アクターはユーザー詳細画面上にある「ユーザー削除」ボタンを押す<br/>3. 選択したユーザーに削除のフラグが建てられている<br/></td></tr><tr id="1f9b95b7-e1e8-80bc-bd00-e447d980453b"><td id="O:jx" class="">例外系列</td><td id="VYFI" class="" style="width:926px"></td></tr><tr id="1f9b95b7-e1e8-8060-801a-cd9f7b149f7b"><td id="O:jx" class="">備考</td><td id="VYFI" class="" style="width:926px"></td></tr></tbody></table><table id="1f9b95b7-e1e8-81a9-8ac3-f28c0104d296" class="simple-table"><tbody><tr id="1f9b95b7-e1e8-8121-bd40-fb88bbd38a6d"><td id=":ctj" class="" style="width:119px">ユースケースID</td><td id="xm|W" class="" style="width:928px">UC114</td></tr><tr id="1f9b95b7-e1e8-81ef-b58a-e827ca9b1fef"><td id=":ctj" class="" style="width:119px">ユースケース名</td><td id="xm|W" class="" style="width:928px">宿削除機能</td></tr><tr id="1f9b95b7-e1e8-81b9-b960-d16cb945a9d1"><td id=":ctj" class="" style="width:119px">概要</td><td id="xm|W" class="" style="width:928px">登録済みの宿の情報を削除する</td></tr><tr id="1f9b95b7-e1e8-810b-b312-f69a3c28b0c5"><td id=":ctj" class="" style="width:119px">アクター</td><td id="xm|W" class="" style="width:928px">管理者</td></tr><tr id="1f9b95b7-e1e8-810e-b6a1-e660e56ddc36"><td id=":ctj" class="" style="width:119px">事前条件</td><td id="xm|W" class="" style="width:928px">管理者ログインを済ませており、なおかつ宿一覧の宿詳細から「宿削除」を選択できる</td></tr><tr id="1f9b95b7-e1e8-81d6-8c08-ecfd3704b478"><td id=":ctj" class="" style="width:119px">事後条件</td><td id="xm|W" class="" style="width:928px">登録した宿情報の削除のフラグが建てられている</td></tr><tr id="1f9b95b7-e1e8-8158-af34-df91378c692d"><td id=":ctj" class="" style="width:119px">基本系列</td><td id="xm|W" class="" style="width:928px">1.「宿詳細画面」になると、このユースケースが開始される<br/>2.アクターは宿詳細画面上にある「宿削除」ボタンを押す<br/>3. 選択した宿に削除のフラグが建てられている<br/></td></tr><tr id="1f9b95b7-e1e8-818f-b1ba-eb036421759c"><td id=":ctj" class="" style="width:119px">例外系列</td><td id="xm|W" class="" style="width:928px"></td></tr><tr id="1f9b95b7-e1e8-81cc-9749-fb7c4362e82d"><td id=":ctj" class="" style="width:119px">備考</td><td id="xm|W" class="" style="width:928px"></td></tr></tbody></table><table id="1f9b95b7-e1e8-81b9-bd21-c913ce4e7aaf" class="simple-table"><tbody><tr id="1f9b95b7-e1e8-8121-aad8-ca1a3c425c85"><td id=":ctj" class="" style="width:119px">ユースケースID</td><td id="xm|W" class="" style="width:929px">UC115</td></tr><tr id="1f9b95b7-e1e8-81b5-8418-de4e7bc17990"><td id=":ctj" class="" style="width:119px">ユースケース名</td><td id="xm|W" class="" style="width:929px">プラン削除機能</td></tr><tr id="1f9b95b7-e1e8-81a1-bbab-c42192112de8"><td id=":ctj" class="" style="width:119px">概要</td><td id="xm|W" class="" style="width:929px">登録済みのプランの情報を削除する</td></tr><tr id="1f9b95b7-e1e8-81e4-9ee4-e1b455005640"><td id=":ctj" class="" style="width:119px">アクター</td><td id="xm|W" class="" style="width:929px">管理者</td></tr><tr id="1f9b95b7-e1e8-8176-bf53-e4b60479fa36"><td id=":ctj" class="" style="width:119px">事前条件</td><td id="xm|W" class="" style="width:929px">管理者ログインを済ませており、なおかつプラン一覧のプラン詳細から「プラン削除」を選択できる</td></tr><tr id="1f9b95b7-e1e8-8174-9b48-fc0540c16943"><td id=":ctj" class="" style="width:119px">事後条件</td><td id="xm|W" class="" style="width:929px">登録したプラン情報の削除のフラグが建てられている</td></tr><tr id="1f9b95b7-e1e8-8136-8874-db464d84eb6d"><td id=":ctj" class="" style="width:119px">基本系列</td><td id="xm|W" class="" style="width:929px">1.「プラン詳細画面」になると、このユースケースが開始される<br/>2.アクターはプラン詳細画面上にある「プラン削除」ボタンを押す<br/>3. 選択したプランに削除のフラグが建てられている<br/>4.システムはプラン削除後のプラン詳細画面が表示される<br/></td></tr><tr id="1f9b95b7-e1e8-818c-9b94-eb716eb377c4"><td id=":ctj" class="" style="width:119px">例外系列</td><td id="xm|W" class="" style="width:929px"></td></tr><tr id="1f9b95b7-e1e8-815e-a05f-e81e5cc76d5d"><td id=":ctj" class="" style="width:119px">備考</td><td id="xm|W" class="" style="width:929px"></td></tr></tbody></table><table id="1f9b95b7-e1e8-80c4-9c2a-c844df09ccdc" class="simple-table"><tbody><tr id="1f9b95b7-e1e8-80dc-9328-ed4ea2abc369"><td id=":ctj" class="" style="width:119px">ユースケースID</td><td id="xm|W" class="" style="width:929px">UC116</td></tr><tr id="1f9b95b7-e1e8-80cf-9454-f5ce7d920121"><td id=":ctj" class="" style="width:119px">ユースケース名</td><td id="xm|W" class="" style="width:929px">ユーザー情報変更機能</td></tr><tr id="1f9b95b7-e1e8-8023-9fa6-f7786e68e975"><td id=":ctj" class="" style="width:119px">概要</td><td id="xm|W" class="" style="width:929px">登録済みのプランの情報を削除する</td></tr><tr id="1f9b95b7-e1e8-80fe-a68d-fb28c8cfb6a8"><td id=":ctj" class="" style="width:119px">アクター</td><td id="xm|W" class="" style="width:929px">管理者</td></tr><tr id="1f9b95b7-e1e8-8026-87ab-d9d8918a62d1"><td id=":ctj" class="" style="width:119px">事前条件</td><td id="xm|W" class="" style="width:929px">管理者ログインを済ませており、なおかつユーザー一覧のユーザー詳細から「ユーザー情報変更機能」を選択できる</td></tr><tr id="1f9b95b7-e1e8-8008-b602-f53beff69d89"><td id=":ctj" class="" style="width:119px">事後条件</td><td id="xm|W" class="" style="width:929px">登録したプラン情報の削除のフラグが建てられている</td></tr><tr id="1f9b95b7-e1e8-80a5-977b-d877c00173a3"><td id=":ctj" class="" style="width:119px">基本系列</td><td id="xm|W" class="" style="width:929px">1.「ユーザー詳細画面」になると、このユースケースが開始される<br/>2.アクターはユーザー詳細画面上にある「ユーザー情報変更機能」ボタンを押す<br/>3.システムはユーザー情報変更を入力する画面を表示する<br/>4.ユーザーの「氏名」「ふりがな」「電話番号」「メールアドレス」「所属（会社）」「生年月日」「住所」の既存の情報が登録・表示されている<br/>5. アクターは各項目について情報を変更することができる<br/>6. 「確認画面へ」ボタンを押す<br/>7. 確認後、「変更を保存」ボタンを押す<br/>8.  システムは宿詳細画面を表示する<br/></td></tr><tr id="1f9b95b7-e1e8-8088-9842-f79cacdfe1bc"><td id=":ctj" class="" style="width:119px">例外系列</td><td id="xm|W" class="" style="width:929px">E-1：アクターが次の入力チェック条件を満たさずに「確認画面へ」ボタンを押した<br/>• 「氏名」「ふりがな」は必須、50文字以下<br/>• 「電話番号」は必須、11文字以下、電話番号として正しいフォーマットであること、同じ電話番号が登録されていないこと<br/>• 「メールアドレス」は必須、100文字以下、メールアドレスとして正しいフォーマットであること、同じメールアド<br/>レスが登録されていないこと<br/>• 「所属（会社）」は必須、50文字以下<br/>• 「生年月日」は必須、選択式<br/>• 「住所」は必須、100文字以下<br/>• 「パスワード」は必須、50文字以下<br/>1.システムは、入力が正しくない旨を伝えるメッセージとともに、ユーザー情報変更画面を再表示する<br/></td></tr><tr id="1f9b95b7-e1e8-801d-8774-fa7e0d857db5"><td id=":ctj" class="" style="width:119px">備考</td><td id="xm|W" class="" style="width:929px"></td></tr></tbody></table><table id="1f9b95b7-e1e8-8107-a24b-d883d8fdf938" class="simple-table"><tbody><tr id="1f9b95b7-e1e8-8129-bd83-d569311e297f"><td id=":ctj" class="" style="width:119px">ユースケースID</td><td id="xm|W" class="" style="width:930px">UC117</td></tr><tr id="1f9b95b7-e1e8-814b-ac72-e87c66df9cad"><td id=":ctj" class="" style="width:119px">ユースケース名</td><td id="xm|W" class="" style="width:930px">宿情報変更機能</td></tr><tr id="1f9b95b7-e1e8-81fb-bb24-e1092a852088"><td id=":ctj" class="" style="width:119px">概要</td><td id="xm|W" class="" style="width:930px">登録した宿情報を変更する</td></tr><tr id="1f9b95b7-e1e8-81b8-bb43-ce1f8872a5fc"><td id=":ctj" class="" style="width:119px">アクター</td><td id="xm|W" class="" style="width:930px">管理者</td></tr><tr id="1f9b95b7-e1e8-8146-91d8-ce8d8d95eea2"><td id=":ctj" class="" style="width:119px">事前条件</td><td id="xm|W" class="" style="width:930px">管理者ログインを済ませており、なおかつ宿一覧の宿詳細から「宿情報変更」を選択できる</td></tr><tr id="1f9b95b7-e1e8-81db-8aea-ecde509c87d7"><td id=":ctj" class="" style="width:119px">事後条件</td><td id="xm|W" class="" style="width:930px">登録した宿情報が変更されている</td></tr><tr id="1f9b95b7-e1e8-8174-a54b-d3a7ff98eb9e"><td id=":ctj" class="" style="width:119px">基本系列</td><td id="xm|W" class="" style="width:930px">1. 「宿詳細画面」になると、このユースケースが開始される<br/>2.アクターは宿詳細画面上にある「宿情報変更」ボタンを押す<br/>3.システムは宿情報変更を入力する画面を表示する<br/><mark class="highlight-yellow_background"><br/><br/></mark><mark class="highlight-default_background">4</mark>. 「ホテル名」「住所」「電話番号」「最寄り駅」「イメージ写真」「温泉の有無」「ホテルのジャンル」<br/>「団体受け入れ可能客室数」の既存の情報が登録・表示されている<br/>5. アクターは各項目について情報を変更することができる<br/>6. 「確認画面へ」ボタンを押す<br/>7. 確認後、「変更を保存」ボタンを押す<br/>8.  システムは宿詳細画面を表示する<br/></td></tr><tr id="1f9b95b7-e1e8-81b6-99f3-dc6e7b32e8c5"><td id=":ctj" class="" style="width:119px">例外系列</td><td id="xm|W" class="" style="width:930px">E-1：アクターが次の入力チェック条件を満たさずに「確認画面へ」ボタンを押した<br/>• 「ホテル名」は必須、50文字以下<br/>• 「住所」は必須、50文字以下<br/>• 「電話番号」は必須<br/>• 「最寄り駅」は必須、50文字以下<br/>• 「イメージ写真」は必須、形式は jpeg, png のみ<br/>• 「温泉の有無」は任意<br/>• 「ホテルのジャンル」は任意、50文字以下<br/>• 「団体受け入れ可能客室数」は任意、正の整数のみ<br/>1.システムは、入力が正しくない旨を伝えるメッセージとともに、宿情報変更画面を再表示する<br/></td></tr><tr id="1f9b95b7-e1e8-81a3-aa83-f3cddf90f6c3"><td id=":ctj" class="" style="width:119px">備考</td><td id="xm|W" class="" style="width:930px"></td></tr></tbody></table><table id="1f9b95b7-e1e8-8140-b98b-dc80e7f1f7c8" class="simple-table"><tbody><tr id="1f9b95b7-e1e8-811f-9499-ea576e379350"><td id=":ctj" class="" style="width:119px">ユースケースID</td><td id="xm|W" class="" style="width:933px">UC118</td></tr><tr id="1f9b95b7-e1e8-816d-8c47-c01270c3c9b3"><td id=":ctj" class="" style="width:119px">ユースケース名</td><td id="xm|W" class="" style="width:933px">プラン情報変更機能</td></tr><tr id="1f9b95b7-e1e8-8163-ba51-d6ea632ffb6c"><td id=":ctj" class="" style="width:119px">概要</td><td id="xm|W" class="" style="width:933px">登録したプラン情報を変更する</td></tr><tr id="1f9b95b7-e1e8-8192-8cf0-dd93a8397096"><td id=":ctj" class="" style="width:119px">アクター</td><td id="xm|W" class="" style="width:933px">管理者</td></tr><tr id="1f9b95b7-e1e8-81c0-a63a-c30975d1f172"><td id=":ctj" class="" style="width:119px">事前条件</td><td id="xm|W" class="" style="width:933px">管理者ログインを済ませている</td></tr><tr id="1f9b95b7-e1e8-8135-92f1-c280a9ba2389"><td id=":ctj" class="" style="width:119px">事後条件</td><td id="xm|W" class="" style="width:933px">登録したプラン情報が変更されている</td></tr><tr id="1f9b95b7-e1e8-81c3-b403-f9ccc168de85"><td id=":ctj" class="" style="width:119px">基本系列</td><td id="xm|W" class="" style="width:933px">1. アクターは管理者画面にログインする<br/>2. 管理者画面で登録したプラン情報の一覧がある<br/>3. 一覧からプランを選択する<br/>4. アクターは「変更する」ボタンを押す<br/>5. 登録されている「プラン名」「金額」が記載されており、表示されている<br/>6. アクターは各項目について情報を変更することができる<br/>6. 「確認画面へ」ボタンを押す<br/>7. 確認後、「変更を保存」ボタンを押す<br/>8. システムはプラン変更情報を保存して、プラン詳細画面を表示する<br/></td></tr><tr id="1f9b95b7-e1e8-818b-8d76-e740063b16d7"><td id=":ctj" class="" style="width:119px">例外系列</td><td id="xm|W" class="" style="width:933px">E-1：アクターが次の入力チェック条件を満たさずに「確認画面へ」ボタンを押した<br/>• 「プラン名」は必須、50文字以下<br/>• 「金額」は必須、正の整数<br/>1.システムは、入力が正しくない旨を伝えるメッセージとともに、プラン情報変更画面を再表示する<br/></td></tr><tr id="1f9b95b7-e1e8-81d1-a6de-d97b95fba79b"><td id=":ctj" class="" style="width:119px">備考</td><td id="xm|W" class="" style="width:933px"></td></tr></tbody></table><table id="1f9b95b7-e1e8-8157-af70-d026de6ae7c4" class="simple-table"><tbody><tr id="1f9b95b7-e1e8-81ea-a6e5-c9dbdafaa188"><td id=":ctj" class="" style="width:119px">ユースケースID</td><td id="xm|W" class="" style="width:896px">UC201</td></tr><tr id="1f9b95b7-e1e8-8174-a3a3-d752f283297c"><td id=":ctj" class="" style="width:119px">ユースケース名</td><td id="xm|W" class="" style="width:896px">会員認証機能</td></tr><tr id="1f9b95b7-e1e8-8195-8122-c70aa60b5d0f"><td id=":ctj" class="" style="width:119px">概要</td><td id="xm|W" class="" style="width:896px">会員登録済みのユーザー会員がページにログインする</td></tr><tr id="1f9b95b7-e1e8-8125-a97e-e0e10feacc7e"><td id=":ctj" class="" style="width:119px">アクター</td><td id="xm|W" class="" style="width:896px">ユーザー</td></tr><tr id="1f9b95b7-e1e8-81b8-bc8e-c07aaadc5983"><td id=":ctj" class="" style="width:119px">事前条件</td><td id="xm|W" class="" style="width:896px">ユーザーが会員登録されている</td></tr><tr id="1f9b95b7-e1e8-81d5-914e-e46643381d96"><td id=":ctj" class="" style="width:119px">事後条件</td><td id="xm|W" class="" style="width:896px">ユーザ認証される</td></tr><tr id="1f9b95b7-e1e8-81a0-89bd-d4f41403d8b3"><td id=":ctj" class="" style="width:119px">基本系列</td><td id="xm|W" class="" style="width:896px">1. アクターは登録する会員の<mark class="highlight-default_background">メールアド</mark>レスとパスワードを入力<br/>2. 「ログイン」を選択する<br/></td></tr><tr id="1f9b95b7-e1e8-81e3-ad31-fe77cc3a4c20"><td id=":ctj" class="" style="width:119px">例外系列</td><td id="xm|W" class="" style="width:896px">E-1：アクターが次の認証条件を満たさずに「ログイン」ボタンを押した<br/>• ユーザの「メールアドレス」が登録されていない<br/>• ユーザの「パスワード」が登録したものと一致しない<br/>1. システムは、入力が正しくない旨を伝えるメッセージとともに、管理者認証画面を再表示する<br/></td></tr><tr id="1f9b95b7-e1e8-8168-8d76-fb9ab0d9ee91"><td id=":ctj" class="" style="width:119px">備考</td><td id="xm|W" class="" style="width:896px"></td></tr></tbody></table><table id="1f9b95b7-e1e8-813e-b96c-ca28db00b143" class="simple-table"><tbody><tr id="1f9b95b7-e1e8-8169-b7f6-f58c50936710"><td id=":ctj" class="" style="width:119px">ユースケースID</td><td id="xm|W" class="" style="width:896px">UC202</td></tr><tr id="1f9b95b7-e1e8-81de-8f7e-e7963a0b68e3"><td id=":ctj" class="" style="width:119px">ユースケース名</td><td id="xm|W" class="" style="width:896px">新規会員登録機能</td></tr><tr id="1f9b95b7-e1e8-8142-923d-e77e0639266e"><td id=":ctj" class="" style="width:119px">概要</td><td id="xm|W" class="" style="width:896px">新規会員としてシステムに登録する</td></tr><tr id="1f9b95b7-e1e8-8181-960e-fc6a6aed0b04"><td id=":ctj" class="" style="width:119px">アクター</td><td id="xm|W" class="" style="width:896px">ユーザー</td></tr><tr id="1f9b95b7-e1e8-811b-abc7-da4deb0f8f96"><td id=":ctj" class="" style="width:119px">事前条件</td><td id="xm|W" class="" style="width:896px">会員メニューにアクセスできる</td></tr><tr id="1f9b95b7-e1e8-810c-b5dc-e9f53b522e25"><td id=":ctj" class="" style="width:119px">事後条件</td><td id="xm|W" class="" style="width:896px">会員登録される</td></tr><tr id="1f9b95b7-e1e8-815f-9569-eb0ead0044ac"><td id=":ctj" class="" style="width:119px">基本系列</td><td id="xm|W" class="" style="width:896px">1. メニューから「会員登録」を選択すると、このユースケースが開始される<br/>2. システムは会員情報を入力する画面を表示する<br/>3. アクターは登録する会員の氏名、ふりがな、電話番号、メールアドレス、所属（会社）、生年月日、住所、パスワードを入力し、「確認画面へ」ボタンを押す<br/>4. システムは登録情報の確認画面を表示する<br/>5. アクターは「登録する」ボタンを押す<br/>6. システムは会員を登録してランダムなパスワードを発行し、会員登録完了画面を表示する<br/></td></tr><tr id="1f9b95b7-e1e8-81ea-81ba-d8cc6704e628"><td id=":ctj" class="" style="width:119px">例外系列</td><td id="xm|W" class="" style="width:896px">E-1：アクターが次の認証条件を満たさずに「確認画面へ」ボタンを押した<br/>• 「氏名」「ふりがな」は必須、50文字以下<br/>• 「電話番号」は必須、11文字以下、電話番号として正しいフォーマットであること、同じ電話番号が登録されていないこと<br/>• 「メールアドレス」は必須、100文字以下、メールアドレスとして正しいフォーマットであること、同じメールアド<br/>レスが登録されていないこと<br/>• 「所属（会社）」は必須、50文字以下<br/>• 「生年月日」は必須、選択式<br/>• 「住所」は必須、100文字以下<br/>• 「パスワード」は必須、50文字以下<br/>1.システムは、入力が正しくない旨を伝えるメッセージとともに、管理者情報入力画面を再表示する<br/></td></tr><tr id="1f9b95b7-e1e8-818e-8e01-cbf49e047d4b"><td id=":ctj" class="" style="width:119px">備考</td><td id="xm|W" class="" style="width:896px"></td></tr></tbody></table><table id="1f9b95b7-e1e8-8177-ac62-c8c6261518a5" class="simple-table"><tbody><tr id="1f9b95b7-e1e8-8143-9fd6-ec34a5c9c020"><td id=":ctj" class="" style="width:119px">ユースケースID</td><td id="xm|W" class="" style="width:896px">UC203</td></tr><tr id="1f9b95b7-e1e8-81b0-aa27-c817422cc109"><td id=":ctj" class="" style="width:119px">ユースケース名</td><td id="xm|W" class="" style="width:896px">会員ログアウト機能 </td></tr><tr id="1f9b95b7-e1e8-81a0-b7a4-eaa6cb9c3a31"><td id=":ctj" class="" style="width:119px">概要</td><td id="xm|W" class="" style="width:896px">ログアウトする</td></tr><tr id="1f9b95b7-e1e8-8147-aa83-c12f0818e795"><td id=":ctj" class="" style="width:119px">アクター</td><td id="xm|W" class="" style="width:896px">ユーザー</td></tr><tr id="1f9b95b7-e1e8-813f-8810-c60dcc732753"><td id=":ctj" class="" style="width:119px">事前条件</td><td id="xm|W" class="" style="width:896px">ログインされている</td></tr><tr id="1f9b95b7-e1e8-818b-8d65-db83d75f357e"><td id=":ctj" class="" style="width:119px">事後条件</td><td id="xm|W" class="" style="width:896px">ログアウトされる</td></tr><tr id="1f9b95b7-e1e8-81ca-b5c7-f2cdaf7269e8"><td id=":ctj" class="" style="width:119px">基本系列</td><td id="xm|W" class="" style="width:896px">1.メニューバーの中に ログアウトがある<br/>2. アクターがログアウト選択する<br/>3. アクターが管理者ログインからログアウトできる<br/></td></tr><tr id="1f9b95b7-e1e8-819f-a159-da47bcd938d9"><td id=":ctj" class="" style="width:119px">例外系列</td><td id="xm|W" class="" style="width:896px"></td></tr><tr id="1f9b95b7-e1e8-8137-87e9-cef7e5390894"><td id=":ctj" class="" style="width:119px">備考</td><td id="xm|W" class="" style="width:896px"></td></tr></tbody></table><table id="1f9b95b7-e1e8-80e1-b687-dead4afb9d0e" class="simple-table"><tbody><tr id="1f9b95b7-e1e8-80d6-b428-d182b86ddbed"><td id=":ctj" class="" style="width:119px">ユースケースID</td><td id="xm|W" class="" style="width:896px">UC204</td></tr><tr id="1f9b95b7-e1e8-8070-8cbf-d333ba804ca5"><td id=":ctj" class="" style="width:119px">ユースケース名</td><td id="xm|W" class="" style="width:896px">会員情報変更機能</td></tr><tr id="1f9b95b7-e1e8-8086-ad9a-f35597ec7845"><td id=":ctj" class="" style="width:119px">概要</td><td id="xm|W" class="" style="width:896px">会員情報を変更される</td></tr><tr id="1f9b95b7-e1e8-809a-91c6-d3d7297c858c"><td id=":ctj" class="" style="width:119px">アクター</td><td id="xm|W" class="" style="width:896px">ユーザー</td></tr><tr id="1f9b95b7-e1e8-80a9-88e5-f3e111d88027"><td id=":ctj" class="" style="width:119px">事前条件</td><td id="xm|W" class="" style="width:896px">プラン検索画面にアクセスできる</td></tr><tr id="1f9b95b7-e1e8-80dd-9cc9-e54683859170"><td id=":ctj" class="" style="width:119px">事後条件</td><td id="xm|W" class="" style="width:896px">会員情報が変更される</td></tr><tr id="1f9b95b7-e1e8-8016-8d28-dbfaa2f6eecc"><td id=":ctj" class="" style="width:119px">基本系列</td><td id="xm|W" class="" style="width:896px">1. 「プラン検索画面」になると、このユースケースが開始される<br/>2.メニューバーの中に会員情報変更がある<br/>3. アクターが会員情報変更を選択する<br/>4. システムは会員情報を変更する画面を表示する<br/>4. アクターは変更する会員の氏名、ふりがな、電話番号、メールアドレス、所属（会社）、生年月日、住所、パスワードを入力し、「確認画面へ」ボタンを押す<br/>4. システムは登録情報の確認画面を表示する<br/>5. アクターは「登録する」ボタンを押す<br/></td></tr><tr id="1f9b95b7-e1e8-806d-ba10-c92612f73462"><td id=":ctj" class="" style="width:119px">例外系列</td><td id="xm|W" class="" style="width:896px">E-1：アクターが次の認証条件を満たさずに「確認画面へ」ボタンを押した<br/>• 「氏名」「ふりがな」は必須、50文字以下<br/>• 「電話番号」は必須、11文字以下、電話番号として正しいフォーマットであること、同じ電話番号が登録されていないこと<br/>• 「メールアドレス」は必須、100文字以下、メールアドレスとして正しいフォーマットであること、同じメールアド<br/>レスが登録されていないこと<br/>• 「所属（会社）」は必須、50文字以下<br/>• 「生年月日」は必須、選択式<br/>• 「住所」は必須、100文字以下<br/>• 「パスワード」は必須、50文字以下<br/>1.システムは、入力が正しくない旨を伝えるメッセージとともに、管理者情報入力画面を再表示する<br/></td></tr><tr id="1f9b95b7-e1e8-805e-85a9-e397ff5bc273"><td id=":ctj" class="" style="width:119px">備考</td><td id="xm|W" class="" style="width:896px"></td></tr></tbody></table><table id="1f9b95b7-e1e8-8165-b313-f2bcc0cde67d" class="simple-table"><tbody><tr id="1f9b95b7-e1e8-8175-9c23-e9a1fd294750"><td id=":ctj" class="" style="width:119px">ユースケースID</td><td id="xm|W" class="" style="width:896px">UC205</td></tr><tr id="1f9b95b7-e1e8-81d0-8344-c387a73d7a61"><td id=":ctj" class="" style="width:119px">ユースケース名</td><td id="xm|W" class="" style="width:896px">退会機能</td></tr><tr id="1f9b95b7-e1e8-8104-baab-fd40aa68e556"><td id=":ctj" class="" style="width:119px">概要</td><td id="xm|W" class="" style="width:896px">退会する</td></tr><tr id="1f9b95b7-e1e8-8159-adb3-f3a20261b9e0"><td id=":ctj" class="" style="width:119px">アクター</td><td id="xm|W" class="" style="width:896px">ユーザー</td></tr><tr id="1f9b95b7-e1e8-81bd-8989-ebf3a62bbe6b"><td id=":ctj" class="" style="width:119px">事前条件</td><td id="xm|W" class="" style="width:896px">会員登録している</td></tr><tr id="1f9b95b7-e1e8-8143-9353-f51969a8db1f"><td id=":ctj" class="" style="width:119px">事後条件</td><td id="xm|W" class="" style="width:896px">会員の退会登録を行う</td></tr><tr id="1f9b95b7-e1e8-811d-948a-d6846373f364"><td id=":ctj" class="" style="width:119px">基本系列</td><td id="xm|W" class="" style="width:896px">1. メニューバーの中に退会がある<br/>2. アクターが退会選択する<br/>3. アクターの会員退会処理が実行される<br/></td></tr><tr id="1f9b95b7-e1e8-815e-b549-c249c55d0527"><td id=":ctj" class="" style="width:119px">例外系列</td><td id="xm|W" class="" style="width:896px"></td></tr><tr id="1f9b95b7-e1e8-8128-99e8-ea5ea25644ac"><td id=":ctj" class="" style="width:119px">備考</td><td id="xm|W" class="" style="width:896px"></td></tr></tbody></table><table id="1f9b95b7-e1e8-81b6-b3e3-ed459bc666a7" class="simple-table"><tbody><tr id="1f9b95b7-e1e8-8103-8515-c2bf177ea089"><td id=":ctj" class="" style="width:119px">ユースケースID</td><td id="xm|W" class="" style="width:896px">UC206</td></tr><tr id="1f9b95b7-e1e8-815b-a7b9-c9efe0ba0767"><td id=":ctj" class="" style="width:119px">ユースケース名</td><td id="xm|W" class="" style="width:896px">プラン検索機能</td></tr><tr id="1f9b95b7-e1e8-81ae-b11a-ccdc9e8c3009"><td id=":ctj" class="" style="width:119px">概要</td><td id="xm|W" class="" style="width:896px">ユーザーが指定した要件通りのプランが検索できる</td></tr><tr id="1f9b95b7-e1e8-8159-aca3-ee6d2663798a"><td id=":ctj" class="" style="width:119px">アクター</td><td id="xm|W" class="" style="width:896px">ユーザー</td></tr><tr id="1f9b95b7-e1e8-816c-b3dc-d8e615d8399d"><td id=":ctj" class="" style="width:119px">事前条件</td><td id="xm|W" class="" style="width:896px">ログインしている</td></tr><tr id="1f9b95b7-e1e8-8190-af6f-e4cee2cd0394"><td id=":ctj" class="" style="width:119px">事後条件</td><td id="xm|W" class="" style="width:896px">要件通りの検索ができる</td></tr><tr id="1f9b95b7-e1e8-8110-b65e-c10bd5433ae5"><td id=":ctj" class="" style="width:119px">基本系列</td><td id="xm|W" class="" style="width:896px">1.メニューバーもしくはトップページからプラン検索できる<br/>2.検索条件を入力する入力フォームの中に以下のの条件を入力できる<br/>条件：金額、地図、日付、ホテルのジャンル、人数、食事の有無、チェックインとチェックアウト時間、温泉の有無、団体受け入れ可能客室数、お気に入り数、口コミの数、星の数、写真の有無<br/>ソート条件：ランキング、金額、お気に入り数、口コミの数、星の数<br/></td></tr><tr id="1f9b95b7-e1e8-81c2-bfc0-dc85fe6177d9"><td id=":ctj" class="" style="width:119px">例外系列</td><td id="xm|W" class="" style="width:896px"></td></tr><tr id="1f9b95b7-e1e8-81ba-a1fd-c7df321c25db"><td id=":ctj" class="" style="width:119px">備考</td><td id="xm|W" class="" style="width:896px">キーワード検索では、プランの名前だけでなく、プランの内容にも検索が掛かるようにする<br/>ランキングは 評価点 = (お気に入り数 + 1) x (星の数 + 1) x (予約数 + 1) の高い順<br/>デフォルトソートはランキング順<br/></td></tr></tbody></table><table id="1f9b95b7-e1e8-8123-aa38-f0646954fce5" class="simple-table"><tbody><tr id="1f9b95b7-e1e8-8152-95f9-e6dcf4f0442f"><td id="F\}]" class="">ユースケースID</td><td id="ag_T" class="" style="width:897px">UC207</td></tr><tr id="1f9b95b7-e1e8-8125-8db6-fae54af62282"><td id="F\}]" class="">ユースケース名</td><td id="ag_T" class="" style="width:897px">プラン検索結果一覧表示機能 </td></tr><tr id="1f9b95b7-e1e8-8177-b9b9-c9602dbfd699"><td id="F\}]" class="">概要</td><td id="ag_T" class="" style="width:897px">プラン検索機能から得た情報で絞られて得られるプランの一覧を表示する</td></tr><tr id="1f9b95b7-e1e8-81b6-ae77-fde0a1ef9c5e"><td id="F\}]" class="">アクター</td><td id="ag_T" class="" style="width:897px">ユーザー</td></tr><tr id="1f9b95b7-e1e8-8126-aa38-ddd5515c05ba"><td id="F\}]" class="">事前条件</td><td id="ag_T" class="" style="width:897px">ユーザログインを済ませており、かつ検索画面にて何かしら条件を入力している</td></tr><tr id="1f9b95b7-e1e8-81d5-9074-fbb6fedd3eec"><td id="F\}]" class="">事後条件</td><td id="ag_T" class="" style="width:897px">検索画面にて入力した内容を条件とし、それに合うプランを表示したプラン検索結果一覧表示画面を表示する</td></tr><tr id="1f9b95b7-e1e8-81fb-bec5-cc73f4ea1d02"><td id="F\}]" class="">基本系列</td><td id="ag_T" class="" style="width:897px">1. プラン検索画面にて、検索条件を入力する入力フォームの中に何かしらの条件を入力し、「検索」ボタンを選択すると、このユースケースが開始される<br/>2. 1. で入力された内容を条件として、その条件に合致するプランのプラン検索結果一覧表示画面を表示する<br/>※ここでのプラン情報は「ホテル名」「プラン名」「写真」「宿の評価（お気に入り数、口コミ数、星数、ランキング順位）」「住所」とし、「プラン名」にはリンクを付けて、プラン詳細確認画面に遷移できるようにする<br/></td></tr><tr id="1f9b95b7-e1e8-818a-bc6c-d675c6c6dfa5"><td id="F\}]" class="">例外系列</td><td id="ag_T" class="" style="width:897px">E-1：アクターがログインを通していない状態でアクセスをした<br/>1.会員情報入力画面に遷移してログインを促す<br/></td></tr><tr id="1f9b95b7-e1e8-8179-80f2-c8882ec14a09"><td id="F\}]" class="">備考</td><td id="ag_T" class="" style="width:897px">①アクターがすべての入力フォームになにも入れずに「検索」ボタンを押した場合、条件絞り込みなしにすべての登録されているプランを表示する<br/>②(機能要検討)「ホテル名」にもリンクを入れて宿詳細画面に遷移できるようにするか？<br/></td></tr></tbody></table><table id="1f9b95b7-e1e8-8152-924a-fe0e99618930" class="simple-table"><tbody><tr id="1f9b95b7-e1e8-81e6-aa5d-c40db6527a6a"><td id="fnNg" class="">ユースケースID</td><td id="p`Oo" class="" style="width:898px">UC208</td></tr><tr id="1f9b95b7-e1e8-819f-a006-ffb60b9c4887"><td id="fnNg" class="">ユースケース名</td><td id="p`Oo" class="" style="width:898px">プラン詳細確認機能</td></tr><tr id="1f9b95b7-e1e8-81e7-b756-d59a2f391f93"><td id="fnNg" class="">概要</td><td id="p`Oo" class="" style="width:898px">プランの詳細を表示する</td></tr><tr id="1f9b95b7-e1e8-8105-a645-df91ddcd541e"><td id="fnNg" class="">アクター</td><td id="p`Oo" class="" style="width:898px">ユーザー</td></tr><tr id="1f9b95b7-e1e8-8170-8fd4-edf61b5004fd"><td id="fnNg" class="">事前条件</td><td id="p`Oo" class="" style="width:898px">ユーザログインを済ませており、かつプラン名を押せる画面(プラン検索結果一覧画面・宿詳細画面)から「プラン名」を選択する</td></tr><tr id="1f9b95b7-e1e8-8171-8cb2-c12234a62de0"><td id="fnNg" class="">事後条件</td><td id="p`Oo" class="" style="width:898px">選択されたプラン名に応じたプラン詳細画面を閲覧できる</td></tr><tr id="1f9b95b7-e1e8-8165-bb39-e8ad3773b911"><td id="fnNg" class="">基本系列</td><td id="p`Oo" class="" style="width:898px">1. 以下の状態になると、このユースケースが開始される<br/>・プラン検索結果一覧表示画面が表示されている<br/>・宿詳細画面が表示されている<br/>2. プランの名前がリンクになっているので、そのリンク部分をクリックする<br/>3. 「ホテル名」「プラン名」を表示したプラン詳細画面を表示する<br/></td></tr><tr id="1f9b95b7-e1e8-817e-aff6-dd1d4825bff4"><td id="fnNg" class="">例外系列</td><td id="p`Oo" class="" style="width:898px">E-1：アクターがログインを通していない状態でアクセスをした<br/>1.会員情報入力画面に遷移してログインを促す<br/></td></tr><tr id="1f9b95b7-e1e8-81f8-be06-dd05116d0800"><td id="fnNg" class="">備考</td><td id="p`Oo" class="" style="width:898px"></td></tr></tbody></table><table id="1f9b95b7-e1e8-81c3-958b-d8bc63744df1" class="simple-table"><tbody><tr id="1f9b95b7-e1e8-8172-8912-db40489cfe75"><td id="fnNg" class="">ユースケースID</td><td id="p`Oo" class="" style="width:898px">UC209</td></tr><tr id="1f9b95b7-e1e8-81fe-8e3f-d07991919ef3"><td id="fnNg" class="">ユースケース名</td><td id="p`Oo" class="" style="width:898px">宿詳細確認機能</td></tr><tr id="1f9b95b7-e1e8-81b3-ae80-e9215f9b63af"><td id="fnNg" class="">概要</td><td id="p`Oo" class="" style="width:898px">登録されている宿の詳細を確認できる</td></tr><tr id="1f9b95b7-e1e8-8158-be53-c1c943aaf7e9"><td id="fnNg" class="">アクター</td><td id="p`Oo" class="" style="width:898px">ユーザー</td></tr><tr id="1f9b95b7-e1e8-813a-a46e-dc929028db76"><td id="fnNg" class="">事前条件</td><td id="p`Oo" class="" style="width:898px">プランの一覧画面から宿が閲覧できる</td></tr><tr id="1f9b95b7-e1e8-81a2-b323-d916c4d8cd41"><td id="fnNg" class="">事後条件</td><td id="p`Oo" class="" style="width:898px">宿の詳細情報が確認できる</td></tr><tr id="1f9b95b7-e1e8-81a8-99a9-d73284d1f4df"><td id="fnNg" class="">基本系列</td><td id="p`Oo" class="" style="width:898px">1. プラン一覧画面をアクターが開く<br/>2. プランを選択する<br/>3. プランに宿の簡潔な情報が載っている<br/>4. 宿の部分を選択すると宿の詳細を確認できる<br/>5.「ホテル名」「プラン一覧」「写真」「評価」（お気に入り数、口コミ数、星数、ランキング順位）「住所」「ホテルのジャンル」「電話番号」「最寄り駅」「イメージ写真」を確認できるようにする<br/></td></tr><tr id="1f9b95b7-e1e8-8187-8d60-e0208916db40"><td id="fnNg" class="">例外系列</td><td id="p`Oo" class="" style="width:898px">E-1：アクターがログインを通していない状態でアクセスをした<br/>1.会員情報入力画面に遷移してログインを促す<br/></td></tr><tr id="1f9b95b7-e1e8-814a-8f25-e271f24ab797"><td id="fnNg" class="">備考</td><td id="p`Oo" class="" style="width:898px">(機能要検討) 「プラン一覧」の「プラン名」にはリンクを付けて、プラン詳細確認画面に遷移できるようにするか？</td></tr></tbody></table><table id="1f9b95b7-e1e8-8136-a9fc-d61c6adb1175" class="simple-table"><tbody><tr id="1f9b95b7-e1e8-816d-9560-f520dd245bea"><td id="fa&lt;:" class="">ユースケースID</td><td id="U=r:" class="" style="width:895px">UC210</td></tr><tr id="1f9b95b7-e1e8-816c-928a-c7953a49e56c"><td id="fa&lt;:" class="">ユースケース名</td><td id="U=r:" class="" style="width:895px">宿お気に入り機能/口コミ機能/星評価機能</td></tr><tr id="1f9b95b7-e1e8-81ba-9756-e2cce194b2fa"><td id="fa&lt;:" class="">概要</td><td id="U=r:" class="" style="width:895px">宿の「お気に入り」する機能、「口コミ」をする、「星」評価をする</td></tr><tr id="1f9b95b7-e1e8-810c-a65b-d8b2a0342b4c"><td id="fa&lt;:" class="">アクター</td><td id="U=r:" class="" style="width:895px">ユーザー</td></tr><tr id="1f9b95b7-e1e8-8156-9fe0-d2953d2469e6"><td id="fa&lt;:" class="">事前条件</td><td id="U=r:" class="" style="width:895px">宿詳細画面にアクセスできる</td></tr><tr id="1f9b95b7-e1e8-811d-8cf7-cfe76336d8ed"><td id="fa&lt;:" class="">事後条件</td><td id="U=r:" class="" style="width:895px">宿がお気に入り登録される、口コミが投稿される、「星」で評価される</td></tr><tr id="1f9b95b7-e1e8-8187-ad8c-dba4fd0cbbb6"><td id="fa&lt;:" class="">基本系列</td><td id="U=r:" class="" style="width:895px">1. アクターが宿詳細画面にアクセスする<br/>2. 画面にその宿の「お気に入り」ボタン、口コミ投稿フォームとフォーム送信ボタン、星評価ボタンがある<br/>3. アクターが各ボタンを押すことで各機能が利用できる<br/>4. 「お気に入り」に登録するとユーザーのお気に入りの宿として、宿の情報と共に登録される。口コミ投稿をすると<br/>宿の詳細にアクターの口コミが投稿される。星で評価すると宿詳細にアクターの星での評価が記載される<br/></td></tr><tr id="1f9b95b7-e1e8-8191-8387-cc98ec538b24"><td id="fa&lt;:" class="">例外系列</td><td id="U=r:" class="" style="width:895px"></td></tr><tr id="1f9b95b7-e1e8-81d7-a20a-c8545fb25076"><td id="fa&lt;:" class="">備考</td><td id="U=r:" class="" style="width:895px"></td></tr></tbody></table><table id="1f9b95b7-e1e8-81c3-be77-db6975b2287a" class="simple-table"><tbody><tr id="1f9b95b7-e1e8-811c-b801-fbb4594d9dd2"><td id="x}lP" class="">ユースケースID</td><td id="~t=:" class="" style="width:898px">UC211</td></tr><tr id="1f9b95b7-e1e8-8191-bf32-e9c13aa5105b"><td id="x}lP" class="">ユースケース名</td><td id="~t=:" class="" style="width:898px">プランに合わせた宿予約機能</td></tr><tr id="1f9b95b7-e1e8-814c-a966-debf2bc12449"><td id="x}lP" class="">概要</td><td id="~t=:" class="" style="width:898px">プラン詳細画面から、そのプランで宿を予約する</td></tr><tr id="1f9b95b7-e1e8-8134-8538-fe02f9045f4d"><td id="x}lP" class="">アクター</td><td id="~t=:" class="" style="width:898px">ユーザー</td></tr><tr id="1f9b95b7-e1e8-8130-92e3-d617d059c12f"><td id="x}lP" class="">事前条件</td><td id="~t=:" class="" style="width:898px">ユーザログインを済ませており、なおかつプラン詳細画面を表示している</td></tr><tr id="1f9b95b7-e1e8-81f6-be64-e557ab307ffc"><td id="x}lP" class="">事後条件</td><td id="~t=:" class="" style="width:898px">プランに合わせた予約が完了し、予約履歴表示画面に遷移する</td></tr><tr id="1f9b95b7-e1e8-8110-a81e-d1f7b27e6ebc"><td id="x}lP" class="">基本系列</td><td id="~t=:" class="" style="width:898px">1. プラン詳細画面から、このユースケースが開始される<br/>2. プラン詳細画面にある「予約する」ボタンを入力し、予約期間入力画面に遷移する<br/>3. 予約期間入力画面にて「チェックイン日」「チェックアウト日」「利用人数」を入力し「確認画面へ」ボタンを押すと、予約期間確認画面に遷移する<br/>4. 予約期間確認画面にて「チェックイン日」「チェックアウト日」「金額」を表示し、「予約を確定する」を選択すると、予約履歴画面に遷移する<br/></td></tr><tr id="1f9b95b7-e1e8-81ef-9426-f47a71c2251c"><td id="x}lP" class="">例外系列</td><td id="~t=:" class="" style="width:898px">E-1：アクターがログインを通していない状態でアクセスをした<br/>1.会員情報入力画面に遷移してログインを促す<br/><br/>E-2：アクターが次の入力チェック条件を満たさずに「確認画面へ」ボタンを押した<br/>• 「チェックイン日」は必須、日付入力、チェックイン可能日程であること、過去の日付ではないこと<br/>• 「チェックアウト日」は必須、日付入力、チェックイン日より未来の日程であること<br/>• 「利用人数」は必須、数値入力、プランの受入人数以内であること<br/>1.システムは、入力が正しくない旨を伝えるメッセージとともに、予約期間入力画面を再表示する<br/></td></tr><tr id="1f9b95b7-e1e8-818d-984e-cfa4070d2540"><td id="x}lP" class="">備考</td><td id="~t=:" class="" style="width:898px"></td></tr></tbody></table><table id="1f9b95b7-e1e8-811e-8405-fb941244b407" class="simple-table"><tbody><tr id="1f9b95b7-e1e8-81ad-8b52-fd382b6ac85a"><td id="fnNg" class="">ユースケースID</td><td id="p`Oo" class="" style="width:898px">UC212</td></tr><tr id="1f9b95b7-e1e8-8172-83d1-e6ca6c952701"><td id="fnNg" class="">ユースケース名</td><td id="p`Oo" class="" style="width:898px">予約履歴機能</td></tr><tr id="1f9b95b7-e1e8-8154-a9cd-f728bf8e3276"><td id="fnNg" class="">概要</td><td id="p`Oo" class="" style="width:898px">予約履歴の確認をする</td></tr><tr id="1f9b95b7-e1e8-81d7-9b8f-def3931a3912"><td id="fnNg" class="">アクター</td><td id="p`Oo" class="" style="width:898px">ユーザー</td></tr><tr id="1f9b95b7-e1e8-81ef-9b6e-de71f78f2a75"><td id="fnNg" class="">事前条件</td><td id="p`Oo" class="" style="width:898px">ログインを済ませていること</td></tr><tr id="1f9b95b7-e1e8-8158-aa40-fe3d90e533b5"><td id="fnNg" class="">事後条件</td><td id="p`Oo" class="" style="width:898px">予約履歴情報の確認ができる</td></tr><tr id="1f9b95b7-e1e8-8188-abe5-e59dee8b0aa2"><td id="fnNg" class="">基本系列</td><td id="p`Oo" class="" style="width:898px">1. メニューバーから「予約履歴」のボタンをクリック<br/>2. 予約履歴画面が表示される<br/></td></tr><tr id="1f9b95b7-e1e8-8143-ac5a-f02bb8da50ea"><td id="fnNg" class="">例外系列</td><td id="p`Oo" class="" style="width:898px"></td></tr><tr id="1f9b95b7-e1e8-812d-b9bc-de8a457f3fe7"><td id="fnNg" class="">備考</td><td id="p`Oo" class="" style="width:898px">(機能要検討) 未来の日付の予約の場合、「予約の削除」「予約の変更」を入れられるようにするか？</td></tr></tbody></table><table id="1f9b95b7-e1e8-81a3-86ee-cd419e8f0ca0" class="simple-table"><tbody><tr id="1f9b95b7-e1e8-816d-9a53-c52356b46196"><td id="ohRF" class="">ユースケースID</td><td id="_pSW" class="" style="width:901px"><mark class="highlight-default_background">UC213</mark></td></tr><tr id="1f9b95b7-e1e8-817a-9e9b-cfc7330dae57"><td id="ohRF" class="">ユースケース名</td><td id="_pSW" class="" style="width:901px">予約情報変更機能</td></tr><tr id="1f9b95b7-e1e8-811c-9bf2-cd502fdd0a3a"><td id="ohRF" class="">概要</td><td id="_pSW" class="" style="width:901px">予約履歴画面から予約情報が変更できる</td></tr><tr id="1f9b95b7-e1e8-81b2-a12a-f0320684d56d"><td id="ohRF" class="">アクター</td><td id="_pSW" class="" style="width:901px">ユーザー</td></tr><tr id="1f9b95b7-e1e8-819c-9d8c-e88e95f99727"><td id="ohRF" class="">事前条件</td><td id="_pSW" class="" style="width:901px">ログインを済ませていること、予約履歴画面に遷移できること</td></tr><tr id="1f9b95b7-e1e8-8113-872f-d36553c01c1a"><td id="ohRF" class="">事後条件</td><td id="_pSW" class="" style="width:901px">予約の情報が変更されている</td></tr><tr id="1f9b95b7-e1e8-812e-99f2-e32fc2b76051"><td id="ohRF" class="">基本系列</td><td id="_pSW" class="" style="width:901px">1. 予約履歴画面の「予約情報変更」ボタンをクリックする<br/>2.システムは予約情報を変更する画面を表示する<br/>3. アクターは変更する「チェックイン日」「チェックアウト日」「利用人数」を入力し、「確認画面へ」ボタンを押す<br/>4. システムは登録情報の確認画面を表示する<br/>5. アクターは「登録する」ボタンを押す<br/></td></tr><tr id="1f9b95b7-e1e8-81c7-b67d-c27e7f56a965"><td id="ohRF" class="">例外系列</td><td id="_pSW" class="" style="width:901px">E-1：アクターがログインを通していない状態でアクセスをした<br/>1.会員情報入力画面に遷移してログインを促す<br/><br/>E-2：アクターが次の入力チェック条件を満たさずに「確認画面へ」ボタンを押した<br/>• 「チェックイン日」は必須、日付入力、チェックイン可能日程であること、過去の日付ではないこと<br/>• 「チェックアウト日」は必須、日付入力、チェックイン日より未来の日程であること<br/>• 「利用人数」は必須、数値入力、プランの受入人数以内であること<br/>1.システムは、入力が正しくない旨を伝えるメッセージとともに、予約期間入力画面を再表示する<br/></td></tr><tr id="1f9b95b7-e1e8-81a8-b2f2-c49ee32584f7"><td id="ohRF" class="">備考</td><td id="_pSW" class="" style="width:901px"></td></tr></tbody></table><table id="1f9b95b7-e1e8-809d-8c8b-e35ac34539b1" class="simple-table"><tbody><tr id="1f9b95b7-e1e8-801c-b943-c062eb041a58"><td id="ohRF" class="">ユースケースID</td><td id="_pSW" class="" style="width:901px">UC214</td></tr><tr id="1f9b95b7-e1e8-80ad-996f-c35bf8cbbe87"><td id="ohRF" class="">ユースケース名</td><td id="_pSW" class="" style="width:901px">領収書発行機能</td></tr><tr id="1f9b95b7-e1e8-805d-a8b1-de5caa89f8eb"><td id="ohRF" class="">概要</td><td id="_pSW" class="" style="width:901px">予約履歴画面から領収書発行ボタンを押す</td></tr><tr id="1f9b95b7-e1e8-80ad-bf8d-cbbad745e498"><td id="ohRF" class="">アクター</td><td id="_pSW" class="" style="width:901px">ユーザー</td></tr><tr id="1f9b95b7-e1e8-8079-9780-e4b38b732d5d"><td id="ohRF" class="">事前条件</td><td id="_pSW" class="" style="width:901px">ログインを済ませていること、予約履歴画面に遷移していること、<br/>チェックインの日付が、この画面閲覧時点で過去の日付になっていること<br/></td></tr><tr id="1f9b95b7-e1e8-801f-bb52-c978060aaf81"><td id="ohRF" class="">事後条件</td><td id="_pSW" class="" style="width:901px">領収書のPDFがメールで送信される</td></tr><tr id="1f9b95b7-e1e8-80a0-a288-d6fdcde6e4cc"><td id="ohRF" class="">基本系列</td><td id="_pSW" class="" style="width:901px">1. 予約履歴画面の「領収書発行」ボタンをクリックする<br/>2. 領収書のPDFがユーザーの登録されたメールアドレスに送信される<br/>3. 予約履歴画面に戻る<br/></td></tr><tr id="1f9b95b7-e1e8-808d-b552-da5546ec384f"><td id="ohRF" class="">例外系列</td><td id="_pSW" class="" style="width:901px">E-1：チェックインの日付が過去の日付になっていない、または料金を払ってない<br/>1.「領収書の発行はできません」というメッセージを表示（アラート）<br/></td></tr><tr id="1f9b95b7-e1e8-80ed-b9cc-e4532be5ae4c"><td id="ohRF" class="">備考</td><td id="_pSW" class="" style="width:901px">予約履歴確認画面の段階で、「領収書発行」ボタンが出現するのはチェックインの日付が過去の日付となった場合のみ</td></tr></tbody></table><h2 id="1f9b95b7-e1e8-81e8-99f7-ce59926eb8fe" class="">５．用語説明</h2><table id="1f9b95b7-e1e8-81e9-9606-f55c3c166b50" class="simple-table"><tbody><tr id="1f9b95b7-e1e8-81f3-b07a-d1f8dab7324c"><td id="sy}~" class="">用語名</td><td id="d_ra" class="" style="width:609px">意味</td><td id="CYR_" class="" style="width:176px">同義語</td></tr><tr id="1f9b95b7-e1e8-81e5-a5b9-df00a92b77f2"><td id="sy}~" class="">ユースケース</td><td id="d_ra" class="" style="width:609px">システムが誰によってどのように使われるのかを具体的に書いた図や記述</td><td id="CYR_" class="" style="width:176px">ユースケース図<br/>ユースケース記述<br/></td></tr><tr id="1f9b95b7-e1e8-818b-bef7-e781971d886a"><td id="sy}~" class="">アクター</td><td id="d_ra" class="" style="width:609px">システムを実行/操作する人</td><td id="CYR_" class="" style="width:176px">人間</td></tr><tr id="1f9b95b7-e1e8-81a6-af53-d5368b575ed3"><td id="sy}~" class="">基本系列</td><td id="d_ra" class="" style="width:609px">アクターが事後条件を獲得するにたどる主要なステップ</td><td id="CYR_" class="" style="width:176px">メインフロー</td></tr><tr id="1f9b95b7-e1e8-81ef-91cd-e8ac9cd8e711"><td id="sy}~" class="">例外系列</td><td id="d_ra" class="" style="width:609px">システムの意図しないアクターの動作と、その動作が行われた場合のシナリオ</td><td id="CYR_" class="" style="width:176px">例外フロー</td></tr><tr id="1f9b95b7-e1e8-8101-bac9-d0d069a104ef"><td id="sy}~" class="">管理者</td><td id="d_ra" class="" style="width:609px">ビギナーズエンジニアズ社員のこと<br/>宿・情報を登録する人<br/></td><td id="CYR_" class="" style="width:176px"></td></tr><tr id="1f9b95b7-e1e8-8179-beab-cedd84d8f6b8"><td id="sy}~" class="">ユーザー</td><td id="d_ra" class="" style="width:609px">このサービスを利用する人のこと<br/>宿を予約する人<br/></td><td id="CYR_" class="" style="width:176px"></td></tr><tr id="1f9b95b7-e1e8-81af-9a24-ebcf1e749b04"><td id="sy}~" class="">認証機能</td><td id="d_ra" class="" style="width:609px">ログイン機能</td><td id="CYR_" class="" style="width:176px"></td></tr><tr id="1f9b95b7-e1e8-8146-9f7d-d70126491660"><td id="sy}~" class="">管理者画面</td><td id="d_ra" class="" style="width:609px">管理者がログイン後に見られる画面の総称<br/>デフォルトはユーザー一覧画面<br/></td><td id="CYR_" class="" style="width:176px"></td></tr></tbody></table><p id="1f9b95b7-e1e8-8174-8738-ed53de49522d" class="">
+</p><p id="1f9b95b7-e1e8-81ee-9286-e6a78f58581a" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

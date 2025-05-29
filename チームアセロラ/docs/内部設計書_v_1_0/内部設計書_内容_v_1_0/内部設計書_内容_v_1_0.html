@@ -1,0 +1,713 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>内部設計書_v 1.0</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+
+/* 追記部分 */
+/* <div style="page-break-after: always;"></div> で改ページ */
+h2 {
+    page-break-before: always;
+}
+.imgBlock {
+    text-align: left; 
+}
+
+@page {
+  @bottom-right {
+    content: counter(page) " / " counter(pages);
+    font-size: 16px;
+  }
+  @top-center {
+    content: "内部設計書_v 1.0"; /* バージョンごとに書き換える */
+    font-size: 16px;
+  }
+}
+/* 追記終わり */
+
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.highlight-default_background {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: undefined; }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-translucentGray { background-color: undefined; }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="1f9b95b7-e1e8-80fa-acd9-fe9ba4658912" class="page sans"><header><h1 class="page-title">内部設計書_v 1.0</h1><p class="page-description"></p></header><div class="page-body"><h1 id="1fab95b7-e1e8-80dd-b00d-c12f97a8a083" class="">目次<h3><br/>１.  Git運用ルール・・・・・・・・・・・・2<br/><br/>２.  コーディングルール・・・・・・・・・3<br/><br/>３.  システム概略図・・・・・・・・・・・4<br/><br/>４.  テーブル設計書 (詳細版)・・・・・・・5<br/><br/>５. ER図・・・・・・・・・・・・・・・・9<br/><br/>６. Laravel プロジェクトファイル一覧・・・10<br/></h3></h1><h2 id="1f9b95b7-e1e8-80b2-8217-c5f3a59c53f9" class="">１．Git運用ルール</h2><p id="1f9b95b7-e1e8-8017-9d86-e579ac173887" class="">参考：<a href="https://zenn.dev/harper/articles/23e99cb6bd2043">https://zenn.dev/harper/articles/23e99cb6bd2043</a></p><h3 id="1f9b95b7-e1e8-8024-9fe8-f03e797fc436" class="">Branch戦略</h3><ul id="1f9b95b7-e1e8-80a3-9365-e308ffd658b1" class="bulleted-list"><li style="list-style-type:disc">Branch名<ul id="1f9b95b7-e1e8-80fc-bae2-fe0ff7484d98" class="bulleted-list"><li style="list-style-type:circle">メインブランチ　main</li></ul><p id="1f9b95b7-e1e8-80cd-97e1-c4e1b4c12d96" class="">以下メインブランチから派生させること</p><p id="1f9b95b7-e1e8-8080-b06d-c423c4546341" class="">それぞれ完了したらPR作成後、メインブランチにマージする</p><ul id="1f9b95b7-e1e8-806d-bb60-cda307991086" class="bulleted-list"><li style="list-style-type:circle">機能追加ブランチ　fearture/{機能名}</li></ul><ul id="1f9b95b7-e1e8-8062-bc6c-ccfce77c0333" class="bulleted-list"><li style="list-style-type:circle">バグ修正ブランチ　hotfix/{バグ修正名}</li></ul></li></ul><ul id="1f9b95b7-e1e8-80bf-a29c-ec8e654d0028" class="bulleted-list"><li style="list-style-type:disc">フロー<ol type="1" id="1f9b95b7-e1e8-8082-8f08-d001e811c613" class="numbered-list" start="1"><li>メインブランチから必要なブランチを切る</li></ol><ol type="1" id="1f9b95b7-e1e8-80d4-9616-db56539e54c0" class="numbered-list" start="2"><li>そのブランチで開発</li></ol><ol type="1" id="1f9b95b7-e1e8-802f-be11-dab1b5badc61" class="numbered-list" start="3"><li>PR作成</li></ol><ol type="1" id="1f9b95b7-e1e8-803b-ac6d-f79d3137d915" class="numbered-list" start="4"><li>PRレビュー</li></ol><ol type="1" id="1f9b95b7-e1e8-80fa-806c-e9a80a7eaeaa" class="numbered-list" start="5"><li>PR承認</li></ol><ol type="1" id="1f9b95b7-e1e8-804a-a251-dceca109fb6f" class="numbered-list" start="6"><li>メインブランチへマージ</li></ol></li></ul><h3 id="1f9b95b7-e1e8-80c7-bc4b-e781b38184b1" class="">Pull Request Convention</h3><ul id="1f9b95b7-e1e8-808c-bcd6-f16a0d33f8e2" class="bulleted-list"><li style="list-style-type:disc">レビュー可能な単位でPR<ul id="1f9b95b7-e1e8-8046-b297-cefe81cb5bd5" class="bulleted-list"><li style="list-style-type:circle">ファイル数：5ファイルまで（機能実現に必要なファイル）</li></ul><ul id="1f9b95b7-e1e8-803a-b80f-da4baf45741f" class="bulleted-list"><li style="list-style-type:circle">それ以上の場合は2人以上からレビューを受ける</li></ul><ul id="1f9b95b7-e1e8-80e1-a13f-df12e726ce4d" class="bulleted-list"><li style="list-style-type:circle">画像は上記の上限に含めない</li></ul></li></ul><ul id="1f9b95b7-e1e8-8074-8f55-ef9a2f8445ef" class="bulleted-list"><li style="list-style-type:disc">PRは1つのテーマに絞る＝1つの機能</li></ul><ul id="1f9b95b7-e1e8-8073-9ba5-db6684e3b2e6" class="bulleted-list"><li style="list-style-type:disc">レビューを受けてからマージ<ul id="1f9b95b7-e1e8-80ff-9431-f814c3e51f87" class="bulleted-list"><li style="list-style-type:circle">承認後のPR変更は再度承認を受ける</li></ul><ul id="1f9b95b7-e1e8-80a7-8b7e-d44a9847fe9c" class="bulleted-list"><li style="list-style-type:circle">PRのタイトルと説明は変更内容, 目的を明確に記載する<ul id="1f9b95b7-e1e8-8060-8da2-c0e873fe51be" class="bulleted-list"><li style="list-style-type:square">テンプレ：○○機能の追加 / 変更</li></ul></li></ul></li></ul><h3 id="1f9b95b7-e1e8-801f-b0d0-e2cece92e23f" class="">Commit Convention</h3><ul id="1f9b95b7-e1e8-8003-afe4-c68cf9edf96d" class="bulleted-list"><li style="list-style-type:disc">1コミット = 1つの変更</li></ul><ul id="1f9b95b7-e1e8-800a-9163-da893be9ebd9" class="bulleted-list"><li style="list-style-type:disc">コミットのコメント<ul id="1f9b95b7-e1e8-807a-b84a-dac2f511055e" class="bulleted-list"><li style="list-style-type:circle">意味のあるコメント<ul id="1f9b95b7-e1e8-80c9-8c0a-e64878f0ccf2" class="bulleted-list"><li style="list-style-type:square">目的と内容を明確化</li></ul><ul id="1f9b95b7-e1e8-8083-be42-e55595083b6a" class="bulleted-list"><li style="list-style-type:square">テンプレ：新規作成/削除/名称変更/更新 [index.blade.php] (○○のため)</li></ul></li></ul></li></ul><h2 id="1f9b95b7-e1e8-80be-a85d-ddde8abacc10" class="">２．コーディングルール</h2><p id="1f9b95b7-e1e8-8069-bc7e-d495838551f0" class="">参考：<a href="https://qiita.com/m_yamaguchi5811/items/c96f5a0a9213ff999f5c">https://qiita.com/m_yamaguchi5811/items/c96f5a0a9213ff999f5c</a></p><h3 id="1f9b95b7-e1e8-80e1-a4f7-e2db5c712115" class=""><strong>1. PSR規格の遵守</strong></h3><ul id="1f9b95b7-e1e8-801b-b495-d79ac699d73c" class="bulleted-list"><li style="list-style-type:disc">PSR-4: オートローディングの標準</li></ul><ul id="1f9b95b7-e1e8-8050-9193-f0f4639a4566" class="bulleted-list"><li style="list-style-type:disc">PSR-2 および PSR-12: コーディングスタイルガイド。インデント、改行、クラス・メソッドの定義などに関するルール</li></ul><h3 id="1f9b95b7-e1e8-8069-a490-f129c778b1aa" class=""><strong>2. 命名規則</strong></h3><ul id="1f9b95b7-e1e8-80c2-a815-eba3bc38a87d" class="bulleted-list"><li style="list-style-type:disc">クラス名: アッパーキャメルケースを使用（各単語の最初の文字を大文字）<ul id="1f9b95b7-e1e8-803d-9959-ca7191844e59" class="bulleted-list"><li style="list-style-type:circle"><code>User</code>, <code>UserProfile</code></li></ul></li></ul><ul id="1f9b95b7-e1e8-80f9-9fb6-eb3f14e42e8c" class="bulleted-list"><li style="list-style-type:disc">メソッド名: ローワーキャメルケースを使用<ul id="1f9b95b7-e1e8-8001-909e-cc308700ca5e" class="bulleted-list"><li style="list-style-type:circle"><code>getUser</code>, <code>saveUser</code></li></ul></li></ul><ul id="1f9b95b7-e1e8-802f-9d12-f57786bad941" class="bulleted-list"><li style="list-style-type:disc">プロパティ: スネークケースを使用<ul id="1f9b95b7-e1e8-8075-a03a-e63960c24c0a" class="bulleted-list"><li style="list-style-type:circle"><code>$user_name</code>, <code>$email_address</code></li></ul></li></ul><ul id="1f9b95b7-e1e8-80e3-96a6-cd5f59fe6e59" class="bulleted-list"><li style="list-style-type:disc">データベーステーブル名: スネークケースを使用（必ず複数形にする）</li></ul><ul id="1f9b95b7-e1e8-80ef-8d49-cdc403975e09" class="bulleted-list"><li style="list-style-type:disc">データベースカラム名: スネークケースを使用</li></ul><h3 id="1f9b95b7-e1e8-805c-b2aa-c8c7b56f4a66" class=""><strong>3. コード構造</strong></h3><ul id="1f9b95b7-e1e8-8091-859b-ebeb4243efcd" class="bulleted-list"><li style="list-style-type:disc">if, foreach, while などの制御構造の括弧は、メソッドの括弧と同様に取り扱われる</li></ul><ul id="1f9b95b7-e1e8-80e2-87b9-d6dbff031899" class="bulleted-list"><li style="list-style-type:disc">ファサードの使用: Laravel独特の「ファサード」を通じてサービスコンテナのサービスにアクセスする</li></ul><h3 id="1f9b95b7-e1e8-8022-bf56-f5be00ffab7e" class=""><strong>4. ビューとブレードテンプレート</strong></h3><ul id="1f9b95b7-e1e8-80fd-b0d4-d1f23fab5248" class="bulleted-list"><li style="list-style-type:disc">Bladeテンプレートエンジンを使用してビューを構築する</li></ul><ul id="1f9b95b7-e1e8-8033-816e-fb3ea37de75e" class="bulleted-list"><li style="list-style-type:disc">{{ }} はエスケープされたデータを出力、{!! !!} はエスケープされないデータを出力する</li></ul><h3 id="1f9b95b7-e1e8-806c-b5c7-e236f6afbdc7" class=""><strong>5. ルーティング規約</strong></h3><ul id="1f9b95b7-e1e8-80e9-b6af-fe6599500735" class="bulleted-list"><li style="list-style-type:disc">RESTfulリソースコントローラを利用したルーティングにする</li></ul><ul id="1f9b95b7-e1e8-803f-a058-df895b678fa7" class="bulleted-list"><li style="list-style-type:disc">ルート名は通常、動詞ではなく名詞を使用する</li></ul><h3 id="1f9b95b7-e1e8-80ad-9127-c5622cc21c4b" class=""><strong>6.モデル関連</strong></h3><ul id="1f9b95b7-e1e8-80d3-a49a-d3a3b30732ee" class="bulleted-list"><li style="list-style-type:disc">Eloquent ORMを使用したデータモデリングにする</li></ul><ul id="1f9b95b7-e1e8-80df-ad2e-f82af4b621c3" class="bulleted-list"><li style="list-style-type:disc">モデル名は単数形、データベーステーブル名は複数形にする</li></ul><h3 id="1f9b95b7-e1e8-80e4-95cf-f1382d309f0b" class=""><strong>7. ドキュメントとコメント</strong></h3><ul id="1f9b95b7-e1e8-805b-b47f-cf7082af279c" class="bulleted-list"><li style="list-style-type:disc">コードには説明的なコメントを記述する</li></ul><ul id="1f9b95b7-e1e8-8017-b9c9-fbbfe8711939" class="bulleted-list"><li style="list-style-type:disc">PHPDocコメントを使用してメソッド、プロパティ、クラスを文書化する</li></ul><h2 id="1f9b95b7-e1e8-80e6-a067-ececb8389333" class="">３．システム概略図</h2><figure id="1fbb95b7-e1e8-801c-a2a4-e4467530b56a" class="image"><a href="sysytem_abstract.png"><img style="width:4868px" src="sysytem_abstract.png"/></a></figure><figure id="1fbb95b7-e1e8-802a-8a3a-e7645cf6a005" class="image"><a href="system_abstract2.png"><img style="width:4868px" src="system_abstract2.png"/></a></figure><p id="1fab95b7-e1e8-8010-9fa5-ebe28b0706be" class=""><h2>４． テーブル設計書 (詳細版)</h2></p><p id="1fab95b7-e1e8-802f-99aa-c43f6ece1826" class=""><strong>Usersテーブル</strong></p><table id="1fab95b7-e1e8-805c-aeca-fe06f70159fd" class="simple-table"><thead class="simple-table-header"><tr id="1fab95b7-e1e8-80a0-9393-f686c93cabb8"><th id="TROP" class="simple-table-header-color simple-table-header">項目</th><th id="q&lt;|[" class="simple-table-header-color simple-table-header">列名</th><th id="P~jR" class="simple-table-header-color simple-table-header">型</th><th id="Vyq;" class="simple-table-header-color simple-table-header">文字数</th><th id="A]iP" class="simple-table-header-color simple-table-header">NULL</th><th id="SObB" class="simple-table-header-color simple-table-header">制約</th><th id="w\sN" class="simple-table-header-color simple-table-header">備考</th></tr></thead><tbody><tr id="1fab95b7-e1e8-80bb-86b7-fd58db5740e5"><th id="TROP" class="simple-table-header-color simple-table-header">ID</th><td id="q&lt;|[" class="">id</td><td id="P~jR" class="">BIGINTEGER</td><td id="Vyq;" class=""></td><td id="A]iP" class=""></td><td id="SObB" class="">AUTO_INCREMENT</td><td id="w\sN" class="">主キー</td></tr><tr id="1fab95b7-e1e8-80ff-afe4-cff58b9b10be"><th id="TROP" class="simple-table-header-color simple-table-header">氏名</th><td id="q&lt;|[" class="">name</td><td id="P~jR" class="">VARCHAR</td><td id="Vyq;" class="">50文字以下</td><td id="A]iP" class=""></td><td id="SObB" class=""></td><td id="w\sN" class=""></td></tr><tr id="1fab95b7-e1e8-805a-8b76-ccc12b265951"><th id="TROP" class="simple-table-header-color simple-table-header">ふりがな</th><td id="q&lt;|[" class="">ruby</td><td id="P~jR" class="">VARCHAR</td><td id="Vyq;" class="">50文字以下</td><td id="A]iP" class=""></td><td id="SObB" class=""></td><td id="w\sN" class=""></td></tr><tr id="1fab95b7-e1e8-80ac-b482-c5ec9a709deb"><th id="TROP" class="simple-table-header-color simple-table-header">パスワード</th><td id="q&lt;|[" class="">password</td><td id="P~jR" class="">VARCHAR</td><td id="Vyq;" class="">50文字以下</td><td id="A]iP" class=""></td><td id="SObB" class=""></td><td id="w\sN" class="">暗号化</td></tr><tr id="1fab95b7-e1e8-8089-9ed5-d267a81fbf4b"><th id="TROP" class="simple-table-header-color simple-table-header">メールアドレス</th><td id="q&lt;|[" class="">email</td><td id="P~jR" class="">VARCHAR</td><td id="Vyq;" class="">100文字以下</td><td id="A]iP" class=""></td><td id="SObB" class=""></td><td id="w\sN" class=""></td></tr><tr id="1fab95b7-e1e8-80f6-bd50-c23e8861bf3e"><th id="TROP" class="simple-table-header-color simple-table-header">電話番号</th><td id="q&lt;|[" class="">tel</td><td id="P~jR" class="">VARCHAR</td><td id="Vyq;" class=""></td><td id="A]iP" class=""></td><td id="SObB" class=""></td><td id="w\sN" class=""></td></tr><tr id="1fab95b7-e1e8-805d-948b-d4c60f57283a"><th id="TROP" class="simple-table-header-color simple-table-header">所属 (会社)</th><td id="q&lt;|[" class="">company</td><td id="P~jR" class="">VARCHAR</td><td id="Vyq;" class="">50文字以下</td><td id="A]iP" class=""></td><td id="SObB" class=""></td><td id="w\sN" class=""></td></tr><tr id="1fab95b7-e1e8-8058-a4ba-fd0030ae5a9f"><th id="TROP" class="simple-table-header-color simple-table-header">生年月日</th><td id="q&lt;|[" class="">birthday</td><td id="P~jR" class="">DATE</td><td id="Vyq;" class=""></td><td id="A]iP" class=""></td><td id="SObB" class=""></td><td id="w\sN" class=""></td></tr><tr id="1fab95b7-e1e8-80e4-9562-dfb93f2fcd0a"><th id="TROP" class="simple-table-header-color simple-table-header">住所</th><td id="q&lt;|[" class="">address</td><td id="P~jR" class="">VARCHAR</td><td id="Vyq;" class="">100文字以下</td><td id="A]iP" class=""></td><td id="SObB" class=""></td><td id="w\sN" class=""></td></tr><tr id="1fab95b7-e1e8-80b6-be1d-c153c6f7da51"><th id="TROP" class="simple-table-header-color simple-table-header">性別</th><td id="q&lt;|[" class="">gender</td><td id="P~jR" class="">VARCHAR</td><td id="Vyq;" class=""></td><td id="A]iP" class=""></td><td id="SObB" class=""></td><td id="w\sN" class="">「回答なし」ボタンを作る<br/>ラジオボタン<br/></td></tr><tr id="1fab95b7-e1e8-8041-b874-de1b45c73127"><th id="TROP" class="simple-table-header-color simple-table-header">お知らせ</th><td id="q&lt;|[" class="">get_notice</td><td id="P~jR" class="">BOOLEAN</td><td id="Vyq;" class=""></td><td id="A]iP" class=""></td><td id="SObB" class=""></td><td id="w\sN" class="">trueでメルマガ受け取り</td></tr><tr id="1fab95b7-e1e8-8079-b28d-da4f8171bd2a"><th id="TROP" class="simple-table-header-color simple-table-header">管理者</th><td id="q&lt;|[" class="">is_admin</td><td id="P~jR" class="">BOOLEAN</td><td id="Vyq;" class=""></td><td id="A]iP" class=""></td><td id="SObB" class=""></td><td id="w\sN" class="">trueで管理人<br/>falseでユーザー<br/></td></tr><tr id="1fab95b7-e1e8-80e6-bae7-e9fd5f6382ef"><th id="TROP" class="simple-table-header-color simple-table-header">退会</th><td id="q&lt;|[" class="">is_deleted</td><td id="P~jR" class="">BOOLEAN</td><td id="Vyq;" class=""></td><td id="A]iP" class=""></td><td id="SObB" class=""></td><td id="w\sN" class="">trueで退会済み</td></tr><tr id="1fab95b7-e1e8-80c0-89ac-ef549280c1c0"><th id="TROP" class="simple-table-header-color simple-table-header">作成日時</th><td id="q&lt;|[" class="">created_at</td><td id="P~jR" class="">TIMESTAMP</td><td id="Vyq;" class=""></td><td id="A]iP" class="">NULLABLE</td><td id="SObB" class=""></td><td id="w\sN" class="">useCurrent()で現在の時刻呼び出し</td></tr><tr id="1fab95b7-e1e8-807c-9587-df910e602e7e"><th id="TROP" class="simple-table-header-color simple-table-header">更新日時</th><td id="q&lt;|[" class="">updated_at</td><td id="P~jR" class="">TIMESTAMP</td><td id="Vyq;" class=""></td><td id="A]iP" class="">NULLABLE</td><td id="SObB" class=""></td><td id="w\sN" class="">useCurrent()で現在の時刻呼び出し</td></tr></tbody></table><div style="page-break-after: always;"></div><p id="1fab95b7-e1e8-8054-ba9f-fa1bf3ff212d" class=""><mark class="highlight-default_background"><strong>Hotelsテーブル（主テーブル）</strong></mark></p><table id="1fab95b7-e1e8-8066-98c0-fcb5930927dd" class="simple-table"><thead class="simple-table-header"><tr id="1fab95b7-e1e8-80e7-8355-df50ab223ad6"><th id="TROP" class="simple-table-header-color simple-table-header">項目</th><th id="q&lt;|[" class="simple-table-header-color simple-table-header">列名</th><th id="P~jR" class="simple-table-header-color simple-table-header">型</th><th id="Vyq;" class="simple-table-header-color simple-table-header">文字数</th><th id="A]iP" class="simple-table-header-color simple-table-header">NULL</th><th id="SObB" class="simple-table-header-color simple-table-header">制約</th><th id="w\sN" class="simple-table-header-color simple-table-header">備考</th></tr></thead><tbody><tr id="1fab95b7-e1e8-805d-bcf6-cebc656af8a5"><th id="TROP" class="simple-table-header-color simple-table-header">ID</th><td id="q&lt;|[" class="">id</td><td id="P~jR" class="">BIGINTEGER</td><td id="Vyq;" class=""></td><td id="A]iP" class=""></td><td id="SObB" class="">AUTO_INCREMENT</td><td id="w\sN" class="">主キー</td></tr><tr id="1fab95b7-e1e8-801c-bb0b-fd43d9748f2b"><th id="TROP" class="simple-table-header-color simple-table-header">ホテル名</th><td id="q&lt;|[" class="">name</td><td id="P~jR" class="">VARCHAR</td><td id="Vyq;" class="">50文字以下</td><td id="A]iP" class=""></td><td id="SObB" class=""></td><td id="w\sN" class=""></td></tr><tr id="1fab95b7-e1e8-80f2-9d86-d5812f7161ac"><th id="TROP" class="simple-table-header-color simple-table-header">住所</th><td id="q&lt;|[" class="">address</td><td id="P~jR" class="">VARCHAR</td><td id="Vyq;" class="">100文字以下</td><td id="A]iP" class=""></td><td id="SObB" class=""></td><td id="w\sN" class=""></td></tr><tr id="1fab95b7-e1e8-80f9-a5c2-deea6d3c3b35"><th id="TROP" class="simple-table-header-color simple-table-header">最寄り駅名</th><td id="q&lt;|[" class="">station</td><td id="P~jR" class="">VARCHAR</td><td id="Vyq;" class="">50文字以下</td><td id="A]iP" class=""></td><td id="SObB" class=""></td><td id="w\sN" class=""></td></tr><tr id="1fab95b7-e1e8-8080-8b1e-f4165e9ac4b9"><th id="TROP" class="simple-table-header-color simple-table-header">電話番号</th><td id="q&lt;|[" class="">tel</td><td id="P~jR" class="">INTEGER</td><td id="Vyq;" class=""></td><td id="A]iP" class=""></td><td id="SObB" class=""></td><td id="w\sN" class=""></td></tr><tr id="1fab95b7-e1e8-80e8-83bc-fce2a0119dcf"><th id="TROP" class="simple-table-header-color simple-table-header">イメージ写真</th><td id="q&lt;|[" class="">image</td><td id="P~jR" class="">LONGBLOB</td><td id="Vyq;" class=""></td><td id="A]iP" class=""></td><td id="SObB" class=""></td><td id="w\sN" class="">写真は.jpg, .pngのみ</td></tr><tr id="1fab95b7-e1e8-806a-8e82-d4b20ff7fddf"><th id="TROP" class="simple-table-header-color simple-table-header">始業時間</th><td id="q&lt;|[" class="">start_time</td><td id="P~jR" class="">TIME</td><td id="Vyq;" class=""></td><td id="A]iP" class=""></td><td id="SObB" class=""></td><td id="w\sN" class="">チェックイン or チェックアウトが開始できる時間</td></tr><tr id="1fab95b7-e1e8-802c-94ab-fa676be1d3c7"><th id="TROP" class="simple-table-header-color simple-table-header">終業時間</th><td id="q&lt;|[" class="">end_time</td><td id="P~jR" class="">TIME</td><td id="Vyq;" class=""></td><td id="A]iP" class=""></td><td id="SObB" class=""></td><td id="w\sN" class="">チェックイン or チェックアウトの受付を終了する時間</td></tr><tr id="1fab95b7-e1e8-80eb-954a-d4757e798726"><th id="TROP" class="simple-table-header-color simple-table-header">温泉の有無</th><td id="q&lt;|[" class="">hot_spring</td><td id="P~jR" class="">BOOLEAN</td><td id="Vyq;" class=""></td><td id="A]iP" class="">NULLABLE</td><td id="SObB" class=""></td><td id="w\sN" class=""></td></tr><tr id="1fab95b7-e1e8-802d-974a-e4d547f86c86"><th id="TROP" class="simple-table-header-color simple-table-header">ホテルのジャンル</th><td id="q&lt;|[" class="">genre</td><td id="P~jR" class="">VARCHAR</td><td id="Vyq;" class="">50文字以下</td><td id="A]iP" class="">NULLABLE</td><td id="SObB" class=""></td><td id="w\sN" class=""></td></tr><tr id="1fab95b7-e1e8-8059-b0e3-e8a1b22bd5e0"><th id="TROP" class="simple-table-header-color simple-table-header">団体受け入れ可能客室数</th><td id="q&lt;|[" class="">group_rooms</td><td id="P~jR" class="">INTEGER</td><td id="Vyq;" class=""></td><td id="A]iP" class="">NULLABLE</td><td id="SObB" class="">unsigned()</td><td id="w\sN" class=""></td></tr><tr id="1fab95b7-e1e8-8021-abcf-ce2cef32f198"><th id="TROP" class="simple-table-header-color simple-table-header">削除</th><td id="q&lt;|[" class="">is_deleted</td><td id="P~jR" class="">BOOLEAN</td><td id="Vyq;" class=""></td><td id="A]iP" class=""></td><td id="SObB" class=""></td><td id="w\sN" class="">trueで削除済み</td></tr><tr id="1fab95b7-e1e8-8025-966c-dd52e8bbeacf"><th id="TROP" class="simple-table-header-color simple-table-header">作成日時</th><td id="q&lt;|[" class="">created_at</td><td id="P~jR" class="">TIMESTAMP</td><td id="Vyq;" class=""></td><td id="A]iP" class="">NULLABLE</td><td id="SObB" class=""></td><td id="w\sN" class="">useCurrent()で現在の時刻呼び出し</td></tr><tr id="1fab95b7-e1e8-80fe-805d-d28ba5ce81ce"><th id="TROP" class="simple-table-header-color simple-table-header">更新日時</th><td id="q&lt;|[" class="">updated_at</td><td id="P~jR" class="">TIMESTAMP</td><td id="Vyq;" class=""></td><td id="A]iP" class="">NULLABLE</td><td id="SObB" class=""></td><td id="w\sN" class="">useCurrent()で現在の時刻呼び出し</td></tr></tbody></table><div style="page-break-after: always;"></div><p id="1fab95b7-e1e8-8041-9a1d-c6afcb1d035d" class=""><strong>Likesテーブル (中間テーブル)</strong></p><table id="1fab95b7-e1e8-807f-978d-c5b2f061411b" class="simple-table"><thead class="simple-table-header"><tr id="1fab95b7-e1e8-8005-adf9-fb09b06df146"><th id="TROP" class="simple-table-header-color simple-table-header" style="width:121px">項目</th><th id="q&lt;|[" class="simple-table-header-color simple-table-header">列名</th><th id="P~jR" class="simple-table-header-color simple-table-header">型</th><th id="Vyq;" class="simple-table-header-color simple-table-header">文字数</th><th id="A]iP" class="simple-table-header-color simple-table-header">NULL</th><th id="SObB" class="simple-table-header-color simple-table-header">制約</th><th id="w\sN" class="simple-table-header-color simple-table-header">備考</th></tr></thead><tbody><tr id="1fab95b7-e1e8-805c-add4-fcfde8f0f379"><th id="TROP" class="simple-table-header-color simple-table-header" style="width:121px">ID</th><td id="q&lt;|[" class="">id</td><td id="P~jR" class="">BIGINTEGER</td><td id="Vyq;" class=""></td><td id="A]iP" class=""></td><td id="SObB" class="">AUTO_INCREMENT</td><td id="w\sN" class="">主キー</td></tr><tr id="1fab95b7-e1e8-80b6-ae4c-cca3eb207b8c"><th id="TROP" class="simple-table-header-color simple-table-header" style="width:121px">ユーザーID</th><td id="q&lt;|[" class="">user_id</td><td id="P~jR" class="">BIGINTEGER</td><td id="Vyq;" class=""></td><td id="A]iP" class=""></td><td id="SObB" class="">AUTO_INCREMENT<br/>index()<br/></td><td id="w\sN" class="">外部キー</td></tr><tr id="1fab95b7-e1e8-801e-a284-fe58f4f11319"><th id="TROP" class="simple-table-header-color simple-table-header" style="width:121px">宿ID</th><td id="q&lt;|[" class="">hotel_id</td><td id="P~jR" class="">BIGINTEGER</td><td id="Vyq;" class=""></td><td id="A]iP" class=""></td><td id="SObB" class="">AUTO_INCREMENT<br/>index()<br/></td><td id="w\sN" class="">外部キー</td></tr><tr id="1fab95b7-e1e8-80d8-935f-f6ad69ae49cb"><th id="TROP" class="simple-table-header-color simple-table-header" style="width:121px">作成日時</th><td id="q&lt;|[" class="">created_at</td><td id="P~jR" class="">TIMESTAMP</td><td id="Vyq;" class=""></td><td id="A]iP" class="">NULLABLE</td><td id="SObB" class=""></td><td id="w\sN" class="">useCurrent()で現在の時刻呼び出し</td></tr><tr id="1fab95b7-e1e8-803f-b390-ffc354455a54"><th id="TROP" class="simple-table-header-color simple-table-header" style="width:121px">更新日時</th><td id="q&lt;|[" class="">updated_at</td><td id="P~jR" class="">TIMESTAMP</td><td id="Vyq;" class=""></td><td id="A]iP" class="">NULLABLE</td><td id="SObB" class=""></td><td id="w\sN" class="">useCurrent()で現在の時刻呼び出し</td></tr></tbody></table><br><br><p id="1fab95b7-e1e8-8077-bd59-c3cff0935b5d" class=""><strong>Reviewsテーブル (子テーブル)</strong></p><table id="1fab95b7-e1e8-80fb-9192-c06ecf8e5b37" class="simple-table"><thead class="simple-table-header"><tr id="1fab95b7-e1e8-80a6-87fb-dab6be112e41"><th id="TROP" class="simple-table-header-color simple-table-header" style="width:121px">項目</th><th id="q&lt;|[" class="simple-table-header-color simple-table-header">列名</th><th id="P~jR" class="simple-table-header-color simple-table-header">型</th><th id="Vyq;" class="simple-table-header-color simple-table-header">文字数</th><th id="A]iP" class="simple-table-header-color simple-table-header">NULL</th><th id="SObB" class="simple-table-header-color simple-table-header">制約</th><th id="w\sN" class="simple-table-header-color simple-table-header">備考</th></tr></thead><tbody><tr id="1fab95b7-e1e8-8013-81f0-f519de78f134"><th id="TROP" class="simple-table-header-color simple-table-header" style="width:121px">ID</th><td id="q&lt;|[" class="">id</td><td id="P~jR" class="">BIGINTEGER</td><td id="Vyq;" class=""></td><td id="A]iP" class=""></td><td id="SObB" class="">AUTO_INCREMENT</td><td id="w\sN" class="">主キー</td></tr><tr id="1fab95b7-e1e8-802e-b137-f7c7bfbe3be1"><th id="TROP" class="simple-table-header-color simple-table-header" style="width:121px">ユーザーID</th><td id="q&lt;|[" class="">user_id</td><td id="P~jR" class="">BIGINTEGER</td><td id="Vyq;" class=""></td><td id="A]iP" class=""></td><td id="SObB" class="">AUTO_INCREMENT<br/>index()<br/></td><td id="w\sN" class="">外部キー</td></tr><tr id="1fab95b7-e1e8-8047-8a1a-fd28a1557be6"><th id="TROP" class="simple-table-header-color simple-table-header" style="width:121px">宿ID</th><td id="q&lt;|[" class="">hotel_id</td><td id="P~jR" class="">BIGINTEGER</td><td id="Vyq;" class=""></td><td id="A]iP" class=""></td><td id="SObB" class="">AUTO_INCREMENT<br/>index()<br/></td><td id="w\sN" class="">外部キー</td></tr><tr id="1fab95b7-e1e8-80b7-be57-f656cfba725c"><th id="TROP" class="simple-table-header-color simple-table-header" style="width:121px">星の数</th><td id="q&lt;|[" class="">num_star</td><td id="P~jR" class="">INTEGER</td><td id="Vyq;" class=""></td><td id="A]iP" class="">NULLABLE</td><td id="SObB" class="">unsigned()<br/>星の数：0 ~ 5<br/></td><td id="w\sN" class=""></td></tr><tr id="1fab95b7-e1e8-8010-8cb9-f677d52065c7"><th id="TROP" class="simple-table-header-color simple-table-header" style="width:121px">レビュー文</th><td id="q&lt;|[" class="">content</td><td id="P~jR" class="">TEXT</td><td id="Vyq;" class=""></td><td id="A]iP" class="">NULLABLE</td><td id="SObB" class=""></td><td id="w\sN" class=""></td></tr><tr id="1fab95b7-e1e8-80d0-a050-f286fc359e84"><th id="TROP" class="simple-table-header-color simple-table-header" style="width:121px">作成日時</th><td id="q&lt;|[" class="">created_at</td><td id="P~jR" class="">TIMESTAMP</td><td id="Vyq;" class=""></td><td id="A]iP" class="">NULLABLE</td><td id="SObB" class=""></td><td id="w\sN" class="">useCurrent()で現在の時刻呼び出し</td></tr><tr id="1fab95b7-e1e8-8019-9da1-e81fe5200744"><th id="TROP" class="simple-table-header-color simple-table-header" style="width:121px">更新日時</th><td id="q&lt;|[" class="">updated_at</td><td id="P~jR" class="">TIMESTAMP</td><td id="Vyq;" class=""></td><td id="A]iP" class="">NULLABLE</td><td id="SObB" class=""></td><td id="w\sN" class="">useCurrent()で現在の時刻呼び出し</td></tr></tbody></table><div style="page-break-after: always;"></div><p id="1fab95b7-e1e8-805b-b9b0-e788c59a6f35" class=""><mark class="highlight-default_background"><strong>Plansテーブル（子テーブル）</strong></mark></p><table id="1fab95b7-e1e8-80ca-a5b5-d174dcf78f12" class="simple-table"><thead class="simple-table-header"><tr id="1fab95b7-e1e8-80e3-9af9-d211ff84da69"><th id="TROP" class="simple-table-header-color simple-table-header" style="width:121px">項目</th><th id="q&lt;|[" class="simple-table-header-color simple-table-header">列名</th><th id="P~jR" class="simple-table-header-color simple-table-header">型</th><th id="Vyq;" class="simple-table-header-color simple-table-header">文字数</th><th id="A]iP" class="simple-table-header-color simple-table-header">NULL</th><th id="SObB" class="simple-table-header-color simple-table-header">制約</th><th id="w\sN" class="simple-table-header-color simple-table-header">備考</th></tr></thead><tbody><tr id="1fab95b7-e1e8-8099-a224-ea628af7bf1b"><th id="TROP" class="simple-table-header-color simple-table-header" style="width:121px">ID</th><td id="q&lt;|[" class="">id</td><td id="P~jR" class="">BIGINTEGER</td><td id="Vyq;" class=""></td><td id="A]iP" class=""></td><td id="SObB" class="">AUTO_INCREMENT</td><td id="w\sN" class="">主キー</td></tr><tr id="1fab95b7-e1e8-807e-9e52-efd4ac2f878f"><th id="TROP" class="simple-table-header-color simple-table-header" style="width:121px">宿ID</th><td id="q&lt;|[" class="">hotel_id</td><td id="P~jR" class="">BIGINTEGER</td><td id="Vyq;" class=""></td><td id="A]iP" class=""></td><td id="SObB" class="">AUTO_INCREMENT<br/>index()<br/></td><td id="w\sN" class="">外部キー</td></tr><tr id="1fab95b7-e1e8-805b-842d-d39af332fcb8"><th id="TROP" class="simple-table-header-color simple-table-header" style="width:121px">プラン名</th><td id="q&lt;|[" class="">name</td><td id="P~jR" class="">VARCHAR</td><td id="Vyq;" class="">50文字以下</td><td id="A]iP" class=""></td><td id="SObB" class=""></td><td id="w\sN" class=""></td></tr><tr id="1fab95b7-e1e8-80d2-97ec-fe5e9d1811bb"><th id="TROP" class="simple-table-header-color simple-table-header" style="width:121px">プラン説明</th><td id="q&lt;|[" class="">description</td><td id="P~jR" class="">TEXT</td><td id="Vyq;" class=""></td><td id="A]iP" class="">NULLABLE</td><td id="SObB" class=""></td><td id="w\sN" class=""></td></tr><tr id="1fab95b7-e1e8-8088-a0f2-eec051fd8c38"><th id="TROP" class="simple-table-header-color simple-table-header" style="width:121px">料金</th><td id="q&lt;|[" class="">price</td><td id="P~jR" class="">INTEGER</td><td id="Vyq;" class=""></td><td id="A]iP" class=""></td><td id="SObB" class="">unsigned()</td><td id="w\sN" class=""></td></tr><tr id="1fab95b7-e1e8-8092-9bde-f23d37e0b6c2"><th id="TROP" class="simple-table-header-color simple-table-header" style="width:121px">利用人数(宿泊可能最小人数)</th><td id="q&lt;|[" class="">min_guest</td><td id="P~jR" class="">INTEGER</td><td id="Vyq;" class=""></td><td id="A]iP" class=""></td><td id="SObB" class="">unsigned()</td><td id="w\sN" class=""></td></tr><tr id="1fbb95b7-e1e8-80d7-a2fb-c2cbf3a48e23"><th id="TROP" class="simple-table-header-color simple-table-header" style="width:121px">利用人数(宿泊可能最大人数)</th><td id="q&lt;|[" class="">max_guest</td><td id="P~jR" class="">INTEGER</td><td id="Vyq;" class=""></td><td id="A]iP" class=""></td><td id="SObB" class="">unsigned()</td><td id="w\sN" class=""></td></tr><tr id="1fab95b7-e1e8-8026-9c6e-c2927ec776ae"><th id="TROP" class="simple-table-header-color simple-table-header" style="width:121px">食事の有無</th><td id="q&lt;|[" class="">meal</td><td id="P~jR" class="">BOOLEAN</td><td id="Vyq;" class=""></td><td id="A]iP" class=""></td><td id="SObB" class=""></td><td id="w\sN" class=""></td></tr><tr id="1fab95b7-e1e8-8025-aee2-f93fb71623b3"><th id="TROP" class="simple-table-header-color simple-table-header" style="width:121px">利用可能開始日</th><td id="q&lt;|[" class="">start_date</td><td id="P~jR" class="">DATE</td><td id="Vyq;" class=""></td><td id="A]iP" class=""></td><td id="SObB" class=""></td><td id="w\sN" class=""></td></tr><tr id="1fab95b7-e1e8-80ca-9d20-f999f0a9386c"><th id="TROP" class="simple-table-header-color simple-table-header" style="width:121px">利用可能最終日</th><td id="q&lt;|[" class="">end_date</td><td id="P~jR" class="">DATE</td><td id="Vyq;" class=""></td><td id="A]iP" class=""></td><td id="SObB" class=""></td><td id="w\sN" class=""></td></tr><tr id="1fab95b7-e1e8-8084-8f04-c35861f82032"><th id="TROP" class="simple-table-header-color simple-table-header" style="width:121px">削除</th><td id="q&lt;|[" class="">is_deleted</td><td id="P~jR" class="">BOOLEAN</td><td id="Vyq;" class=""></td><td id="A]iP" class=""></td><td id="SObB" class=""></td><td id="w\sN" class="">trueで削除済み</td></tr><tr id="1fab95b7-e1e8-8034-be37-fc31244e8e54"><th id="TROP" class="simple-table-header-color simple-table-header" style="width:121px">作成日時</th><td id="q&lt;|[" class="">created_at</td><td id="P~jR" class="">TIMESTAMP</td><td id="Vyq;" class=""></td><td id="A]iP" class="">NULLABLE</td><td id="SObB" class=""></td><td id="w\sN" class="">useCurrent()で現在の時刻呼び出し</td></tr><tr id="1fab95b7-e1e8-80ca-9df6-e1113418794e"><th id="TROP" class="simple-table-header-color simple-table-header" style="width:121px">更新日時</th><td id="q&lt;|[" class="">updated_at</td><td id="P~jR" class="">TIMESTAMP</td><td id="Vyq;" class=""></td><td id="A]iP" class="">NULLABLE</td><td id="SObB" class=""></td><td id="w\sN" class="">useCurrent()で現在の時刻呼び出し</td></tr></tbody></table><br><br><p id="1fab95b7-e1e8-8072-a224-cb9b61904e42" class=""><mark class="highlight-default_background"><strong>Reservationsテーブル（子テーブル）</strong></mark></p><table id="1fab95b7-e1e8-80cd-aeb0-c2a8524e47ce" class="simple-table"><thead class="simple-table-header"><tr id="1fab95b7-e1e8-8048-9f57-f2a4236a591f"><th id="nHZG" class="simple-table-header-color simple-table-header" style="width:123px">項目</th><th id="~=]=" class="simple-table-header-color simple-table-header">列名</th><th id="]tA\" class="simple-table-header-color simple-table-header">型</th><th id="B[r\" class="simple-table-header-color simple-table-header">文字数</th><th id="\mXc" class="simple-table-header-color simple-table-header">NULL</th><th id="U:Sx" class="simple-table-header-color simple-table-header">制約</th><th id="d;AQ" class="simple-table-header-color simple-table-header">備考</th></tr></thead><tbody><tr id="1fab95b7-e1e8-80e1-93ce-d233c3a67c21"><th id="nHZG" class="simple-table-header-color simple-table-header" style="width:123px">ID</th><td id="~=]=" class="">id</td><td id="]tA\" class="">BIGINTEGER</td><td id="B[r\" class=""></td><td id="\mXc" class=""></td><td id="U:Sx" class="">AUTO_INCREMENT</td><td id="d;AQ" class="">主キー</td></tr><tr id="1fab95b7-e1e8-8000-90f7-c1cd9659ad52"><th id="nHZG" class="simple-table-header-color simple-table-header" style="width:123px">ユーザーID</th><td id="~=]=" class="">user_id</td><td id="]tA\" class="">BIGINTEGER</td><td id="B[r\" class=""></td><td id="\mXc" class=""></td><td id="U:Sx" class="">AUTO_INCREMENT<br/>index()<br/></td><td id="d;AQ" class="">外部キー</td></tr><tr id="1fab95b7-e1e8-80c6-af1b-f633b01c81d3"><th id="nHZG" class="simple-table-header-color simple-table-header" style="width:123px">プランID</th><td id="~=]=" class="">plan_id</td><td id="]tA\" class="">BIGINTEGER</td><td id="B[r\" class=""></td><td id="\mXc" class=""></td><td id="U:Sx" class="">AUTO_INCREMENT<br/>index()<br/></td><td id="d;AQ" class="">外部キー</td></tr><tr id="1fab95b7-e1e8-80e4-a5ed-c2e895c7a620"><th id="nHZG" class="simple-table-header-color simple-table-header" style="width:123px">チェックイン日時</th><td id="~=]=" class="">check_in</td><td id="]tA\" class="">DATETIME</td><td id="B[r\" class=""></td><td id="\mXc" class=""></td><td id="U:Sx" class=""></td><td id="d;AQ" class=""></td></tr><tr id="1fab95b7-e1e8-8002-a7ae-c7be5ad50da9"><th id="nHZG" class="simple-table-header-color simple-table-header" style="width:123px">チェックアウト日時</th><td id="~=]=" class="">check_out</td><td id="]tA\" class="">DATETIME</td><td id="B[r\" class=""></td><td id="\mXc" class=""></td><td id="U:Sx" class=""></td><td id="d;AQ" class=""></td></tr><tr id="1fab95b7-e1e8-803f-b8dd-d13ff7819caa"><th id="nHZG" class="simple-table-header-color simple-table-header" style="width:123px">利用人数 (宿泊人数)</th><td id="~=]=" class="">num_user</td><td id="]tA\" class="">INTEGER</td><td id="B[r\" class=""></td><td id="\mXc" class=""></td><td id="U:Sx" class="">unsigned()<br/>1以上<br/></td><td id="d;AQ" class=""></td></tr><tr id="1fab95b7-e1e8-8073-b9d0-e7a2468d959a"><th id="nHZG" class="simple-table-header-color simple-table-header" style="width:123px">削除</th><td id="~=]=" class="">is_deleted</td><td id="]tA\" class="">BOOLEAN</td><td id="B[r\" class=""></td><td id="\mXc" class=""></td><td id="U:Sx" class=""></td><td id="d;AQ" class="">trueで削除済み</td></tr><tr id="1fab95b7-e1e8-806f-a567-e0871743a55f"><th id="nHZG" class="simple-table-header-color simple-table-header" style="width:123px">作成日時</th><td id="~=]=" class="">created_at</td><td id="]tA\" class="">TIMESTAMP</td><td id="B[r\" class=""></td><td id="\mXc" class="">NULLABLE</td><td id="U:Sx" class=""></td><td id="d;AQ" class="">useCurrent()で現在の時刻呼び出し</td></tr><tr id="1fab95b7-e1e8-80a2-93a3-d4bd8dea9a94"><th id="nHZG" class="simple-table-header-color simple-table-header" style="width:123px">更新日時</th><td id="~=]=" class="">updated_at</td><td id="]tA\" class="">TIMESTAMP</td><td id="B[r\" class=""></td><td id="\mXc" class="">NULLABLE</td><td id="U:Sx" class=""></td><td id="d;AQ" class="">useCurrent()で現在の時刻呼び出し</td></tr></tbody></table><h2 id="1f9b95b7-e1e8-80eb-b899-e4b48fddbb58" class="">５．ER図</h2><figure id="1fbb95b7-e1e8-80b6-aad3-c58077a92524" class="image"><a href="%E7%84%A1%E9%A1%8C_(1).jpg"><img style="width:710px" src="%E7%84%A1%E9%A1%8C_(1).jpg"/></a></figure><h2 id="1f9b95b7-e1e8-8034-aad0-c9f26672878b" class="">６．Laravelプロジェクトファイル一覧（主要なもの）</h2><p id="1fab95b7-e1e8-8081-a685-d2b1fea97463" class="">UC101 - 管理者ログイン.html</p><p id="1fab95b7-e1e8-80d4-b6a5-c34c0cc77c7e" class="">UC102 - 管理者登録依頼.html</p><p id="1fab95b7-e1e8-809d-bcca-d6cc1e33835b" class="">UC103 - 管理者ログアウト.html</p><p id="1fbb95b7-e1e8-806c-8dbd-cafb8e6f1d7b" class="">
+</p><p id="1fab95b7-e1e8-805b-8c66-fc54f07c790b" class="">UC104 - ユーザー一覧.html</p><p id="1fab95b7-e1e8-8076-82d6-f86d355513f5" class="">UC105 - 宿一覧.html</p><p id="1fab95b7-e1e8-8012-9bfa-d813479ea7ee" class="">UC106 - プラン一覧.html</p><p id="1fbb95b7-e1e8-80e1-b5a1-f77ee93ce994" class="">
+</p><p id="1fab95b7-e1e8-8002-9cf1-dfd00da5244e" class="">UC107 - ユーザー詳細.html</p><p id="1fab95b7-e1e8-803f-b168-e3a0b8b5cfaf" class="">UC108 - 宿詳細.html</p><p id="1fab95b7-e1e8-8081-8c64-de1ce1707c88" class="">UC109 - プラン詳細.html</p><p id="1fbb95b7-e1e8-80e1-8d9b-e88c3f42ecdb" class="">
+</p><p id="1fab95b7-e1e8-802d-a779-d57fad8c3283" class="">UC110 - ユーザー登録.html</p><p id="1fab95b7-e1e8-805e-bade-d63d185b7dcc" class="">UC111 - 宿登録.html</p><p id="1fab95b7-e1e8-80ad-87d8-ceeeaa886d24" class="">UC112 - プラン登録.html</p><p id="1fbb95b7-e1e8-800a-93ec-d49b240303e0" class="">
+</p><p id="1fab95b7-e1e8-805c-8587-fb1d5376e0ce" class="">UC113 - ユーザー削除.html　</p><p id="1fab95b7-e1e8-803a-bf9f-d5e69a6488a6" class="">
+</p><p id="1fab95b7-e1e8-805a-a48d-e811009a9df1" class="">UC116 - ユーザー情報変更.html</p><p id="1fab95b7-e1e8-804a-912f-e71b3037538f" class="">UC117 - 宿情報変更.html</p><p id="1fab95b7-e1e8-80a1-b246-d973a03f6dae" class="">UC118 - プラン情報変更.html</p><p id="1fab95b7-e1e8-8007-9cf0-cfa53eb389f0" class="">
+</p><p id="1fab95b7-e1e8-80e6-981c-c70109f7fe2d" class="">UC201 - ユーザーログイン.html</p><p id="1fab95b7-e1e8-80b2-87ce-e26feabac133" class="">UC202 - ユーザー登録.html　</p><p id="1fab95b7-e1e8-8027-ad80-df761b9963bb" class="">UC203 - ユーザーログアウト.html</p><p id="1fab95b7-e1e8-80a8-9567-c76c0dc489dd" class="">UC204 - ユーザー情報変更.html</p><p id="1fab95b7-e1e8-804e-8d56-fbc989bfd362" class="">UC205 - 退会.html？</p><p id="1fab95b7-e1e8-8036-9029-d1e408a24925" class="">UC206 - プラン検索.html</p><p id="1fab95b7-e1e8-802f-a014-ff7cc3721e25" class="">UC207 - 検索結果一覧.html</p><p id="1fab95b7-e1e8-80d7-ad58-ef53d1aaa15b" class="">UC208 - プラン詳細.html</p><p id="1fab95b7-e1e8-802d-a2af-e35a8d9e5c80" class="">UC209 - 宿詳細確認機能.html</p><p id="1fab95b7-e1e8-80b3-95c7-d1de3a788899" class="">UC211 - プランに合わせた宿予約機能.html</p><p id="1fab95b7-e1e8-8050-84ff-fd4a1055a4f0" class="">UC212 / 214 - 予約履歴.html</p><p id="1fab95b7-e1e8-8070-905e-d37e72229166" class="">UC213 - 予約情報入力.html</p><p id="1fab95b7-e1e8-80a0-b21d-dbccac90ea95" class="">
+</p><p id="1fab95b7-e1e8-80f6-b2b9-e1f3bcd8c08e" class="">この一覧にないユースケースは他のファイルで定義・実装される</p><p id="1fab95b7-e1e8-80ff-ba19-edf04ac24688" class="">確認画面に関しては記載していない</p>
+</body></html>

@@ -1,0 +1,194 @@
+/* ナビゲーションのCSS */
+/* .navigation{
+text-align: center;
+}
+.navigation ul{
+margin: 0 ;
+padding: 0 ;
+}
+.navigation ul li{
+list-style: none;
+display: inline-block;
+width: 18%;
+min-width: 90px;
+}
+.navigation ul li a{
+text-decoration: none;
+color: #333;
+}
+.navigation ul li.current a{
+color: #F33135;
+}
+.navigation ul li a:hover{
+color: #E7DA66;
+} */
+
+.navigation {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.navigation li {
+    padding: 0 10px;
+}
+
+/* show */
+#plan_photo {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto 20px auto;
+    overflow: hidden;
+    display: block;
+}
+
+#plan_photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+#hotel_photo_review {
+    margin: 0 auto;
+    background-color: #d4e6f7;
+    border-collapse: collapse;
+    padding: 10px;
+    max-width: 500px;
+    text-align: left;
+}
+
+#hotel_photo_review td,
+#hotel_photo_review th {
+    padding: 6px 10px;
+    text-align: left;
+}
+
+#hotel_photo_review #score {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+}
+
+#hotel_photo_review img {
+    display: block;
+    margin: 0 auto;
+    width: 300px;
+    height: auto;
+    border-radius: 8px;
+}
+#action-buttons {
+    display: flex;
+    gap: 10px;
+    margin: 10px 10px 20px 10px;
+}
+
+#edit,
+#delete {
+    display: inline-block;
+    padding: 10px 20px;
+    color: #ffffff;
+    border: 2px solid #000000;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 16px;
+    text-align: center;
+}
+
+#edit {
+    background-color: #009246;
+}
+
+#delete {
+    background-color: #b00020;
+}
+
+#edit:hover,
+#delete:hover {
+    color: #fffc39;
+}
+
+.details {
+    margin-left: 10px;
+    margin-right: auto;
+    max-width: 600px; 
+}
+
+.detail-item {
+    background-color: #f8f8f8;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin-bottom: 12px;
+}
+
+.detail-item label {
+    font-weight: bold;
+    color: #333;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.detail-item p {
+    margin: 0;
+    line-height: 1.6;
+}
+
+#reservation {
+    max-width: 600px;
+    margin-left: 10px;
+    margin-right: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: #f8f8f8;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 16px;
+}
+
+#reservation label {
+    font-weight: bold;
+    font-size: 16px;
+    display: block;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+#review {
+    max-width: 600px;
+    margin-left: 10px;
+    margin-right: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: #f8f8f8;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 16px;
+}
+
+#review label {
+    font-weight: bold;
+    font-size: 16px;
+    display: block;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+#back {
+    margin: 20px 10px;
+}
+
+#back a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #292929;
+    color: #ffffff;
+    border: 2px solid #000000;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+#back a:hover {
+    color: #fffc39;
+}

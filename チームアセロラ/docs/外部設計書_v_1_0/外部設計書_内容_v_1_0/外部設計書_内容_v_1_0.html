@@ -1,0 +1,706 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>外部設計書_v 1.0</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+
+/* 追記部分 */
+/* <div style="page-break-after: always;"></div> で改ページ */
+h2 {
+    page-break-before: always;
+}
+.imgBlock {
+    text-align: left; 
+}
+
+@page {
+  @bottom-right {
+    content: counter(page) " / " counter(pages);
+    font-size: 16px;
+  }
+  @top-center {
+    content: "外部設計書_v 1.0"; /* バージョンごとに書き換える */
+    font-size: 16px;
+  }
+}
+/* 追記終わり */
+
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.highlight-default_background {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: undefined; }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-translucentGray { background-color: undefined; }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="1f8b95b7-e1e8-80bf-8ce5-deb319dc14f2" class="page sans"><header><h1 class="page-title">外部設計書_v 1.0</h1><p class="page-description"></p></header><div class="page-body"><h1 id="1f8b95b7-e1e8-80f9-8873-e4ece758681b" class="">目次<h3><br/>１．画面遷移図・・・・・2<br/><br/>２．画面レイアウト・・・3<br/><br/>３．テーブル設計書・・・18</h3><br/></h1><p id="1fab95b7-e1e8-806c-87e8-dc15c2b3adb4" class=""><h2>１．画面遷移図</h2></p><figure id="1fbb95b7-e1e8-8064-9058-d1a5ccfcd931" class="image" style="text-align:left"><a href="prod.jpg"><img style="width:576px" src="prod.jpg"/></a></figure><h2 id="1f8b95b7-e1e8-80bb-b037-ffdaf15745ff" class="">２．画面レイアウト</h2><figure id="1fbb95b7-e1e8-80b6-a508-c971902065b0" class="image" style="text-align:left"><a href="image.png"><img style="width:288px" src="image.png"/></a><figcaption>ログイン画面</figcaption></figure><figure id="1fbb95b7-e1e8-80d9-899c-ee5985728859" class="image" style="text-align:left"><a href="image_(1).png"><img style="width:288px" src="image_(1).png"/></a><figcaption>【ユーザー】新規会員登録画面</figcaption></figure><figure id="1fbb95b7-e1e8-809e-bb9c-fc1f735acd7a" class="image" style="text-align:left"><a href="image_(2).png"><img style="width:336px" src="image_(2).png"/></a><figcaption>【ユーザー】確認画面</figcaption></figure><p id="1fab95b7-e1e8-8081-a0a9-f7c9333879d0" class="">
+</p><figure id="1fbb95b7-e1e8-8059-b718-d9db3ab2ec4d" class="image" style="text-align:left"><a href="image_(3).png"><img style="width:384px" src="image_(3).png"/></a><figcaption>【ユーザー】プラン検索画面</figcaption></figure><figure id="1fbb95b7-e1e8-80b3-a8c0-fdbb03f37c73" class="image" style="text-align:left"><a href="image_(4).png"><img style="width:432px" src="image_(4).png"/></a><figcaption>【ユーザー】プラン検索結果一覧画面</figcaption></figure><figure id="1fbb95b7-e1e8-808e-b5b3-e2a64cec7a62" class="image" style="text-align:left"><a href="image_(5).png"><img style="width:432px" src="image_(5).png"/></a><figcaption>【ユーザー】プラン詳細画面</figcaption></figure><figure id="1fbb95b7-e1e8-8087-a732-f9a1e0605322" class="image" style="text-align:left"><a href="image_(6).png"><img style="width:528px" src="image_(6).png"/></a><figcaption>【ユーザー】予約情報入力画面</figcaption></figure><figure id="1fbb95b7-e1e8-8019-8ad6-f4c0fef08fdf" class="image" style="text-align:left"><a href="image_(7).png"><img style="width:528px" src="image_(7).png"/></a><figcaption>【ユーザー】予約情報入力の確認画面</figcaption></figure><figure id="1fbb95b7-e1e8-8021-b67c-ea78765f68bc" class="image" style="text-align:left"><a href="image_(8).png"><img style="width:384px" src="image_(8).png"/></a><figcaption>【ユーザー】宿詳細画面</figcaption></figure><figure id="1fbb95b7-e1e8-80bd-97a8-cef2792377cd" class="image" style="text-align:left"><a href="image_(9).png"><img style="width:480px" src="image_(9).png"/></a><figcaption>【ユーザー】予約履歴画面</figcaption></figure><figure id="1fbb95b7-e1e8-8061-9068-c693a3665380" class="image" style="text-align:left"><a href="image_(10).png"><img style="width:528px" src="image_(10).png"/></a><figcaption>【ユーザー】予約情報変更画面</figcaption></figure><figure id="1fbb95b7-e1e8-809f-b5b2-f7343062e3fc" class="image" style="text-align:left"><a href="image_(11).png"><img style="width:576px" src="image_(11).png"/></a><figcaption>【ユーザー】予約情報変更の確認画面<br/><br/></figcaption></figure><figure id="1fbb95b7-e1e8-8000-8a18-ecd4247016ea" class="image" style="text-align:left"><a href="image_(12).png"><img style="width:384px" src="image_(12).png"/></a><figcaption>【管理者】ログイン画面</figcaption></figure><figure id="1fbb95b7-e1e8-8043-86ad-e9b93c51b96c" class="image" style="text-align:left"><a href="image_(13).png"><img style="width:480px" src="image_(13).png"/></a><figcaption>【管理者】ユーザー一覧画面</figcaption></figure><figure id="1fbb95b7-e1e8-8064-8d4d-d8dadcbb456d" class="image" style="text-align:left"><a href="image_(14).png"><img style="width:432px" src="image_(14).png"/></a><figcaption>【管理者】ユーザー詳細画面</figcaption></figure><figure id="1fbb95b7-e1e8-80b5-bbfe-f68cf4046c39" class="image" style="text-align:left"><a href="image_(15).png"><img style="width:480px" src="image_(15).png"/></a><figcaption>【管理者】ユーザー情報変更画面</figcaption></figure><figure id="1fbb95b7-e1e8-8016-acb7-d57f5a5c3990" class="image" style="text-align:left"><a href="image_(16).png"><img style="width:432px" src="image_(16).png"/></a><figcaption>【管理者】ユーザー情報変更の確認画面</figcaption></figure><figure id="1fbb95b7-e1e8-8084-a3b9-c68f581f8459" class="image" style="text-align:left"><a href="image_(17).png"><img style="width:480px" src="image_(17).png"/></a><figcaption>【管理者】ユーザー新規作成画面</figcaption></figure><figure id="1fbb95b7-e1e8-80d9-9bf0-f6bd67a36b6b" class="image" style="text-align:left"><a href="image_(18).png"><img style="width:480px" src="image_(18).png"/></a><figcaption>【管理者】ユーザー新規登録の確認画面</figcaption></figure><figure id="1fbb95b7-e1e8-8048-aedd-db4914ac30ec" class="image" style="text-align:left"><a href="image_(19).png"><img style="width:576px" src="image_(19).png"/></a><figcaption>【管理者】宿一覧画面</figcaption></figure><figure id="1fbb95b7-e1e8-8006-91b9-cd184bcc2081" class="image" style="text-align:left"><a href="image_(20).png"><img style="width:528px" src="image_(20).png"/></a><figcaption>【管理者】宿詳細画面</figcaption></figure><figure id="1fbb95b7-e1e8-8099-bc77-d0c8b03e178e" class="image" style="text-align:left"><a href="image_(21).png"><img style="width:528px" src="image_(21).png"/></a><figcaption>【管理者】宿編集画面</figcaption></figure><figure id="1fbb95b7-e1e8-80cd-9108-f1d862ddb209" class="image" style="text-align:left"><a href="image_(22).png"><img style="width:480px" src="image_(22).png"/></a><figcaption>【管理者】確認画面</figcaption></figure><figure id="1fbb95b7-e1e8-804c-8bab-d63a921f038f" class="image" style="text-align:left"><a href="image_(23).png"><img style="width:576px" src="image_(23).png"/></a><figcaption>【管理者】宿新規作成画面</figcaption></figure><figure id="1fbb95b7-e1e8-8010-b302-d7d01ae5260a" class="image" style="text-align:left"><a href="image_(24).png"><img style="width:432px" src="image_(24).png"/></a><figcaption>【管理者】確認画面</figcaption></figure><figure id="1fbb95b7-e1e8-8007-b320-c7042e13db26" class="image" style="text-align:left"><a href="image_(26).png"><img style="width:528px" src="image_(26).png"/></a><figcaption>【管理者】プラン一覧画面</figcaption></figure><figure id="1fbb95b7-e1e8-8040-bbd2-f2f9922d2637" class="image" style="text-align:left"><a href="image_(27).png"><img style="width:528px" src="image_(27).png"/></a><figcaption>【管理者】プラン詳細画面</figcaption></figure><figure id="1fbb95b7-e1e8-80c2-8b75-e64e54cca0ac" class="image" style="text-align:left"><a href="image_(28).png"><img style="width:576px" src="image_(28).png"/></a><figcaption>【管理者】プラン編集画面</figcaption></figure><figure id="1fbb95b7-e1e8-8040-bc91-f756297044a8" class="image" style="text-align:left"><a href="image_(31).png"><img style="width:528px" src="image_(31).png"/></a><figcaption>【管理者】確認画面</figcaption></figure><figure id="1fbb95b7-e1e8-80ef-9170-e97c7d4ae08d" class="image" style="text-align:left"><a href="image_(29).png"><img style="width:528px" src="image_(29).png"/></a><figcaption>【管理者】プラン新規作成画面</figcaption></figure><figure id="1fbb95b7-e1e8-8066-a28d-fac6c8e1560f" class="image" style="text-align:left"><a href="image_(30).png"><img style="width:480px" src="image_(30).png"/></a><figcaption>【管理者】確認画面</figcaption></figure><figure id="1fbb95b7-e1e8-803e-b724-ce4629ba0196" class="image" style="text-align:left"><a href="image_(32).png"><img style="width:528px" src="image_(32).png"/></a><figcaption>【管理者】管理者登録依頼画面</figcaption></figure><figure id="1fbb95b7-e1e8-8061-9539-cb47713d8d17" class="image" style="text-align:left"><a href="image_(33).png"><img style="width:576px" src="image_(33).png"/></a><figcaption>【管理者】確認画面</figcaption></figure><h2 id="1f8b95b7-e1e8-8043-85d5-ffccf4c5c1b4" class="">３．テーブル設計書</h2><p id="1f9b95b7-e1e8-806a-b623-f7a02199a9e7" class=""><strong>Usersテーブル</strong></p><table id="1fab95b7-e1e8-8000-8646-d3c47711dd65" class="simple-table"><thead class="simple-table-header"><tr id="1fab95b7-e1e8-807d-b5d1-e799d9e7b5d2"><th id="TROP" class="simple-table-header-color simple-table-header">項目</th><th id="q&lt;|[" class="simple-table-header-color simple-table-header">列名</th><th id="P~jR" class="simple-table-header-color simple-table-header">型定義</th><th id="A]iP" class="simple-table-header-color simple-table-header">値なし</th><th id="SObB" class="simple-table-header-color simple-table-header">制約</th><th id="w\sN" class="simple-table-header-color simple-table-header">備考</th></tr></thead><tbody><tr id="1fab95b7-e1e8-8086-b618-e6d94b664a00"><th id="TROP" class="simple-table-header-color simple-table-header">ID</th><td id="q&lt;|[" class="">id</td><td id="P~jR" class="">整数<br/>(制限なし)<br/></td><td id="A]iP" class=""></td><td id="SObB" class="">自動連番</td><td id="w\sN" class="">主キー</td></tr><tr id="1fab95b7-e1e8-8047-91d9-cc6b4d553d55"><th id="TROP" class="simple-table-header-color simple-table-header">氏名</th><td id="q&lt;|[" class="">name</td><td id="P~jR" class="">文字列<br/>(0 ~ 50文字)<br/></td><td id="A]iP" class=""></td><td id="SObB" class=""></td><td id="w\sN" class=""></td></tr><tr id="1fab95b7-e1e8-8044-a683-cf4240aa6adf"><th id="TROP" class="simple-table-header-color simple-table-header">ふりがな</th><td id="q&lt;|[" class="">ruby</td><td id="P~jR" class="">文字列<br/>(0 ~ 50文字)<br/></td><td id="A]iP" class=""></td><td id="SObB" class=""></td><td id="w\sN" class=""></td></tr><tr id="1fab95b7-e1e8-80e5-8aad-e043e9c41f46"><th id="TROP" class="simple-table-header-color simple-table-header">パスワード</th><td id="q&lt;|[" class="">password</td><td id="P~jR" class="">文字列<br/>(0 ~ 50文字)<br/></td><td id="A]iP" class=""></td><td id="SObB" class=""></td><td id="w\sN" class="">暗号化される</td></tr><tr id="1fab95b7-e1e8-80f0-9319-d3a8bcb043a3"><th id="TROP" class="simple-table-header-color simple-table-header">メールアドレス</th><td id="q&lt;|[" class="">email</td><td id="P~jR" class="">文字列<br/>(0 ~ 100文字)<br/></td><td id="A]iP" class=""></td><td id="SObB" class=""></td><td id="w\sN" class=""></td></tr><tr id="1fab95b7-e1e8-80b2-a829-e89c08a1304f"><th id="TROP" class="simple-table-header-color simple-table-header">電話番号</th><td id="q&lt;|[" class="">tel</td><td id="P~jR" class="">文字列<br/>(0 ~ 255文字)<br/></td><td id="A]iP" class=""></td><td id="SObB" class=""></td><td id="w\sN" class=""></td></tr><tr id="1fab95b7-e1e8-8048-8dd5-cc9c377fd3e7"><th id="TROP" class="simple-table-header-color simple-table-header">所属 (会社)</th><td id="q&lt;|[" class="">company</td><td id="P~jR" class="">文字列<br/>(0 ~ 50文字)<br/></td><td id="A]iP" class=""></td><td id="SObB" class=""></td><td id="w\sN" class=""></td></tr><tr id="1fab95b7-e1e8-80e5-bc7a-d4672fbe630a"><th id="TROP" class="simple-table-header-color simple-table-header">生年月日</th><td id="q&lt;|[" class="">birthday</td><td id="P~jR" class="">日付</td><td id="A]iP" class=""></td><td id="SObB" class=""></td><td id="w\sN" class=""></td></tr><tr id="1fab95b7-e1e8-80a7-9320-f118ba09a4b3"><th id="TROP" class="simple-table-header-color simple-table-header">住所</th><td id="q&lt;|[" class="">address</td><td id="P~jR" class="">文字列<br/>(0 ~ 100文字)<br/></td><td id="A]iP" class=""></td><td id="SObB" class=""></td><td id="w\sN" class=""></td></tr><tr id="1fab95b7-e1e8-80d4-9a95-d900e7efac46"><th id="TROP" class="simple-table-header-color simple-table-header">性別</th><td id="q&lt;|[" class="">gender</td><td id="P~jR" class="">文字列<br/>(0 ~ 255文字)<br/></td><td id="A]iP" class=""></td><td id="SObB" class=""></td><td id="w\sN" class="">「回答なし」のラジオボタンを作る</td></tr><tr id="1fab95b7-e1e8-804f-b01a-eff429d895bc"><th id="TROP" class="simple-table-header-color simple-table-header">お知らせ</th><td id="q&lt;|[" class="">get_notice</td><td id="P~jR" class="">真偽</td><td id="A]iP" class=""></td><td id="SObB" class=""></td><td id="w\sN" class="">「真」でメルマガ受け取り</td></tr><tr id="1fab95b7-e1e8-80c0-b14e-e5c81c807d31"><th id="TROP" class="simple-table-header-color simple-table-header">管理者</th><td id="q&lt;|[" class="">is_admin</td><td id="P~jR" class="">真偽</td><td id="A]iP" class=""></td><td id="SObB" class=""></td><td id="w\sN" class="">「真」で管理人<br/>「偽」でユーザー<br/></td></tr><tr id="1fab95b7-e1e8-8089-932b-fa86738775f4"><th id="TROP" class="simple-table-header-color simple-table-header">退会</th><td id="q&lt;|[" class="">is_deleted</td><td id="P~jR" class="">真偽</td><td id="A]iP" class=""></td><td id="SObB" class=""></td><td id="w\sN" class="">「真」で<br/>退会済み<br/></td></tr><tr id="1fab95b7-e1e8-800c-8ff6-e343e2b1a0da"><th id="TROP" class="simple-table-header-color simple-table-header">作成日時</th><td id="q&lt;|[" class="">created_up</td><td id="P~jR" class="">タイムスタンプ</td><td id="A]iP" class="">〇</td><td id="SObB" class=""></td><td id="w\sN" class=""></td></tr><tr id="1fab95b7-e1e8-8012-83e2-e26efa728281"><th id="TROP" class="simple-table-header-color simple-table-header">更新日時</th><td id="q&lt;|[" class="">updated_at</td><td id="P~jR" class="">タイムスタンプ</td><td id="A]iP" class="">〇</td><td id="SObB" class=""></td><td id="w\sN" class=""></td></tr></tbody></table><div style="page-break-after: always;"></div><p id="1fab95b7-e1e8-8038-9881-db865bfc178e" class=""><mark class="highlight-default_background"><strong>Hotelsテーブル（主テーブル）</strong></mark></p><table id="1fab95b7-e1e8-80d6-bc71-cab609397e80" class="simple-table"><thead class="simple-table-header"><tr id="1fab95b7-e1e8-80d5-96cd-d6770041865b"><th id="TROP" class="simple-table-header-color simple-table-header">項目</th><th id="q&lt;|[" class="simple-table-header-color simple-table-header">列名</th><th id="P~jR" class="simple-table-header-color simple-table-header">型定義</th><th id="A]iP" class="simple-table-header-color simple-table-header">値なし</th><th id="SObB" class="simple-table-header-color simple-table-header">制約</th><th id="w\sN" class="simple-table-header-color simple-table-header">備考</th></tr></thead><tbody><tr id="1fab95b7-e1e8-80e3-9055-f5b290892c75"><th id="TROP" class="simple-table-header-color simple-table-header">ID</th><td id="q&lt;|[" class="">id</td><td id="P~jR" class="">整数<br/>(制限なし)<br/></td><td id="A]iP" class=""></td><td id="SObB" class="">自動連番</td><td id="w\sN" class="">主キー</td></tr><tr id="1fab95b7-e1e8-8080-bf4e-e4e362bed467"><th id="TROP" class="simple-table-header-color simple-table-header">ホテル名</th><td id="q&lt;|[" class="">name</td><td id="P~jR" class="">文字列<br/>(0 ~ 50文字)<br/></td><td id="A]iP" class=""></td><td id="SObB" class=""></td><td id="w\sN" class=""></td></tr><tr id="1fab95b7-e1e8-8043-ba8a-d1c83383ed3b"><th id="TROP" class="simple-table-header-color simple-table-header">住所</th><td id="q&lt;|[" class="">address</td><td id="P~jR" class="">文字列<br/>(0 ~ 100文字)<br/></td><td id="A]iP" class=""></td><td id="SObB" class=""></td><td id="w\sN" class=""></td></tr><tr id="1fab95b7-e1e8-8046-bccf-ef343d6972b6"><th id="TROP" class="simple-table-header-color simple-table-header">最寄り駅名</th><td id="q&lt;|[" class="">station</td><td id="P~jR" class="">文字列<br/>(0 ~ 50文字)<br/></td><td id="A]iP" class=""></td><td id="SObB" class=""></td><td id="w\sN" class=""></td></tr><tr id="1fab95b7-e1e8-804b-b2e0-f1dcd5aa862e"><th id="TROP" class="simple-table-header-color simple-table-header">電話番号</th><td id="q&lt;|[" class="">tel</td><td id="P~jR" class="">文字列<br/>(0 ~ 255文字)<br/></td><td id="A]iP" class=""></td><td id="SObB" class=""></td><td id="w\sN" class=""></td></tr><tr id="1fab95b7-e1e8-8000-bbdf-f79d7e820509"><th id="TROP" class="simple-table-header-color simple-table-header">イメージ写真</th><td id="q&lt;|[" class="">image</td><td id="P~jR" class="">バイナリ<br/>(4GBまで)<br/></td><td id="A]iP" class=""></td><td id="SObB" class=""></td><td id="w\sN" class="">写真は.jpg, .pngのみ</td></tr><tr id="1fab95b7-e1e8-8082-9f90-c7f628d57baf"><th id="TROP" class="simple-table-header-color simple-table-header">始業時刻</th><td id="q&lt;|[" class="">start_time</td><td id="P~jR" class="">時刻</td><td id="A]iP" class=""></td><td id="SObB" class=""></td><td id="w\sN" class="">チェックイン or チェックアウトが開始できる時間</td></tr><tr id="1fab95b7-e1e8-80ee-b475-fd854287ad6c"><th id="TROP" class="simple-table-header-color simple-table-header">終業時刻</th><td id="q&lt;|[" class="">end_time</td><td id="P~jR" class="">時刻</td><td id="A]iP" class=""></td><td id="SObB" class=""></td><td id="w\sN" class="">チェックイン or チェックアウトの受付を終了する時間</td></tr><tr id="1fab95b7-e1e8-80a6-8f01-cb7d37fc1e68"><th id="TROP" class="simple-table-header-color simple-table-header">温泉の有無</th><td id="q&lt;|[" class="">hot_spring</td><td id="P~jR" class="">真偽</td><td id="A]iP" class="">〇</td><td id="SObB" class=""></td><td id="w\sN" class=""></td></tr><tr id="1fab95b7-e1e8-8068-9704-c019ca6280a1"><th id="TROP" class="simple-table-header-color simple-table-header">ホテルのジャンル</th><td id="q&lt;|[" class="">genre</td><td id="P~jR" class="">文字列<br/>(0 ~ 50文字)<br/></td><td id="A]iP" class="">〇</td><td id="SObB" class=""></td><td id="w\sN" class=""></td></tr><tr id="1fab95b7-e1e8-80a0-830c-dfda29ba751a"><th id="TROP" class="simple-table-header-color simple-table-header">団体受け入れ可能客室数</th><td id="q&lt;|[" class="">group_rooms</td><td id="P~jR" class="">整数<br/>(0 ~42億)<br/></td><td id="A]iP" class="">〇</td><td id="SObB" class="">正の整数</td><td id="w\sN" class="">1次開発では実装しない</td></tr><tr id="1fab95b7-e1e8-80eb-9faa-ed6a137edb80"><th id="TROP" class="simple-table-header-color simple-table-header">削除</th><td id="q&lt;|[" class="">is_deleted</td><td id="P~jR" class="">真偽</td><td id="A]iP" class=""></td><td id="SObB" class=""></td><td id="w\sN" class="">「真」で削除済み</td></tr><tr id="1fab95b7-e1e8-808e-b2e3-d76d6dea44a3"><th id="TROP" class="simple-table-header-color simple-table-header">作成日時</th><td id="q&lt;|[" class="">created_at</td><td id="P~jR" class="">タイムスタンプ</td><td id="A]iP" class="">〇</td><td id="SObB" class=""></td><td id="w\sN" class=""></td></tr><tr id="1fab95b7-e1e8-8009-bdfb-e6c0ec85e237"><th id="TROP" class="simple-table-header-color simple-table-header">更新日時</th><td id="q&lt;|[" class="">updated_at</td><td id="P~jR" class="">タイムスタンプ</td><td id="A]iP" class="">〇</td><td id="SObB" class=""></td><td id="w\sN" class=""></td></tr></tbody></table><div style="page-break-after: always;"></div><p id="1fab95b7-e1e8-800b-80e1-ead2dd413066" class=""><strong>Likesテーブル (中間テーブル)</strong></p><table id="1fab95b7-e1e8-806a-bd66-dabe59883530" class="simple-table"><thead class="simple-table-header"><tr id="1fab95b7-e1e8-8039-aec5-f250dea1ab52"><th id="TROP" class="simple-table-header-color simple-table-header">項目</th><th id="q&lt;|[" class="simple-table-header-color simple-table-header">列名</th><th id="P~jR" class="simple-table-header-color simple-table-header">型定義</th><th id="A]iP" class="simple-table-header-color simple-table-header">値なし</th><th id="SObB" class="simple-table-header-color simple-table-header">制約</th><th id="w\sN" class="simple-table-header-color simple-table-header">備考</th></tr></thead><tbody><tr id="1fab95b7-e1e8-8078-b362-c36612f23f60"><th id="TROP" class="simple-table-header-color simple-table-header">ID</th><td id="q&lt;|[" class="">id</td><td id="P~jR" class="">整数<br/>(制限なし)<br/></td><td id="A]iP" class=""></td><td id="SObB" class="">自動連番</td><td id="w\sN" class="">主キー</td></tr><tr id="1fab95b7-e1e8-8066-8ac6-f6e95eb09251"><th id="TROP" class="simple-table-header-color simple-table-header">ユーザーID</th><td id="q&lt;|[" class="">user_id</td><td id="P~jR" class="">整数<br/>(制限なし)<br/></td><td id="A]iP" class=""></td><td id="SObB" class="">自動連番<br/>索引可能<br/></td><td id="w\sN" class="">外部キー</td></tr><tr id="1fab95b7-e1e8-80b0-b65b-d8ee2bb7342d"><th id="TROP" class="simple-table-header-color simple-table-header">宿ID</th><td id="q&lt;|[" class="">hotel_id</td><td id="P~jR" class="">整数<br/>(制限なし)<br/></td><td id="A]iP" class=""></td><td id="SObB" class="">自動連番<br/>索引可能<br/></td><td id="w\sN" class="">外部キー</td></tr><tr id="1fab95b7-e1e8-8091-9e26-cc237c17faf5"><th id="TROP" class="simple-table-header-color simple-table-header">作成日時</th><td id="q&lt;|[" class="">created_at</td><td id="P~jR" class="">タイムスタンプ</td><td id="A]iP" class="">〇</td><td id="SObB" class=""></td><td id="w\sN" class=""></td></tr><tr id="1fab95b7-e1e8-8079-899a-c25bb79b5238"><th id="TROP" class="simple-table-header-color simple-table-header">更新日時</th><td id="q&lt;|[" class="">updated_at</td><td id="P~jR" class="">タイムスタンプ</td><td id="A]iP" class="">〇</td><td id="SObB" class=""></td><td id="w\sN" class=""></td></tr></tbody></table><br><br><p id="1fab95b7-e1e8-8070-839a-fdec9f5005ed" class=""><strong>Reviewsテーブル (子テーブル)</strong></p><table id="1fab95b7-e1e8-8064-8c65-c3592efc2abc" class="simple-table"><thead class="simple-table-header"><tr id="1fab95b7-e1e8-809b-b968-c0f4dcec4472"><th id="TROP" class="simple-table-header-color simple-table-header" style="width:121px">項目</th><th id="q&lt;|[" class="simple-table-header-color simple-table-header">列名</th><th id="Vyq;" class="simple-table-header-color simple-table-header">型定義</th><th id="A]iP" class="simple-table-header-color simple-table-header">値なし</th><th id="SObB" class="simple-table-header-color simple-table-header">制約</th><th id="w\sN" class="simple-table-header-color simple-table-header">備考</th></tr></thead><tbody><tr id="1fab95b7-e1e8-80da-b1d8-ff90704fb288"><th id="TROP" class="simple-table-header-color simple-table-header" style="width:121px">ID</th><td id="q&lt;|[" class="">id</td><td id="Vyq;" class="">整数<br/>(制限なし)<br/></td><td id="A]iP" class=""></td><td id="SObB" class="">自動連番</td><td id="w\sN" class="">主キー</td></tr><tr id="1fab95b7-e1e8-805a-b4b7-dfc24ee4be22"><th id="TROP" class="simple-table-header-color simple-table-header" style="width:121px">ユーザーID</th><td id="q&lt;|[" class="">user_id</td><td id="Vyq;" class="">整数<br/>(制限なし)<br/></td><td id="A]iP" class=""></td><td id="SObB" class="">自動連番<br/>索引可能<br/></td><td id="w\sN" class="">外部キー</td></tr><tr id="1fab95b7-e1e8-8077-9cae-f21d9a9f4858"><th id="TROP" class="simple-table-header-color simple-table-header" style="width:121px">宿ID</th><td id="q&lt;|[" class="">hotel_id</td><td id="Vyq;" class="">整数<br/>(制限なし)<br/></td><td id="A]iP" class=""></td><td id="SObB" class="">自動連番<br/>索引可能<br/></td><td id="w\sN" class="">外部キー</td></tr><tr id="1fab95b7-e1e8-804c-a0d0-d346c1d1cd2d"><th id="TROP" class="simple-table-header-color simple-table-header" style="width:121px">星の数</th><td id="q&lt;|[" class="">num_star</td><td id="Vyq;" class="">整数</td><td id="A]iP" class="">〇</td><td id="SObB" class="">正の整数</td><td id="w\sN" class="">入力値：1 - 5<br/>デフォルト：0<br/></td></tr><tr id="1fab95b7-e1e8-809a-8b87-f80646fecd9f"><th id="TROP" class="simple-table-header-color simple-table-header" style="width:121px">レビュー文</th><td id="q&lt;|[" class="">content</td><td id="Vyq;" class="">文字列<br/>(最大65,535文字)<br/></td><td id="A]iP" class="">〇</td><td id="SObB" class=""></td><td id="w\sN" class=""></td></tr><tr id="1fab95b7-e1e8-8005-9735-ddb71174f477"><th id="TROP" class="simple-table-header-color simple-table-header" style="width:121px">作成日時</th><td id="q&lt;|[" class="">created_at</td><td id="Vyq;" class="">タイムスタンプ</td><td id="A]iP" class="">〇</td><td id="SObB" class=""></td><td id="w\sN" class=""></td></tr><tr id="1fab95b7-e1e8-80cb-846b-f6e50d0e29d1"><th id="TROP" class="simple-table-header-color simple-table-header" style="width:121px">更新日時</th><td id="q&lt;|[" class="">updated_at</td><td id="Vyq;" class="">タイムスタンプ</td><td id="A]iP" class="">〇</td><td id="SObB" class=""></td><td id="w\sN" class=""></td></tr></tbody></table><div style="page-break-after: always;"></div><p id="1fab95b7-e1e8-80a8-8cd4-e7a5b4a60b4e" class=""><mark class="highlight-default_background"><strong>Plansテーブル（子テーブル）</strong></mark></p><table id="1fab95b7-e1e8-80c5-be00-cec8554149a6" class="simple-table"><thead class="simple-table-header"><tr id="1fab95b7-e1e8-80d6-9202-feaad471f75d"><th id="TROP" class="simple-table-header-color simple-table-header" style="width:121px">項目</th><th id="q&lt;|[" class="simple-table-header-color simple-table-header">列名</th><th id="P~jR" class="simple-table-header-color simple-table-header">型定義</th><th id="A]iP" class="simple-table-header-color simple-table-header">値なし</th><th id="SObB" class="simple-table-header-color simple-table-header">制約</th><th id="w\sN" class="simple-table-header-color simple-table-header">備考</th></tr></thead><tbody><tr id="1fab95b7-e1e8-80e8-8178-c40ee3399caa"><th id="TROP" class="simple-table-header-color simple-table-header" style="width:121px">ID</th><td id="q&lt;|[" class="">id</td><td id="P~jR" class="">整数<br/>(制限なし)<br/></td><td id="A]iP" class=""></td><td id="SObB" class="">自動連番</td><td id="w\sN" class="">主キー</td></tr><tr id="1fab95b7-e1e8-80d0-9364-cdedeb83cbec"><th id="TROP" class="simple-table-header-color simple-table-header" style="width:121px">宿ID</th><td id="q&lt;|[" class="">hotel_id</td><td id="P~jR" class="">整数<br/>(制限なし)<br/></td><td id="A]iP" class=""></td><td id="SObB" class="">自動連番<br/>索引可能<br/></td><td id="w\sN" class="">外部キー</td></tr><tr id="1fab95b7-e1e8-804f-89a3-ed5803381020"><th id="TROP" class="simple-table-header-color simple-table-header" style="width:121px">プラン名</th><td id="q&lt;|[" class="">name</td><td id="P~jR" class="">文字列<br/>(50文字以下)<br/></td><td id="A]iP" class=""></td><td id="SObB" class=""></td><td id="w\sN" class=""></td></tr><tr id="1fab95b7-e1e8-80a7-8231-dc9be3b94c44"><th id="TROP" class="simple-table-header-color simple-table-header" style="width:121px">プラン説明</th><td id="q&lt;|[" class="">description</td><td id="P~jR" class="">文字列<br/>(最大65,535文字)<br/></td><td id="A]iP" class="">〇</td><td id="SObB" class=""></td><td id="w\sN" class=""></td></tr><tr id="1fab95b7-e1e8-8049-8635-f1b2d4ef3a0e"><th id="TROP" class="simple-table-header-color simple-table-header" style="width:121px">料金</th><td id="q&lt;|[" class="">price</td><td id="P~jR" class="">整数</td><td id="A]iP" class=""></td><td id="SObB" class="">正の整数</td><td id="w\sN" class="">プランの合計金額</td></tr><tr id="1fbb95b7-e1e8-80be-8911-d949f7caee1a"><th id="TROP" class="simple-table-header-color simple-table-header" style="width:121px">利用人数(宿泊可能最大人数)</th><td id="q&lt;|[" class="">max_guest</td><td id="P~jR" class="">整数</td><td id="A]iP" class=""></td><td id="SObB" class="">正の整数</td><td id="w\sN" class=""></td></tr><tr id="1fab95b7-e1e8-8068-be7a-e91b29cece4b"><th id="TROP" class="simple-table-header-color simple-table-header" style="width:121px">食事の有無</th><td id="q&lt;|[" class="">meal</td><td id="P~jR" class="">真偽</td><td id="A]iP" class=""></td><td id="SObB" class=""></td><td id="w\sN" class=""></td></tr><tr id="1fab95b7-e1e8-80bb-aa14-dee8b5cd5b1a"><th id="TROP" class="simple-table-header-color simple-table-header" style="width:121px">利用可能開始日</th><td id="q&lt;|[" class="">start_date</td><td id="P~jR" class="">日付</td><td id="A]iP" class=""></td><td id="SObB" class=""></td><td id="w\sN" class=""></td></tr><tr id="1fab95b7-e1e8-8066-bbc4-c7e75f856355"><th id="TROP" class="simple-table-header-color simple-table-header" style="width:121px">利用可能最終日</th><td id="q&lt;|[" class="">end_date</td><td id="P~jR" class="">日付</td><td id="A]iP" class=""></td><td id="SObB" class=""></td><td id="w\sN" class=""></td></tr><tr id="1fab95b7-e1e8-8062-a7d2-dc1ea4993a10"><th id="TROP" class="simple-table-header-color simple-table-header" style="width:121px">削除</th><td id="q&lt;|[" class="">is_deleted</td><td id="P~jR" class="">真偽</td><td id="A]iP" class=""></td><td id="SObB" class=""></td><td id="w\sN" class="">「真」で削除済み</td></tr><tr id="1fab95b7-e1e8-8000-a082-ff23d74df522"><th id="TROP" class="simple-table-header-color simple-table-header" style="width:121px">作成時刻</th><td id="q&lt;|[" class="">created_at</td><td id="P~jR" class="">タイムスタンプ</td><td id="A]iP" class="">〇</td><td id="SObB" class=""></td><td id="w\sN" class=""></td></tr><tr id="1fab95b7-e1e8-8003-aae7-de6638cc763f"><th id="TROP" class="simple-table-header-color simple-table-header" style="width:121px">更新時刻</th><td id="q&lt;|[" class="">updated_at</td><td id="P~jR" class="">タイムスタンプ</td><td id="A]iP" class="">〇</td><td id="SObB" class=""></td><td id="w\sN" class=""></td></tr></tbody></table><br><br><p id="1fab95b7-e1e8-8007-911d-c92d0e89f960" class=""><mark class="highlight-default_background"><strong>Reservationsテーブル（子テーブル）</strong></mark></p><table id="1fab95b7-e1e8-80ea-9c67-d327057fd1ad" class="simple-table"><thead class="simple-table-header"><tr id="1fab95b7-e1e8-801e-a693-f3489d1d9b56"><th id="nHZG" class="simple-table-header-color simple-table-header" style="width:123px">項目</th><th id="~=]=" class="simple-table-header-color simple-table-header">列名</th><th id="]tA\" class="simple-table-header-color simple-table-header">型定義</th><th id="\mXc" class="simple-table-header-color simple-table-header">値なし</th><th id="U:Sx" class="simple-table-header-color simple-table-header">制約</th><th id="d;AQ" class="simple-table-header-color simple-table-header">備考</th></tr></thead><tbody><tr id="1fab95b7-e1e8-802f-a2ad-de8e3e334d47"><th id="nHZG" class="simple-table-header-color simple-table-header" style="width:123px">ID</th><td id="~=]=" class="">id</td><td id="]tA\" class="">整数<br/>(制限なし)<br/></td><td id="\mXc" class=""></td><td id="U:Sx" class="">自動連番</td><td id="d;AQ" class="">主キー</td></tr><tr id="1fab95b7-e1e8-8015-90f6-d32c7fb3eb75"><th id="nHZG" class="simple-table-header-color simple-table-header" style="width:123px">ユーザーID</th><td id="~=]=" class="">user_id</td><td id="]tA\" class="">整数<br/>(制限なし)<br/></td><td id="\mXc" class=""></td><td id="U:Sx" class="">自動連番</td><td id="d;AQ" class="">外部キー</td></tr><tr id="1fab95b7-e1e8-8067-a87d-e1e5c8c6fed7"><th id="nHZG" class="simple-table-header-color simple-table-header" style="width:123px">プランID</th><td id="~=]=" class="">plan_id</td><td id="]tA\" class="">整数<br/>(制限なし)<br/></td><td id="\mXc" class=""></td><td id="U:Sx" class="">自動連番</td><td id="d;AQ" class="">外部キー</td></tr><tr id="1fab95b7-e1e8-80af-b5cf-d98a841038f1"><th id="nHZG" class="simple-table-header-color simple-table-header" style="width:123px">チェックイン日時</th><td id="~=]=" class="">check_in</td><td id="]tA\" class="">日時</td><td id="\mXc" class=""></td><td id="U:Sx" class=""></td><td id="d;AQ" class=""></td></tr><tr id="1fab95b7-e1e8-800f-9259-e56d7e6859cc"><th id="nHZG" class="simple-table-header-color simple-table-header" style="width:123px">チェックアウト日時</th><td id="~=]=" class="">check_out</td><td id="]tA\" class="">日時</td><td id="\mXc" class=""></td><td id="U:Sx" class=""></td><td id="d;AQ" class=""></td></tr><tr id="1fab95b7-e1e8-8034-98e3-e24cd2d1e4b4"><th id="nHZG" class="simple-table-header-color simple-table-header" style="width:123px">利用人数 (宿泊人数)</th><td id="~=]=" class="">num_user</td><td id="]tA\" class="">整数<br/>(1 ~ 42億)<br/></td><td id="\mXc" class=""></td><td id="U:Sx" class="">正の整数</td><td id="d;AQ" class=""></td></tr><tr id="1fab95b7-e1e8-809b-9f85-ff308a95af6b"><th id="nHZG" class="simple-table-header-color simple-table-header" style="width:123px">削除</th><td id="~=]=" class="">is_deleted</td><td id="]tA\" class="">真偽</td><td id="\mXc" class=""></td><td id="U:Sx" class=""></td><td id="d;AQ" class="">「真」で削除済み</td></tr><tr id="1fab95b7-e1e8-8076-995f-c52e84078599"><th id="nHZG" class="simple-table-header-color simple-table-header" style="width:123px">作成日時</th><td id="~=]=" class="">created_at</td><td id="]tA\" class="">タイムスタンプ</td><td id="\mXc" class="">〇</td><td id="U:Sx" class=""></td><td id="d;AQ" class=""></td></tr><tr id="1fab95b7-e1e8-802e-9dc9-fdaaf8c41928"><th id="nHZG" class="simple-table-header-color simple-table-header" style="width:123px">更新日時</th><td id="~=]=" class="">updated_at</td><td id="]tA\" class="">タイムスタンプ</td><td id="\mXc" class="">〇</td><td id="U:Sx" class=""></td><td id="d;AQ" class=""></td></tr></tbody></table></div></article></body></html>

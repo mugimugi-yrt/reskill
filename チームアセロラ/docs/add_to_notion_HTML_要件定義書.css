@@ -1,0 +1,43 @@
+/*
+    (このcssは要件定義書用です。他ドキュメントは別途用意します)
+    notion から pdf を作成する際には、HTMLを経由して印刷する方がきれい
+    notion から pdf を作る方法
+    1. notion のドキュメントを HTMLでエクスポート
+    2. エクスポートしたHTMLファイルをテキストエディタで開き、<style>タグの中に以下の記述を突っ込む
+    3. 「バージョンごとに書き換える」の部分を書き換える
+    4. HTMLファイルをGoogle Chromeで開き、pdf印刷
+    ※特殊記述があるので、Google Chrome以外では望んだものが出てこないので注意
+*/
+
+/* 追記部分 */
+h2 {
+    page-break-before: always;
+}
+
+h3:nth-child(-n+6) {
+    font-weight: normal;
+}
+h3:last-of-type {
+    font-weight: bold;
+    page-break-before: always;
+}
+table {
+    page-break-before: always;
+}
+table:first-of-type {
+    page-break-before: auto;
+}
+table:last-of-type {
+    page-break-before: auto;
+}
+@page {
+  @bottom-right {
+    content: counter(page) " / " counter(pages);
+    font-size: 16px;
+  }
+  @top-center {
+    content: "要件定義書_v1.0"; /* バージョンごとに書き換える */
+    font-size: 16px;
+  }
+}
+/* 追記終わり */
