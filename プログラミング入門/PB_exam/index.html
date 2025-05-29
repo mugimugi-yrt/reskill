@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+
+<!-- コメントはDOCTYPE宣言の前に入れない -->
+<!-- No.17 -->
+<!-- インデントが見にくかったらすみません -->
+
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <!-- No.1 -->
+    <title>小テスト</title>
+    <!-- No.13 -->
+    <link href="style.css" rel="stylesheet">
+</head>
+<body>
+    <!-- No.2 -->
+    <h1>
+        メッセージを表示  
+    </h1>
+    <p id="one"></p>
+    <p id="two"></p>
+    <p id="three"></p>
+    <p id="four"></p>
+    <p id="five"></p>
+    <table>
+        <tr>
+            <!-- No.7, No.8 -->
+            <td colspan="3" id="txt">何かボタンを押して下さい</td>
+        </tr>
+        <tr>
+            <!-- No.9 -->
+            <td><button class="morning">朝</button></td>
+            <td><button class="night">夜</button></td>
+            <td><button class="culc">計算</button></td>
+        </tr>
+    </table>
+
+    <script>
+        // No.5, No.6
+        let engNum = ["#one", "#two", "#three", "#four", "#five"];
+        let str = "";
+
+        // 0 = 1という扱いに注意
+        for (let i = 0; i < engNum.length; i++) {
+            str = str + String(i + 1) + "は";
+            if (i % 2 == 1) { str = str + "偶数です。"; }
+            else            { str = str + "奇数です。"; }
+            let strArea = document.querySelector(engNum[i]);
+            strArea.innerHTML = str
+            str = "";
+        }
+
+        // No.14
+        let press = document.querySelector(".morning");
+        press.addEventListener("click", function() { changeStr(0); });
+
+        // No.15
+        let button = document.querySelector(".night");
+        button.addEventListener("click", function() { changeStr(1); });
+
+        // No.16
+        let mugiChan = document.querySelector(".culc");
+        mugiChan.addEventListener("click", function() { changeStr(2); });
+
+        // No.14 -> 0 : 「朝」のボタンが押されたとき
+        // No.15 -> 1 : 「夜」のボタンが押されたとき
+        // No.16 -> 2 : 「計算」のボタンが押されたとき
+        function changeStr(caseNum) {
+            let str = document.querySelector("#txt");
+            let text = ""; // 最終的に文字として出力するやつ
+
+            // No.14
+            if (caseNum == 0) { 
+                text = "おはよう";
+            }
+            // No.15
+            else if (caseNum == 1) {
+                text = "こんばんは";
+            }
+            // No.16
+            else { 
+                let ans = 0;
+                for (let j = 1; j <= 100; j++) {
+                    ans += j;
+                }
+                text = String(ans);
+            }
+
+            str.innerHTML = text;
+        }
+    </script>
+</body>
+</html>

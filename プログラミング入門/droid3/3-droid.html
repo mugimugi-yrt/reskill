@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <title>droidラボ</title>
+  <meta charset="UTF-8">
+  <link href="droid.css" rel="stylesheet">
+</head>
+<body>
+  <h1>droidラボ</h1>
+  <h2>ドロイドくんであそぶ</h2>
+  <p><img src="droid.gif" alt="ドロイドくん" id="photo"></p>
+  <p>色々な動きを試してみましょう</p>
+  <p id="response"></p>
+  <h3>アクションMENU</h3>
+  <ul>
+    <li id="chat">話す</li>
+    <li id="break">こわす</li>
+    <li id="stop">停止</li>
+    <li id="extend">ふやす</li>
+    <li id="change">モデルチェンジ</li>
+  </ul>
+  <script>
+    let chatMode = document.querySelector("#chat");
+    chatMode.addEventListener("click", function() { actionFunc("ドロイドデス", ""); });
+
+    let breakMode = document.querySelector("#break");
+    breakMode.addEventListener("click", function() { actionFunc("ヤラレマシタ", "break.gif"); });
+
+    let stopMode = document.querySelector("#stop");
+    stopMode.addEventListener("click", function() { actionFunc("キノウヲテイシシマス…ガガッ……", "stop.gif"); });
+
+    let extendMode = document.querySelector("#extend");
+    extendMode.addEventListener("click", function() { actionFunc("ゾウショクシマス", "plenty.gif"); });
+
+    let changeMode = document.querySelector("#change");
+    changeMode.addEventListener("click", function() { actionFunc("モードチェンジ：", ""); });
+
+    let droidPhoto = document.querySelector("#photo");
+    droidPhoto.addEventListener("mouseover", function() { swapPhoto(0); });
+    droidPhoto.addEventListener("mouseout", function() { swapPhoto(1); });
+    droidPhoto.addEventListener("click", function() { actionFunc("ポッ", "pink.gif"); });
+
+    function actionFunc(chat, gifPath) {
+      let chattingArea = document.querySelector("#response");
+      let photoArea = document.querySelector("#photo");
+      if (gifPath != "") {
+        photoArea.src = gifPath;
+      }
+      else if (chat == "モードチェンジ：") {
+        let mode = Math.floor(Math.random() * 100);
+        if (mode % 3 == 0) {
+          chat += "ケーキ"
+          photoArea.src = "model.gif"
+        }
+        else if (mode % 3 == 1) {
+          chat += "オハナ1"
+          photoArea.src = "girl.gif"
+        }
+        else {
+          chat += "オハナ2"
+          photoArea.src = "flower.gif"
+        }
+      }
+
+      chattingArea.innerHTML = chat;
+    }
+
+    function swapPhoto(num) {
+      let chattingArea = document.querySelector("#response");
+      let photoArea = document.querySelector("#photo");
+      if (num == 0) {
+        photoArea.src = "hello.gif";
+        chattingArea.innerHTML = "ハロー、ワールド！";
+      }
+      else {
+        photoArea.src = "droid.gif";
+        chattingArea.innerHTML = "";
+        
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+header {
+    background-color: rgb(200, 200, 200);
+    width: 800px;
+    height: 100px;
+}
+
+article {
+    display: flex;
+    height: 400px;
+}
+
+main {
+    background-color: rgb(145, 145, 145);
+    width: 550px;
+}
+
+aside {
+    background-color: rgb(127, 123, 123);
+    width: 250px;
+}
+
+footer {
+    background-color: rgb(75, 75, 75);
+    color:aliceblue;
+    width: 800px;
+    height: 100px;
+}
+
+p {
+    margin: 0;
+}

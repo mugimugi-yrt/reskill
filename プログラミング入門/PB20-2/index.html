@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>乱数くん</title>
+    <link href="style.css" rel="stylesheet">
+</head>
+<body>
+    <h1>ランダムで数字を表示します</h1>
+    <h2></h2>
+    <script>
+        // ランダムな数値を出すにはMath.random()
+        // ただし、以上の出し方は0~1までの少数になる
+        // そのため、*100をすることで0~100の数値を生成
+        let random = Math.random() * 100;
+
+        let num = document.querySelector("h2");
+
+        // 数値を四捨五入する場合はMath.round()
+        // 切り上げは「ceil」、切り捨ては「floor」
+        num.innerHTML = Math.round(random % 5) + 1;
+    </script>
+</body>
+</html>

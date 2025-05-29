@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>電卓プログラム</title>
+    <style>
+        table { border: 1px #000000 solid; }
+        table td { border: 1px #000000 solid; }
+    </style>
+</head>
+<body>
+    <h3>
+        電卓プログラム<br>
+        (2つの数の計算のみ)
+    </h3>
+    <table>
+        <tr>
+            <td colspan="4" id="ans"></td>
+        </tr>
+        <tr>
+            <td><button id="one">1</button></td>
+            <td><button id="two">2</button></td>
+            <td><button id="three">3</button></td>
+            <td><button id="add">+</button></td>
+        </tr>
+        <tr>
+            <td><button id="four">4</button></td>
+            <td><button id="five">5</button></td>
+            <td><button id="six">6</button></td>
+            <td><button id="sub">-</button></td>
+        </tr>
+        <tr>
+            <td><button id="seven">7</button></td>
+            <td><button id="eight">8</button></td>
+            <td><button id="nine">9</button></td>
+            <td><button id="div">/</button></td>
+        </tr>
+        <tr>
+            <td><button id="zero">0</button></td>
+            <td><button id="clear">C</button></td>
+            <td><button id="mul">*</button></td>
+            <td><button id="eql">=</button></td>
+        </tr>
+    </table>
+
+    <p id="caution"></p>
+
+    <script>
+        function printNum(val) {
+            let num = document.querySelector("#ans");
+            let cautionField = document.querySelector("#caution");
+            let newNum = "";
+
+            if (val == "C") { 
+                newNum = "0";
+                culcNum = 0;
+                cautionField.innerHTML = "";
+            }
+            else if (val == "+" || val == "-" || val == "*" || val == "/") {
+                newNum = String(culcNum) + val;
+                operator = val;
+                num2Switch = true;
+            }
+            else if (val == "=") {
+                if      (operator == "+") { newNum = culcNum + culcNum2; }
+                else if (operator == "-") { newNum = culcNum - culcNum2; }
+                else if (operator == "*") { newNum = culcNum * culcNum2; }
+                else                      { newNum = culcNum / culcNum2; }
+                culcNum = 0;
+                culcNum2 = 0;
+                operator = "";
+                num2Switch = false;
+                cautionField.innerHTML = "次の計算を始める場合は「C」を押してください";
+            }
+            else {
+                if (culcNum == 0) { 
+                    newNum = String(val);
+                    culcNum = val;
+                }
+                else { 
+                    if (num2Switch) {
+                        if (culcNum2 == 0) { newNum = String(culcNum) + operator + String(val); }
+                        else               { newNum = String(culcNum) + operator + String(culcNum2) + String(val);}
+                        culcNum2 = Number(String(culcNum2) + String(val));
+                    }
+                    else {
+                        newNum = String(culcNum) + String(val);
+                        culcNum = Number(newNum);
+                    }
+                }
+            }
+
+            num.innerHTML = newNum;
+        }
+
+        let disp = document.querySelector("#ans");
+        let culcNum = 0;
+        let culcNum2 = 0;
+        let operator = "";
+        let num2Switch = false;
+        disp.innerHTML = culcNum;
+
+        let oneBtn = document.querySelector("#one");
+        oneBtn.addEventListener("click", function() { printNum(1); })
+
+        let twoBtn = document.querySelector("#two");
+        twoBtn.addEventListener("click", function() { printNum(2); })
+        
+        let threeBtn = document.querySelector("#three");
+        threeBtn.addEventListener("click", function() { printNum(3); })
+        
+        let fourBtn = document.querySelector("#four");
+        fourBtn.addEventListener("click", function() { printNum(4); })
+
+        let fiveBtn = document.querySelector("#five");
+        fiveBtn.addEventListener("click", function() { printNum(5); })
+
+        let sixBtn = document.querySelector("#six");
+        sixBtn.addEventListener("click", function() { printNum(6); })
+        
+        let sevenBtn = document.querySelector("#seven");
+        sevenBtn.addEventListener("click", function() { printNum(7); })
+
+        let eightBtn = document.querySelector("#eight");
+        eightBtn.addEventListener("click", function() { printNum(8); })
+
+        let nineBtn = document.querySelector("#nine");
+        nineBtn.addEventListener("click", function() { printNum(9); })
+
+        let zeroBtn = document.querySelector("#zero");
+        zeroBtn.addEventListener("click", function() { printNum(0); })
+
+        let addBtn = document.querySelector("#add");
+        addBtn.addEventListener("click", function() { printNum("+"); })
+
+        let subBtn = document.querySelector("#sub");
+        subBtn.addEventListener("click", function() { printNum("-"); })
+
+        let mulBtn = document.querySelector("#mul");
+        mulBtn.addEventListener("click", function() { printNum("*"); })
+
+        let divBtn = document.querySelector("#div");
+        divBtn.addEventListener("click", function() { printNum("/"); })
+
+        let eqlBtn = document.querySelector("#eql");
+        eqlBtn.addEventListener("click", function() { printNum("="); })
+
+        let clrBtn = document.querySelector("#clear");
+        clrBtn.addEventListener("click", function() { printNum("C"); })
+    </script>
+</body>
+</html>

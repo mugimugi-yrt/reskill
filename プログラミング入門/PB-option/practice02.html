@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>演習2</title>
+</head>
+<body>
+    <h1>10!の計算結果を表示します</h1>
+    <p id="ans"></p>
+    <script>
+        let ansField = document.querySelector("#ans");
+        let str = "10! = 10*9*8*7*6*5*4*3*2*1 =";
+        let n = 10;
+        let ansNum = 1;
+        while (n > 0) {
+            ansNum *= n;
+            n--;
+        }
+
+        ansField.innerHTML = str + ansNum;
+    </script>
+</body>
+</html>

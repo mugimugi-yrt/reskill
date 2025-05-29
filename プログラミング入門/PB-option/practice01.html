@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>演習1</title>
+</head>
+<body>
+    <h1>4で割った余りを計算します</h1>
+    <p><input type="number" id="num"></p>
+    <button>計算する</button>
+    <p id="ans"></p>
+    <script>
+        // 剰余 = remainder
+        function getRem4(num) {
+            while (num > 4) {
+                num -= 4;
+            }
+            return num;
+        }
+
+        function printNumber() {
+            let num = document.querySelector("#num");
+            let ansField = document.querySelector("#ans");
+
+            num = Number(num.value);
+            let ans = getRem4(num);
+            ansField.innerHTML = "答えは" + ans + "です！";
+        }
+        
+        // main
+        let btn = document.querySelector("button");
+        btn.addEventListener("click", printNumber);
+
+    </script>
+</body>
+</html>

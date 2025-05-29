@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>自己紹介</title>
+    <link href="style.css" rel="stylesheet">
+    <style>
+        #pressingPlace { color:black; }
+        #changingString { color:black; }
+    </style>
+</head>
+<body>
+    <h1>
+        自己紹介
+    </h1>
+    <p>
+        はじめまして！株式会社ソニックムーブの岡野鈴です。<br>
+        この研修でアウトプットをすることとわからないことを放置しないことを意識し、<br>
+        「この人になら仕事を任せられる」といったようなエンジニアになれるよう頑張ります！
+    </p>
+    <p><img src="r_okano_image.png" alt="ムギちゃんアイコン" class="photo"></p>
+    <table>
+        <tr>
+            <th id="pressingPlace">ここをクリック</th><td id="changingString"></td>
+        </tr>
+        <tr>
+            <th>名前</th><td>岡野鈴</td>
+        </tr>
+        <tr>
+            <th>会社名</th><td>株式会社ソニックムーブ</td>
+        </tr>
+        <tr>
+            <th>出身地</th><td>神奈川県</td>
+        </tr>
+        <tr>
+            <th>趣味</th><td>硬式テニス、ゲーム(作業ゲームが好きかも)</td>
+        </tr>
+        <tr>
+            <th>特技</th><td>食べるのが早い(アイスを除く)</td>
+        </tr>
+        <tr>
+            <th>プログラミング経験</th><td>Python / C++ / Java / Ocaml / Haskell / PowerShell Script</td>
+        </tr>
+        <tr>
+            <th>研修への意気込み</th><td>吸収できることはすべて自分の力にします！</td>
+        </tr>
+        <tr>
+            <th><button>メッセージを表示</button></th><td><input type="text" name="sentence"></td>
+        </tr>
+    </table>
+    <p><a href="contact.html">お問い合わせ</a></p>
+
+    <script>
+        let press = document.querySelector("#pressingPlace");
+        press.addEventListener("click", function() { changeStr(0); });
+
+        let button = document.querySelector("button");
+        button.addEventListener("click", function() { changeStr(1); });
+
+        let mugiChan = document.querySelector(".photo");
+        mugiChan.addEventListener("click", function() { changeStr(2); });
+
+        // 0 : 「ここをクリック」のテキストが押されたとき
+        // 1 : ボタンが押されたとき
+        // 2 : 画像が押されたとき
+        function changeStr(caseNum) {
+            let str = document.querySelector("#changingString");
+            let mugiPhoto = document.querySelector(".photo");
+            let text = ""; // 最終的に文字として出力するやつ
+            mugiPhoto.src = "r_okano_image.png";
+
+            if (caseNum == 0) { 
+                text = "おはようございます！！！";
+            }
+            else if (caseNum == 1) {
+                let textbox = document.querySelector("input");
+                text = textbox.value;
+            }
+            else { 
+                // text = "ムギっ！？";
+                // mugiPhoto.src = "surprise_mugi.png";
+                console.log("test click");
+            }
+
+            str.innerHTML = text;
+        }
+
+        // 旧関数(全部分割してたやつ)
+        // function changeStrMugi() {
+        //     let str = document.querySelector("#changingString");
+        //     let neomugiChan = document.querySelector(".photo");
+        //     str.innerHTML = "ムギっ！？";
+        //     neomugiChan.src = "surprise_mugi.png"
+        // }
+
+        // function changeStr() {
+        //     let str = document.querySelector("#changingString");
+        //     str.innerHTML = "おはようございます！！！";
+        // }
+
+        // // inputの値取得には .value を使う
+        // function changeStr2() {
+        //     let textbox = document.querySelector("input");
+        //     let str = document.querySelector("#changingString");
+        //     str.innerHTML = textbox.value;
+        // }
+    </script>
+</body>
+</html>

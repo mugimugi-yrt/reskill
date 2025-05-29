@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <title>droidラボ</title>
+  <meta charset="UTF-8">
+  <link href="droid.css" rel="stylesheet">
+</head>
+<body>
+  <h1>droidラボ</h1>
+  <h2>ドロイドくんであそぶ</h2>
+  <p><img id="droid" src="droid.gif" alt="ドロイドくん"></p>
+  <p id="message"><!-- ここにメッセージが表示されます --></p>
+  <p>色々な動きを試してみましょう</p>
+  <h3>アクションMENU</h3>
+  <ul>
+    <li id="speak">話す</li>
+    <li id="breaks">こわす</li>
+    <li id="stop">停止</li>
+    <li id="plenty">ふやす</li>
+    <li id="model">モデルチェンジ</li>
+  </ul>
+  <script>
+     let droidDom   = document.querySelector("#droid");
+     let messageDom = document.querySelector("#message");
+     let speakDom   = document.querySelector("#speak");
+     let breaksDom  = document.querySelector("#breaks");
+     let stopDom    = document.querySelector("#stop");
+     let plentyDom  = document.querySelector("#plenty");
+     let modelDom   = document.querySelector("#model");
+     function changeImg(filename) {
+       droidDom.src = filename;
+     }
+     function speaks(msg) {
+       messageDom.innerHTML = msg;
+     }
+     droidDom.addEventListener("mouseover", function() { changeImg("hello.gif"); });
+     droidDom.addEventListener("mouseout", function() { changeImg("droid.gif"); });
+     speakDom.addEventListener("click", function() { speaks("ドロイドデス"); });
+     breaksDom.addEventListener("click", function() { changeImg("break.gif"); });
+     stopDom.addEventListener("click", function() { changeImg("stop.gif"); });
+     plentyDom.addEventListener("click", function() { changeImg("plenty.gif"); });
+     modelDom.addEventListener("click", function() { changeImg("model.gif"); });
+  </script>
+</body>
+</html>

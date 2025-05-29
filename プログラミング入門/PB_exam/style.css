@@ -1,0 +1,29 @@
+/* 
+No.13, No.17
+インデントが見にくかったらすみません
+*/
+
+/* No.2, No.3 */
+h1 {
+    background-color:#8B0000;
+    color: #FFFFFF;
+}
+
+p {
+    margin: 0px;
+}
+
+/* No.12 */
+table {
+    border: 1px #000000 solid;
+}
+
+table td {
+    border: 1px #000000 solid;
+}
+
+/* No.9, No.10 */
+.morning, .night, .culc {
+    width: 100px;
+    height: 40px;
+}
