@@ -1,0 +1,115 @@
+/* my original css */
+
+html {
+    font-size: 90%;
+    line-height: 1.8;
+}
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 1rem;
+    color: #242036;
+    background-color: #ededed;
+}
+a:link {
+    color: #030777;
+    text-decoration: none;
+}
+a:visited {
+    color: #aa05af;
+    text-decoration: none;
+}
+a:hover {
+    background-color: #f6ffa0;
+    text-decoration: none;
+}
+input[type=text],
+input[type=email],
+input[type=password] {
+    width: 360px;
+    padding: 8px;
+    border-radius: 4px;
+    background-color: #fcfcfc;
+    border: 1px solid #cacaca;
+}
+textarea {
+    resize: none;
+    width: 360px;
+    height: 100px;
+    padding: 8px;
+    border-radius: 4px;
+    background-color: #fcfcfc;
+    border: 1px solid #cacaca;
+}
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+header {
+    background: #fafafa;
+}
+header .container {
+    display: flex;
+    justify-content: space-between;
+}
+header .brand {
+    display: block;
+    font-size: 1.3rem;
+}
+
+.navigation {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.navigation li {
+    padding: 0 10px;
+}
+
+table.table {
+    border-collapse: collapse;
+}
+table.table thead {
+    background: #f1f1f1;
+    font-weight: bold;
+}
+table.table th,
+table.table td {
+    padding: 10px 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+dt {
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: .9rem;
+}
+dd {
+    margin-bottom: 15px;
+}
+svg.w-5.h-5 {
+    width: 25px;
+    vertical-align: middle;
+}
+
+.myName{
+    color: #070022;
+    font-size: 0.95rem;
+    font-weight: 800;
+}
+.othersName{
+    color: #504875;
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+#timestamp{
+    color: #747379;
+    font-size: 0.9rem;
+    font-weight: lighter;
+}
+#msgContent{
+    font-size: 1.05rem;
+}

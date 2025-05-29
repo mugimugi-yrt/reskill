@@ -1,0 +1,102 @@
+html {
+    font-size: 90%;
+    line-height: 1.8;
+}
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 1rem;
+}
+a:link {
+    text-decoration: none;
+}
+input[type=text],
+input[type=number],
+select {
+    width: 200px;
+    padding: 3px;
+}
+
+/* input[type=email],
+input[type=password],
+textarea {
+    width: 360px;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #cacaca;
+} */
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+header .container {
+    background: #5e5e5e;
+    color: #dfdede;
+    display: flex;
+    justify-content: space-between;
+}
+header a:link {
+    text-decoration: none;
+    color: #cccaca;
+}
+header a:visited {
+    text-decoration: none;
+    color: #cccaca;
+}
+header .brand {
+    display: block;
+    font-size: 1.3rem;
+}
+header #ansField {
+    background: #ceedff;
+    font-size: 1.1rem;
+    padding: 5px;
+}
+
+.navigation {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.navigation li {
+    padding: 0 10px;
+}
+
+main {
+    padding: 10px;
+}
+table,
+th,
+td {
+    border-collapse: collapse;
+}
+table th,
+table td {
+    padding: 10px 15px;
+    border-bottom: 1px solid #ddd;
+}
+table th {
+    background: #dbdbdb;
+}
+
+dt {
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: 1.3rem;
+}
+dd {
+    margin-bottom: 15px;
+}
+svg.w-5.h-5 {
+    width: 25px;
+    vertical-align: middle;
+}
+
+.title {
+    background: #f8f7f7;
+    font-size: 1.5rem;
+    padding: 7px;
+}
